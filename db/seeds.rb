@@ -12,6 +12,6 @@ Teacher.destroy_all
 
 puts "Creating teacher"
 
-Teacher.create!(email: paulo@teacher.com, password: "secret")
+Teacher.create!(email: "paulo@teacher.com", password: "secret")
 
 puts "Finished"

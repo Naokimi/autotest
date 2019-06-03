@@ -2,4 +2,10 @@ Rails.application.routes.draw do
   devise_for :teachers
   root to: 'pages#home'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  resources :exams, only: [:new, :create, :show] do
+    resources :questions, only: [:new, :create, :index]
+    resources :submissions, only: [:new, :create]
+  end
+  resources :questions, only: [:show]
+  resources :answers, only: [:edit, :update]
 end

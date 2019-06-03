@@ -10,10 +10,52 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_03_060318) do
+ActiveRecord::Schema.define(version: 2019_06_03_062043) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "answers", force: :cascade do |t|
+    t.bigint "question_id"
+    t.bigint "submission_id"
+    t.string "content"
+    t.boolean "is_correct"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["question_id"], name: "index_answers_on_question_id"
+    t.index ["submission_id"], name: "index_answers_on_submission_id"
+  end
+
+  create_table "exams", force: :cascade do |t|
+    t.string "image"
+    t.boolean "verified"
+    t.bigint "teacher_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["teacher_id"], name: "index_exams_on_teacher_id"
+  end
+
+  create_table "questions", force: :cascade do |t|
+    t.bigint "exam_id"
+    t.integer "score"
+    t.string "correct_answer"
+    t.float "origin_x"
+    t.float "origin_y"
+    t.float "width"
+    t.float "height"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["exam_id"], name: "index_questions_on_exam_id"
+  end
+
+  create_table "submissions", force: :cascade do |t|
+    t.string "image"
+    t.integer "student_number"
+    t.bigint "exam_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["exam_id"], name: "index_submissions_on_exam_id"
+  end
 
   create_table "teachers", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -27,4 +69,9 @@ ActiveRecord::Schema.define(version: 2019_06_03_060318) do
     t.index ["reset_password_token"], name: "index_teachers_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "answers", "questions"
+  add_foreign_key "answers", "submissions"
+  add_foreign_key "exams", "teachers"
+  add_foreign_key "questions", "exams"
+  add_foreign_key "submissions", "exams"
 end

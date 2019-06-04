@@ -1,0 +1,4 @@
+<h1><%= @exam.id %></h1>
+<% @questions.each do |question| %>
+  <p><%= question.id %> - <%= question.correct_answer %></p>
+<% end %>

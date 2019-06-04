@@ -8,10 +8,30 @@
 
 puts "Emptying database"
 
+Submission.destroy_all
+Exam.destroy_all
 Teacher.destroy_all
 
 puts "Creating teacher"
 
-Teacher.create!(email: "paulo@teacher.com", password: "secret")
+teacher = Teacher.create!(email: "paulo@teacher.com", password: "secret")
+
+puts "Creating exam"
+
+exam = Exam.new
+exam.teacher = teacher
+exam.remote_image_url = "https://res.cloudinary.com/naokimi/image/upload/v1559616707/autotest/correct_sheet-1_vg4z5t.jpg"
+exam.save!
+
+puts "Creating submissions"
+
+counter = 1
+15.times do
+  submission = Submission.new(student_number: counter)
+  submission.exam = exam
+  submission.remote_image_url = "https://res.cloudinary.com/naokimi/image/upload/v155962243#{counter < 10 ? 0 : 1}/autotest/201906041127-#{counter}.jpg"
+  submission.save!
+  counter += 1
+end
 
 puts "Finished"

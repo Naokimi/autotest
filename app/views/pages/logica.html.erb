@@ -1,0 +1,21 @@
+<div class="container mt-4">
+  <div class="wrapper">
+    <div class="row justify-content-center">
+      <div class="col-12" style="background-image: url(https://res.cloudinary.com/dkbhdqszt/image/upload/v1559607758/correct-sheet_dfq73u.jpg); height: 1560px;position: relative;" >
+<a href="#" id="username" data-type="text" data-pk="1" data-url="/post" data-title="Enter username">superuser</a>
+
+        <% @ocr.recognitionResults.each do |region|  %>
+          <% region.lines.each do |line| %>
+            <% line.words.each do |word|%>
+            <div style="position: absolute;left: <%= word.boundingBox.split(',')[0][0] %>px;top: <%= word.boundingBox.split(',')[0][1]-25 %>px;">
+              <% if word.boundingBox.split(',')[0][1] > 260 && word.boundingBox.split(',')[0][0] > 360 && word.boundingBox.split(',')[0][1] < 1060%>
+                <input type="text" name="" value=<%= word.text %>>
+              <% end %>
+            </div>
+            <% end  %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,6 +1,4 @@
 class ExamsController < ApplicationController
-  skip_before_action :authenticate_teacher!, only: [:show]
-
   def index
     @exams = policy_scope(Exam)
   end

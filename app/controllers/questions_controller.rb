@@ -64,11 +64,16 @@ class QuestionsController < ApplicationController
 
     @question.exam = @exam
     if @question.save
-      redirect_to exam_path(@exam)
+      respond_to do |format|
+        format.html { redirect_to redirect_to exam_path(@exam) }
+        format.js # <-- will render `app/views/reviews/create.js.erb`
+      end
+
     else
       render 'exams/show'
     end
   end
+
   def question_params
     params.require(:question).permit(:correct_answer)
   end

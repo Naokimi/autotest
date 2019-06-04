@@ -7,11 +7,9 @@
             <% line.words.each do |word|%>
             <div style="position: absolute;left: <%= word.boundingBox.split(',')[0][0] %>px;top: <%= word.boundingBox.split(',')[0][1]-25 %>px;">
               <% if word.boundingBox.split(',')[0][1] > 260 && word.boundingBox.split(',')[0][0] > 360 && word.boundingBox.split(',')[0][1] < 1060%>
-                <%= simple_form_for([ @exam, @question ]) do |form| %>
-                  <%= form.input :correct_answer, input_html: { value: word.text } %>
-
+                <%= simple_form_for([ @exam, @question ], remote: true) do |form| %>
+                  <%= form.input :correct_answer, input_html: { value: word.text, id:word.boundingBox }, label: false %>
                   <%= form.submit 'Save' %>
-
                 <% end %>
               <% end %>
             </div>

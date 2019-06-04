@@ -1,4 +1,6 @@
-<h1><%= current_teacher.email %></h1>
-<% @exams.each do |exam| %>
-  <%= cl_image_tag exam.image, height: 90, width: 60, crop: :fill %>
-<% end %>
+<div class="container text-center">
+  <h1>My Exams</h1>
+  <% @exams.each do |exam| %>
+    <%= link_to cl_image_tag(exam.image, height: 540, width: 360, crop: :fill), exam_path(exam) %>
+  <% end %>
+</div>

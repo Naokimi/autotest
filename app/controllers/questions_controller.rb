@@ -51,8 +51,7 @@ class QuestionsController < ApplicationController
     response = Net::HTTP.start(uri.host, uri.port, :use_ssl => uri.scheme == 'https') do |http|
         http.request(request)
     end
-    @exam = Exam.find(params[:exam_id])
     @ocr = JSON.parse(response.body, object_class: OpenStruct)
-    authorize @exam
+    authorize @orc
   end
 end

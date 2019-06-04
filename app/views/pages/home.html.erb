@@ -3,7 +3,11 @@
     <div class="container">
       <%= image_tag "logo.png", class: "rounded-circle circle"%>
       <h1> <strong>AutoTest</strong></h1> <br><h2><strong>Grade Papers Instantly</strong></h2>
-      <%= link_to "Upload", root_path, class: "btn btn-flat" %>
+      <%= simple_form_for(@exam) do |f| %>
+        <%= f.input :image %>
+        <%= f.input :image_cache, as: :hidden %>
+        <%= f.submit %>
+      <% end %>
     </div>
   </div>
 </div>

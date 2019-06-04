@@ -4,9 +4,9 @@
       <%= image_tag "logo.png", class: "rounded-circle circle"%>
       <h1> <strong>AutoTest</strong></h1> <br><h2><strong>Grade Papers Instantly</strong></h2>
       <%= simple_form_for(@exam) do |f| %>
-        <%= f.input :image %>
+        <%= f.input :image, input_html: { class: 'btn btn-flat', style: "width: 500px;" } %>
         <%= f.input :image_cache, as: :hidden %>
-        <%= f.submit %>
+        <%= f.submit "Upload an exam", class: "btn btn-primary" %>
       <% end %>
     </div>
   </div>

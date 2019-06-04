@@ -52,6 +52,24 @@ class QuestionsController < ApplicationController
         http.request(request)
     end
     @ocr = JSON.parse(response.body, object_class: OpenStruct)
-    authorize @orc
+    @question = Question.new
+    @exam = Exam.find(params[:exam_id])
+    authorize @question
+  end
+
+  def create
+    @exam = Exam.find(params[:exam_id])
+    @question = Question.new(question_params)
+    authorize @question
+
+    @question.exam = @exam
+    if @question.save
+      redirect_to exam_path(@exam)
+    else
+      render 'exams/show'
+    end
+  end
+  def question_params
+    params.require(:question).permit(:correct_answer)
   end
 end

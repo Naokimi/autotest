@@ -1,1 +1,3 @@
-show a single question here
+<h1><%= @question.correct_answer %></h1>
+<% @answers.each do |answer| %>
+<p><%= answer.content %> - <%= answer.is_correct %></p>

@@ -5,6 +5,10 @@ class ExamPolicy < ApplicationPolicy
     end
   end
 
+  def create?
+    true
+  end
+  
   def show?
     return true
   end

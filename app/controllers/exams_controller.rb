@@ -6,8 +6,9 @@ class ExamsController < ApplicationController
   def show
     @exam = Exam.find(params[:id])
     authorize @exam
+    @submission = Submission.new
   end
-  
+
   def create
     @exam = Exam.new(exam_params)
     @exam.teacher_id = current_teacher.id
@@ -15,7 +16,8 @@ class ExamsController < ApplicationController
     if @exam.save
       redirect_to exams_path
     else
-      render root_path
+      flash[:notice] = 'Failed to save an exam'
+      redirect_to root_path
     end
   end
 

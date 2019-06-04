@@ -8,4 +8,8 @@ class ExamPolicy < ApplicationPolicy
   def create?
     true
   end
+  
+  def show?
+    return true
+  end
 end

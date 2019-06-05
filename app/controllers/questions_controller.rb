@@ -63,6 +63,9 @@ class QuestionsController < ApplicationController
     authorize @question
 
     @question.exam = @exam
+
+    @qid = params[:question][:qid]
+
     if @question.save
       respond_to do |format|
         format.html { redirect_to redirect_to exam_path(@exam) }

@@ -6,15 +6,17 @@
         <% @ocr.recognitionResults.each do |region|  %>
           <% region.lines.each do |line| %>
             <% line.words.each do |word|%>
-            <div class="form-inline border resize-drag" style="position: absolute;left: <%= word.boundingBox.split(',')[0][0]-90 %>px;top: <%= word.boundingBox.split(',')[0][1]-37 %>px;">
+            <div class="form-inline border resize-drag border-success" style="position: absolute;left: <%= word.boundingBox.split(',')[0][0]-90 %>px;top: <%= word.boundingBox.split(',')[0][1]-37 %>px;">
               <% if word.boundingBox.split(',')[0][1] > 260 && word.boundingBox.split(',')[0][0] > 360 && word.boundingBox.split(',')[0][1] < 1060%>
                 <%= simple_form_for([ @exam, @question ], remote: true) do |form| %>
+                  <% qid = SecureRandom.hex(4) %>
                   <%= form.input :correct_answer, input_html: { value: word.text, id:word.boundingBox }, label: false %>
                   <%= form.input :origin_x, :as => :hidden, :input_html => { :value => word.boundingBox.split(',')[0][0]-100 } %>
                   <%= form.input :origin_y, :as => :hidden, :input_html => { :value => word.boundingBox.split(',')[0][1]-35 } %>
                   <%= form.input :width, :as => :hidden, :input_html => { :value => 250} %>
                   <%= form.input :height, :as => :hidden, :input_html => { :value => 80} %>
-                  <%= form.submit 'Save' %>
+                  <%= form.input :qid, :as => :hidden, :input_html => { :value => qid } %>
+                  <%= form.submit 'Save', class: 'special', id: "qbtn-#{qid}" %>
                 <% end %>
               <% end %>
             </div>

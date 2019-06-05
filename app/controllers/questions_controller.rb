@@ -75,6 +75,6 @@ class QuestionsController < ApplicationController
   end
 
   def question_params
-    params.require(:question).permit(:correct_answer)
+    params.require(:question).permit(:correct_answer, :origin_x, :origin_y, :width, :height)
   end
 end

@@ -5,11 +5,18 @@
       <%= cl_image_tag @exam.image, width: 600, crop: :fill %>
     </div>
     <div class="col-4">
-        <%= simple_form_for [@exam, @submission] do |f| %>
-        <%= f.input :image %>
-        <%= f.input :image_cache, as: :hidden %>
-        <%= f.submit "Upload answer sheet" %>
-      <% end %>
+      <div class="row">
+        <div class="col-12 mb-5">
+          <%= simple_form_for [@exam, @submission] do |f| %>
+            <%= f.input :image %>
+            <%= f.input :image_cache, as: :hidden %>
+            <%= f.submit "Upload answer sheet" %>
+          <% end %>
+        </div>
+        <div class="col-12 mt-5">
+          <%= link_to "Submissions", exam_submissions_path(@exam), class: "btn btn-primary" %>
+        </div>
+      </div>
     </div>
   </div>
 </div>

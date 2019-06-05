@@ -20,13 +20,6 @@
   font-weight: bold;
 }
 
-// .banner p {
-//   font-size: 20px;
-//   color: white;
-//   opacity: .7;
-//   text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
-// }
-
 
 .btn-flat{
 color: white;
@@ -38,7 +31,7 @@ transition: background 0.3s ease;
 
 .banner-btn{
   position: relative;
-  margin-top: 60px;
+  margin-top: 20px;
 }
 
 .circle{
@@ -52,4 +45,12 @@ transition: background 0.3s ease;
   position: relative;
   left: 60px;
   top: 16px;
+}
+
+.hide {
+  transform: translateY(60px);
+  opacity: 0;
+  z-index: 1;
+  width:200px;
+  margin-left: -59px;
 }

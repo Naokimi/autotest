@@ -4,9 +4,9 @@
       <%= image_tag "logo.png", class: "rounded-circle circle"%>
       <h1> <strong>AutoTest</strong></h1> <br><h2><strong>Grade Papers Instantly</strong></h2>
       <%= simple_form_for(@exam) do |f| %>
-        <%= f.input :image ,input_html: { class: 'text-white btn btn-primary' }  %>
+        <%= f.input :image ,input_html: { class: 'text-white banner-btn btn btn-primary hide', id: 'upload' }  %>
         <%= f.input :image_cache, as: :hidden %>
-        <%= f.submit "Upload an exam", class: "banner-btn btn btn-primary mt-1" %>
+        <%= f.submit "Upload an exam", class: "banner-btn btn btn-primary mt-1", id: "submit" %>
       <% end %>
     </div>
   </div>
@@ -33,4 +33,10 @@
 </div>
 </div>
 
-
+<script type="text/javascript">
+  let upload = document.getElementById("upload");
+  let submit = document.getElementById("submit");
+  upload.addEventListener("change", (event) => {
+    submit.click();
+  });
+</script>

@@ -18,7 +18,11 @@ background-color: rgba(200,200,200,0.01)
 
 
 .card h1 {
-  text-align: center
+  text-align: center;
+  color: rgba(105,39,255,0.9);
+  // font-weight: bold;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.3)
+  // color: rgba(0,0,0,0.6);
 }
 
 .wrapper{

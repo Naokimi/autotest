@@ -3,11 +3,8 @@
 <% end %>
 <div class="container">
   <div class="row">
-    <div class="col-6">
+    <div class="col-12">
       <h2>Submission id: <%= params[:id] %></h2>
-      <%= image_tag(@img_path, :size => "400x600", :alt => "") %>
-    </div>
-    <div class="col-6">
       <% if @answers == [] %>
         <%= link_to 'Analyze the answers', new_submission_answer_path(@submission) %>
       <% else %>
@@ -26,6 +23,8 @@
               <td><%= answer.question.correct_answer %></td>
               <td><%= answer.content ? answer.content : 'No answer found' %></td>
               <td><%= answer.is_correct ? 'Correct' : 'Incorrect' %></td>
+              <% url = "https://res.cloudinary.com/naokimi/image/upload/x_#{answer.question.origin_x.to_i},y_#{answer.question.origin_y.to_i},w_#{answer.question.width.to_i},h_#{answer.question.height.to_i},c_crop/#{@submission.image.filename}" %>
+              <td><%= image_tag(url) %></td>
             </tr>
           <% end %>
         </table>
@@ -33,3 +32,4 @@
     </div>
   </div>
 </div>
+

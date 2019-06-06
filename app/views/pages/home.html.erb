@@ -4,7 +4,8 @@
       <%= image_tag "logo.png", class: "rounded-circle circle"%>
       <h1> <strong>AutoTest</strong></h1> <br><h2><strong>Grade Papers Instantly</strong></h2>
       <%= simple_form_for(@exam) do |f| %>
-        <%= f.input :image ,input_html: { class: 'text-white banner-btn btn btn-primary hide', id: 'upload' }  %>
+        <%= f.input :image, input_html: { class: 'text-white banner-btn btn btn-primary hide', id: 'upload' }  %>
+        <!--,as: :file, , multiple:true add this inside inner html -->
         <%= f.input :image_cache, as: :hidden %>
         <%= f.submit "Upload an exam", class: "banner-btn btn btn-primary mt-1", id: "submit" %>
       <% end %>

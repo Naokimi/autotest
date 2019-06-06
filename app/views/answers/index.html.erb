@@ -1,0 +1,6 @@
+<ul>
+  <li>Question ID | Correct answer | Answers</li>
+  <% @answers.each do |answer| %>
+    <li><%= answer.question.id %> | <%= answer.question.correct_answer %> | <%= answer.content %></li>
+  <% end %>
+</ul>

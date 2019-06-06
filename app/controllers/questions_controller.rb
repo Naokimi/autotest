@@ -26,6 +26,8 @@ class QuestionsController < ApplicationController
     # Request body
     request.body = "{\"url\": \"https://res.cloudinary.com/naokimi/image/upload/v1559622430/autotest/201906041127-3.jpg\"}"
 
+
+
     #Send the http request to Azure and store the response
     response = Net::HTTP.start(uri.host, uri.port, :use_ssl => uri.scheme == 'https') do |http|
         http.request(request)

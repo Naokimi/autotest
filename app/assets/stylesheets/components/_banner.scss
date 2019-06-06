@@ -8,7 +8,7 @@
   margin: 0;
   color: white;
   text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
-  font-size: 32px;
+  font-size: 42px;
   font-weight: bolder;
 }
 
@@ -30,8 +30,6 @@ transition: background 0.3s ease;
 }
 
 .banner-btn{
-  position: relative;
-  margin-top: 20px;
 }
 
 .circle{
@@ -42,9 +40,6 @@ transition: background 0.3s ease;
 }
 
 .container h1{
-  position: relative;
-  left: 60px;
-  top: 16px;
 }
 
 .hide {

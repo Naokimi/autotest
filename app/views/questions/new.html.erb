@@ -1,20 +1,23 @@
 <div class="container mt-4">
   <div class="wrapper">
     <div class="row justify-content-center">
-      <div class="col-12" style="background-image: url(https://res.cloudinary.com/dkbhdqszt/image/upload/v1559607758/correct-sheet_dfq73u.jpg); height: 1560px;position: relative;" >
-        <%= link_to "finish", exam_questions_path  %>
+      <p id='area'></p>
+      <canvas id="canvas" class="col-12"  width="1100" height="1424">
+      </canvas>
+      <div id="box" class="col-12"  width="1100" height="1424" style="background-image: url(https://res.cloudinary.com/dkbhdqszt/image/upload/v1559607758/correct-sheet_dfq73u.jpg);">
+        <%#= link_to "finish", exam_questions_path  %>
         <% @ocr.recognitionResults.each do |region|  %>
           <% region.lines.each do |line| %>
             <% line.words.each do |word|%>
-            <div class="form-inline border resize-drag border-success" style="position: absolute;left: <%= word.boundingBox.split(',')[0][0]-90 %>px;top: <%= word.boundingBox.split(',')[0][1]-37 %>px;">
-              <% if word.boundingBox.split(',')[0][1] > 260 && word.boundingBox.split(',')[0][0] > 360 && word.boundingBox.split(',')[0][1] < 1060%>
+            <div class="form-inline border border-success" style="position: absolute;left: <%= word.boundingBox.split(',')[0][0] %>px;top: <%= word.boundingBox.split(',')[0][1]%>px;">
+              <% if word.boundingBox.split(',')[0][1] > 276 && word.boundingBox.split(',')[0][0] > 323 && word.boundingBox.split(',')[0][1] < 805%>
                 <%= simple_form_for([ @exam, @question ], remote: true) do |form| %>
                   <% qid = SecureRandom.hex(4) %>
                   <%= form.input :correct_answer, input_html: { value: word.text, id:word.boundingBox }, label: false %>
                   <%= form.input :origin_x, :as => :hidden, :input_html => { :value => word.boundingBox.split(',')[0][0]-100 } %>
                   <%= form.input :origin_y, :as => :hidden, :input_html => { :value => word.boundingBox.split(',')[0][1]-35 } %>
-                  <%= form.input :width, :as => :hidden, :input_html => { :value => 250} %>
-                  <%= form.input :height, :as => :hidden, :input_html => { :value => 80} %>
+                  <%= form.input :width, :as => :hidden, :input_html => { :value => 165} %>
+                  <%= form.input :height, :as => :hidden, :input_html => { :value => 52} %>
                   <%= form.input :qid, :as => :hidden, :input_html => { :value => qid } %>
                   <%= form.submit 'Save', class: 'special', id: "qbtn-#{qid}" %>
                 <% end %>

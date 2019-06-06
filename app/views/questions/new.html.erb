@@ -1,8 +1,9 @@
 <div class="container mt-4">
   <div class="wrapper">
     <div class="row justify-content-center">
-      <p id='area'></p>
-      <canvas id="canvas" class="col-12"  width="1100" height="1424">
+
+      <p id='area' data-canvas="<%= @exam.image.url %>"></p>
+      <canvas id="canvas"   width="<%= @ocr.recognitionResults[0].width %>" height="<%= @ocr.recognitionResults[0].height %>">
       </canvas>
       <div id="box" class="col-12"  width="1100" height="1424" style="background-image: url(https://res.cloudinary.com/naokimi/image/upload/v1559622431/autotest/201906041127-1.jpg);">
         <%#= link_to "finish", exam_questions_path  %>

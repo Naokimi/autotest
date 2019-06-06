@@ -32,7 +32,7 @@ class QuestionsController < ApplicationController
     response_url = response.header['operation-location']
 
     # Wait for 10 seconds
-    sleep(5)
+    sleep(3)
 
     # Get Read Operation Result API
     uri = URI(response_url)

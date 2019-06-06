@@ -33,7 +33,8 @@ class ExamsController < ApplicationController
         config.api_secret = ENV['CONVERT_API_SECRET']
       end
 
-      result = ConvertApi.convert('jpg', File: file, ImageHeight: '1424', ImageWidth: '1100')
+      result = ConvertApi.convert('jpg', File: file)
+      # if we want to specify image size we can do like this: ImageHeight: '1424', ImageWidth: '1100'
       @exam.remote_image_url = result.files.first.url
     end
   end

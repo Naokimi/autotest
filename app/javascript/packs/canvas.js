@@ -23,6 +23,12 @@ function init() {
 function mouseUp(e) {
      console.log(rect)
      document.getElementById('area').innerHTML=`${rect.h}-${rect.w}-${rect.startX}-${rect.startY}`;
+     document.getElementById('exam_origin_x').value =rect.startX;
+     document.getElementById('exam_origin_y').value =rect.startY;
+     document.getElementById('exam_width').value =rect.w;
+     document.getElementById('exam_height').value =rect.h;
+
+
      drag = false;
 }
 
@@ -40,4 +46,4 @@ function mouseMove(e) {
 init();
 document.getElementById('area').addEventListener('click', (el) => {
   console.log(el);
-})
+});

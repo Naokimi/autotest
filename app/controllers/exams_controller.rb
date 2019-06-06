@@ -14,6 +14,13 @@ class ExamsController < ApplicationController
     authorize @exam
   end
 
+  def update
+    @exam = Exam.find(params[:id])
+    authorize @exam
+    @exam.update(exam_params)
+    redirect_to new_exam_question_path(@exam)
+  end
+
   def create
     @exam = Exam.new(exam_params)
     @exam.teacher_id = current_teacher.id
@@ -56,7 +63,7 @@ class ExamsController < ApplicationController
   end
 
   def exam_params
-    params.require(:exam).permit(:image)
+    params.require(:exam).permit(:image, :origin_x, :origin_y, :width, :height)
     # add inside the params :media => []
     # it will break your logic
   end

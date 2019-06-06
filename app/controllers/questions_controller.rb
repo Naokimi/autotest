@@ -1,9 +1,9 @@
 class QuestionsController < ApplicationController
+  before_action :set_exam, only: [:index, :new, :create]
+
   def index
-    @exam = Exam.find(params[:exam_id])
     @questions = policy_scope(Question)
   end
-
 
   def show
     @question = Question.find(params[:id])
@@ -11,9 +11,6 @@ class QuestionsController < ApplicationController
   end
 
   def new
-    require 'net/http'
-    require 'json'
-
     # Batch Read File API
     uri = URI('https://japaneast.api.cognitive.microsoft.com/vision/v2.0/read/core/asyncBatchAnalyze')
     uri.query = URI.encode_www_form({
@@ -24,19 +21,17 @@ class QuestionsController < ApplicationController
     request['Content-Type'] = 'application/json'
     request['Ocp-Apim-Subscription-Key'] = '933cd1f2524740a0bb33dd537ed98cd8'
     # Request body
-    request.body = "{\"url\": \"https://res.cloudinary.com/naokimi/image/upload/v1559622430/autotest/201906041127-3.jpg\"}"
+    request.body = "{\"url\": \"#{@exam.image.url}\"}"
 
-
-
-    #Send the http request to Azure and store the response
-    response = Net::HTTP.start(uri.host, uri.port, :use_ssl => uri.scheme == 'https') do |http|
-        http.request(request)
+    # Send the http request to Azure and store the response
+    response = Net::HTTP.start(uri.host, uri.port, use_ssl: uri.scheme == 'https') do |http|
+      http.request(request)
     end
 
-    #Store the operation-location
+    # Store the operation-location
     response_url = response.header['operation-location']
 
-    #Wait for 10 seconds
+    # Wait for 10 seconds
     sleep(5)
 
     # Get Read Operation Result API
@@ -50,8 +45,8 @@ class QuestionsController < ApplicationController
     # Request body
     # request.body = "{body}"
 
-    response = Net::HTTP.start(uri.host, uri.port, :use_ssl => uri.scheme == 'https') do |http|
-        http.request(request)
+    response = Net::HTTP.start(uri.host, uri.port, use_ssl: uri.scheme == 'https') do |http|
+      http.request(request)
     end
     @ocr = JSON.parse(response.body, object_class: OpenStruct)
     @question = Question.new
@@ -60,7 +55,6 @@ class QuestionsController < ApplicationController
   end
 
   def create
-    @exam = Exam.find(params[:exam_id])
     @question = Question.new(question_params)
     authorize @question
 
@@ -77,6 +71,12 @@ class QuestionsController < ApplicationController
     else
       render 'exams/show'
     end
+  end
+
+  private
+
+  def set_exam
+    @exam = Exam.find(params[:exam_id])
   end
 
   def question_params

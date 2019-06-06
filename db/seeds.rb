@@ -20,7 +20,7 @@ puts "Creating exam"
 
 exam = Exam.new
 exam.teacher = teacher
-exam.remote_image_url = "https://res.cloudinary.com/naokimi/image/upload/v1559616707/autotest/correct_sheet-1_vg4z5t.jpg"
+exam.remote_image_url = "https://res.cloudinary.com/naokimi/image/upload/v1559622430/autotest/201906041127-3.jpg"
 exam.save!
 
 puts "Creating submissions"

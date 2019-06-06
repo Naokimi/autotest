@@ -1,5 +1,5 @@
 class ExamsController < ApplicationController
-  before_action :set_exam, only: [:show, :destroy]
+  before_action :set_exam, only: [:show, :destroy, :edit]
 
   def index
     @exams = policy_scope(Exam)
@@ -8,6 +8,10 @@ class ExamsController < ApplicationController
   def show
     authorize @exam
     @submission = Submission.new
+  end
+
+  def edit
+    authorize @exam
   end
 
   def create

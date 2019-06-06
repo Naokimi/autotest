@@ -13,6 +13,10 @@ class ExamPolicy < ApplicationPolicy
     return true
   end
 
+  def edit?
+    return true
+  end
+
   def destroy?
     true
   end

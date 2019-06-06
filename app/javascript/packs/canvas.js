@@ -3,11 +3,12 @@ var ctx = canvas.getContext('2d');
 var rect = {};
 var drag = false;
 var imageObj = null;
-
+const el = document.getElementById('area');
+var elcanvas = el.dataset.canvas
 function init() {
      imageObj = new Image();
      imageObj.onload = function () { ctx.drawImage(imageObj, 0, 0); };
-     imageObj.src = 'https://res.cloudinary.com/naokimi/image/upload/v1559622430/autotest/201906041127-3.jpg';
+     imageObj.src =elcanvas;
      canvas.addEventListener('mousedown', mouseDown, false);
      canvas.addEventListener('mouseup', mouseUp, false);
      canvas.addEventListener('mousemove', mouseMove, false);

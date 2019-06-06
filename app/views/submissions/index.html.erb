@@ -1,4 +1,5 @@
-<div class="conrainer">
+<div class="container">
+  <%= link_to "Back to exam", exam_path(@exam), class: "btn btn-primary m-3" %>
   <h2>Exam id: <%= @exam.id %></h2>
   <% @submissions.each do |submission| %>
       <%= link_to submission_path(submission) do %>
@@ -6,8 +7,6 @@
         <%= cl_image_tag submission.image, height: 300, width: 200, crop: :fill, class:'m-3' %>
       <% end %>
   <% end %>
-
-  <%= link_to "Back to exam", exam_path(@exam), class: "btn btn-primary" %>
 </div>
 
 

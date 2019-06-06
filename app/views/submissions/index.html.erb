@@ -1,3 +1,5 @@
+<%= link_to "Back to exam", exam_path(@exam), class: "btn btn-primary" %>
+
 <% @submissions.each do |submission| %>
   <li><%= submission.exam.id %> <%= submission.id %></li>
 <% end %>

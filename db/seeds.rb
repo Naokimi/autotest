@@ -9,6 +9,7 @@
 puts "Emptying database"
 
 Submission.destroy_all
+Question.destroy_all
 Exam.destroy_all
 Teacher.destroy_all
 

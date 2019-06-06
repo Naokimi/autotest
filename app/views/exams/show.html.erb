@@ -1,29 +1,40 @@
+  <%= link_to exams_path, class: "btn btn-primary mt-4" do%>
+    <i class="fas fa-arrow-left px-3"></i>
+  <% end %>
 <div class="container mt-5">
-  <%= link_to "Back to exams", exams_path, class: "btn btn-primary mb-3" %>
   <div class="row">
     <div class="col-8">
       <h2>Correct answer sheet</h2>
       <%= cl_image_tag @exam.image, width: 600, crop: :fill %>
     </div>
-    <div class="col-4">
-      <div class="row">
-        <div class="col-12 my-5">
+    <div class="col-4 card" style="background-color: white;">
+      <div class="row ">
+        <div class="col-12 my-1">
           <%= simple_form_for [@exam, @submission] do |f| %>
             <%= f.input :image %>
             <%= f.input :image_cache, as: :hidden %>
             <%= f.submit "Upload answer sheet" %>
           <% end %>
         </div>
-        <div class="col-12 my-5">
+         <div class="col-12 my-5 d-flex justify-content-between">
+          <%= link_to "Delete this exam", exam_path(@exam), method: "delete", class: "btn btn-danger" %>
+        <!-- </div>
+        <div class="col-12 my-1"> -->
           <% css_class = @exam.submissions.empty? ? "d-none" : "" %>
           <%= link_to "Submissions", exam_submissions_path(@exam), class: "btn btn-primary #{css_class}" %>
         </div>
-        <div class="col-12 my-5">
-          <%= link_to "Delete this exam", exam_path(@exam), method: "delete", class: "btn btn-danger" %>
-        </div>
+
       </div>
     </div>
   </div>
 </div>
 
 
+<!-- <div class="card">
+  <h5 class="card-header">Featured</h5>
+  <div class="card-body">
+    <h5 class="card-title">Special title treatment</h5>
+    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div>
+</div> -->

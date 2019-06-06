@@ -1,10 +1,11 @@
 class ExamsController < ApplicationController
+  before_action :set_exam, only: [:show, :destroy]
+
   def index
     @exams = policy_scope(Exam)
   end
 
   def show
-    @exam = Exam.find(params[:id])
     authorize @exam
     @submission = Submission.new
   end
@@ -37,7 +38,17 @@ class ExamsController < ApplicationController
     end
   end
 
+  def destroy
+    authorize @exam
+    @exam.destroy
+    redirect_to exams_path
+  end
+
   private
+
+  def set_exam
+    @exam = Exam.find(params[:id])
+  end
 
   def exam_params
     params.require(:exam).permit(:image)

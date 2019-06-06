@@ -17,6 +17,9 @@
           <% css_class = @exam.submissions.empty? ? "d-none" : "" %>
           <%= link_to "Submissions", exam_submissions_path(@exam), class: "btn btn-primary #{css_class}" %>
         </div>
+        <div class="col-12 my-5">
+          <%= link_to "Delete this exam", exam_path(@exam), method: "delete", class: "btn btn-danger" %>
+        </div>
       </div>
     </div>
   </div>

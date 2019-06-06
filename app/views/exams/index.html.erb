@@ -1,6 +1,9 @@
-<div class="container text-center">
-  <h1>My Exams</h1>
-  <% @exams.each do |exam| %>
-    <%= link_to cl_image_tag(exam.image, height: 540, width: 360, crop: :fill), exam_path(exam) %>
-  <% end %>
-</div>
+  <h1 style="text-align: center;" class="m-3">My Exams</h1>
+<div class="container text-center ">
+  <div class="student-exams  justify-content-around">
+      <% @exams.each do |exam| %>
+      <div class="col-12 mb-3">
+        <%= link_to cl_image_tag(exam.image, height: 440, width: 300, crop: :fill), exam_path(exam), class: "rounded-right" %>
+      </div>
+      <% end %>
+    </div>

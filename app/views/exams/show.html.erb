@@ -6,15 +6,16 @@
     </div>
     <div class="col-4">
       <div class="row">
-        <div class="col-12 mb-5">
+        <div class="col-12 my-5">
           <%= simple_form_for [@exam, @submission] do |f| %>
             <%= f.input :image %>
             <%= f.input :image_cache, as: :hidden %>
             <%= f.submit "Upload answer sheet" %>
           <% end %>
         </div>
-        <div class="col-12 mt-5">
-          <%= link_to "Submissions", exam_submissions_path(@exam), class: "btn btn-primary" %>
+        <div class="col-12 my-5">
+          <% css_class = @exam.submissions.empty? ? "d-none" : "" %>
+          <%= link_to "Submissions", exam_submissions_path(@exam), class: "btn btn-primary #{css_class}" %>
         </div>
       </div>
     </div>

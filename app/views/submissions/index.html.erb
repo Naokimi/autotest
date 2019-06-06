@@ -1,10 +1,12 @@
+<%= link_to @exam, class: "btn btn-primary mt-4" do%>
+    <i class="fas fa-arrow-left px-3"></i>
+  <% end %>
 <div class="container">
-  <%= link_to "Back to exam", exam_path(@exam), class: "btn btn-primary m-3" %>
   <h2>Exam id: <%= @exam.id %></h2>
   <% @submissions.each do |submission| %>
       <%= link_to submission_path(submission) do %>
         <%= submission.id %>
-        <%= cl_image_tag submission.image, height: 300, width: 200, crop: :fill, class:'m-3' %>
+        <%= cl_image_tag submission.image, height: 300, width: 200, crop: :fill, class: 'm-3 shadow' %>
       <% end %>
   <% end %>
 </div>

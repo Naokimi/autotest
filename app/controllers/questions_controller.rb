@@ -24,7 +24,7 @@ class QuestionsController < ApplicationController
     request['Content-Type'] = 'application/json'
     request['Ocp-Apim-Subscription-Key'] = '933cd1f2524740a0bb33dd537ed98cd8'
     # Request body
-    request.body = "{\"url\": \"https://res.cloudinary.com/dkbhdqszt/image/upload/v1559607758/correct-sheet_dfq73u.jpg\"}"
+    request.body = "{\"url\": \"https://res.cloudinary.com/naokimi/image/upload/v1559622430/autotest/201906041127-3.jpg\"}"
 
     #Send the http request to Azure and store the response
     response = Net::HTTP.start(uri.host, uri.port, :use_ssl => uri.scheme == 'https') do |http|
@@ -35,7 +35,7 @@ class QuestionsController < ApplicationController
     response_url = response.header['operation-location']
 
     #Wait for 10 seconds
-    sleep(2)
+    sleep(5)
 
     # Get Read Operation Result API
     uri = URI(response_url)

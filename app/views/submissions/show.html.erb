@@ -1,0 +1,28 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-6">
+      <h2>Submission id: <%= params[:id] %></h2>
+      <%= image_tag(@img_path, :size => "400x600", :alt => "") %>
+    </div>
+    <div class="col-6">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Question #</th>
+            <th>Correct Answer</th>
+            <th>Student Answer</th>
+            <th>Correct?</th>
+          </tr>
+        </thead>
+        <% @answers.each do |answer| %>
+          <tr>
+            <td><%= answer.question_id %></td>
+            <td><%= answer.question.correct_answer %></td>
+            <td><%= answer.content ? answer.content : 'No answer found' %></td>
+            <td><%= answer.is_correct ? 'Correct' : 'Incorrect' %></td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>

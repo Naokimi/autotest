@@ -4,6 +4,13 @@ class SubmissionsController < ApplicationController
     @submissions = policy_scope(Submission)
   end
 
+  def show
+    @submission = policy_scope(Submission).find(params[:id])
+    @img_path = "https://res.cloudinary.com/naokimi/#{@submission.image.model[:image]}"
+    @answers = Answer.where(submission_id: @submission.id)
+    authorize Submission
+  end
+
   def create
     @exam = Exam.find(params[:exam_id])
     @submission = @exam.submissions.new(submission_params)

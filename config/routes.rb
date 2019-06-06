@@ -8,4 +8,7 @@ Rails.application.routes.draw do
   end
   resources :questions, only: [:show]
   resources :answers, only: [:edit, :update]
+  resources :submissions, only: [:show] do
+    resources :answers, only: [:new, :create, :index]
+  end
 end

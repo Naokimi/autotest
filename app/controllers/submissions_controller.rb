@@ -7,7 +7,7 @@ class SubmissionsController < ApplicationController
   def show
     @submission = policy_scope(Submission).find(params[:id])
     @img_path = "https://res.cloudinary.com/naokimi/#{@submission.image.model[:image]}"
-    @answers = Answer.where(submission_id: @submission.id)
+    @answers = Answer.where(submission_id: @submission.id).order(:id)
     authorize Submission
   end
 

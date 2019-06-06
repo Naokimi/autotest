@@ -1,10 +1,31 @@
+<%= link_to exam_path(@exam), class: "btn btn-primary mt-4" do%>
+  <i class="fas fa-arrow-left px-3"></i>
+<% end %>
 <div class="container">
-  <%= link_to "Back to exam", exam_path(@exam), class: "btn btn-primary m-3" %>
-  <h2>Exam id: <%= @exam.id %></h2>
+  <h2>Exam id: <%= @exam.id %>, Total submissions: <%= @submissions.count %></h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Question #</th>
+        <th>Correct Answer</th>
+        <th># of total answers</th>
+        <th># of correct answers</th>
+        <th># of incorrect answers</th>
+      </tr>
+    </thead>
+    <% @exam.questions.each do |question| %>
+      <tr>
+        <td><%= question.id %></td>
+        <td><%= question.correct_answer %></td>
+        <td><%= question.answers.count %></td>
+        <td><%= question.answers.where(is_correct: true).count %></td>
+        <td><%= question.answers.where(is_correct: false).count %></td>
+      </tr>
+    <% end %>
+  </table>
   <% @submissions.each do |submission| %>
       <%= link_to submission_path(submission) do %>
-        <%= submission.id %>
-        <%= cl_image_tag submission.image, height: 300, width: 200, crop: :fill, class:'m-3' %>
+        <p> Submission id: <%= submission.id %>, Number of answers: <%= submission.answers.count %></p>
       <% end %>
   <% end %>
 </div>

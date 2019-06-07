@@ -1,4 +1,5 @@
 var btn = document.querySelector("#qbtn-<%= @qid %>")
+btn.nextSibling.nextSibling.remove();
 btn.remove();
 if (document.querySelectorAll('.special').length === 0)
 {

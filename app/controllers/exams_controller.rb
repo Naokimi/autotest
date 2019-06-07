@@ -3,6 +3,7 @@ class ExamsController < ApplicationController
 
   def index
     @exams = policy_scope(Exam)
+    @exam = Exam.new
   end
 
   def show
@@ -29,7 +30,7 @@ class ExamsController < ApplicationController
     convert_to_jpg
 
     if @exam.save
-      redirect_to exams_path
+      redirect_to edit_exam_path(@exam)
     else
       flash[:notice] = 'Failed to save an exam'
       redirect_to root_path

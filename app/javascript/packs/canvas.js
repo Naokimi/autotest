@@ -1,4 +1,5 @@
 var canvas = document.getElementById('canvas');
+if (canvas) {
 var ctx = canvas.getContext('2d');
 var rect = {};
 var drag = false;
@@ -47,3 +48,5 @@ init();
 document.getElementById('area').addEventListener('click', (el) => {
   console.log(el);
 });
+
+}

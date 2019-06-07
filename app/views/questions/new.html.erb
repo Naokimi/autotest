@@ -1,7 +1,31 @@
 <div class="container mt-4">
-  <div class="wrapper">
-    <div class="row justify-content-center">
-
+  <div class="row ">
+    <div class="col-lg-12" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%= cl_image_path @exam.image %>); width: <%= @ocr.recognitionResults[0].width %>px; height: <%= @ocr.recognitionResults[0].height %>px; background-repeat: repeat-y;">
+      <% @ocr.recognitionResults.each do |region|  %>
+        <% region.lines.each do |line| %>
+          <% line.words.each do |word|%>
+            <!-- start if -->
+            <% if word.boundingBox.split(',')[0][1] > @exam.origin_y && word.boundingBox.split(',')[0][0] > @exam.origin_x && word.boundingBox.split(',')[0][1] < (@exam.origin_y + @exam.height) %>
+              <%if (@exam.origin_x + @exam.width/2) < word.boundingBox.split(',')[0][0] %>
+                <% left = word.boundingBox.split(',')[0][4]  %>
+                <% origin_x = @exam.origin_x + (@exam.width/2) %>
+              <% else  %>
+                <% left = word.boundingBox.split(',')[0][0] %>
+                <% origin_x = @exam.origin_x  %>
+              <% end  %>
+              <div class="form-inline" style="position: absolute;left: <%= left %>px;top: <%= word.boundingBox.split(',')[0][1] -10%>px;">
+                <!-- form -->
+                <%= simple_form_for([ @exam, @question ], remote: true,  html: { class: 'form-inline' }) do |form| %>
+                <% qid = SecureRandom.hex(4) %>
+                <div class="form-group">
+                  <%= form.submit 'ok', class: 'special', id: "qbtn-#{qid}" %>
+                </div>
+                <%= form.input :correct_answer, input_html: { value: word.text, id:word.boundingBox , size: word.text.size}, label: false %>
+                <%= form.input :origin_x, :as => :hidden, :input_html => { :value => origin_x } %>
+                <%= form.input :origin_y, :as => :hidden, :input_html => { :value => word.boundingBox.split(',')[0][1]-35 } %>
+                <%= form.input :width, :as => :hidden, :input_html => { :value => 165} %>
+                <%= form.input :height, :as => :hidden, :input_html => { :value => 52} %>
+                <%= form.input :qid, :as => :hidden, :input_html => { :value => qid } %>
       <p id='area' data-canvas="<%= @exam.image.url %>"></p>
       <canvas id="canvas"   width="<%= @ocr.recognitionResults[0].width %>" height="<%= @ocr.recognitionResults[0].height %>">
       </canvas>
@@ -22,12 +46,14 @@
                   <%= form.input :qid, :as => :hidden, :input_html => { :value => qid } %>
                   <%= form.submit 'Save', class: 'special', id: "qbtn-#{qid}" %>
                 <% end %>
-              <% end %>
-            </div>
-            <% end  %>
-          <% end %>
+                <!-- endform -->
+              </div>
+            <% end %>
+            <!-- end if -->
+          <% end  %>
         <% end %>
-      </div>
+      <% end %>
     </div>
   </div>
 </div>
+

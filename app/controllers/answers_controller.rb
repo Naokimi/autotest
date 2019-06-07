@@ -66,7 +66,7 @@ class AnswersController < ApplicationController
     uri.query = URI.encode_www_form({})
     request = Net::HTTP::Post.new(uri.request_uri)
     request['Content-Type'] = 'application/json'
-    request['Ocp-Apim-Subscription-Key'] = '933cd1f2524740a0bb33dd537ed98cd8'
+    request['Ocp-Apim-Subscription-Key'] = ENV['AZURE_API_KEY']
     request.body = "{\'url\': \'#{img_path}\'}"
     response = Net::HTTP.start(uri.host, uri.port, use_ssl: uri.scheme == 'https') do |http|
       http.request(request)
@@ -80,7 +80,7 @@ class AnswersController < ApplicationController
     uri = URI(response_url)
     uri.query = URI.encode_www_form({})
     request = Net::HTTP::Get.new(uri.request_uri)
-    request['Ocp-Apim-Subscription-Key'] = '933cd1f2524740a0bb33dd537ed98cd8'
+    request['Ocp-Apim-Subscription-Key'] = ENV['AZURE_API_KEY']
     response = Net::HTTP.start(uri.host, uri.port, use_ssl: uri.scheme == 'https') do |http|
       http.request(request)
     end

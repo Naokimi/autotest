@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resources :exams, only: [:new, :create, :show, :edit, :update, :index, :destroy] do
     resources :questions, only: [:new, :create, :index, :show]
     resources :submissions, only: [:new, :create, :index]
-    resources :answers, only: [:index]
+    resources :answers, only: [:index, :show]
   end
   resources :questions, only: [:show]
   resources :answers, only: [:edit, :update]

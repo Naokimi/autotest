@@ -1,6 +1,27 @@
-<ul>
-  <li>Question ID | Correct answer | Answers</li>
-  <% @answers.each do |answer| %>
-    <li><%= answer.question.id %> | <%= answer.question.correct_answer %> | <%= answer.content %></li>
-  <% end %>
-</ul>
+<div class="container mt-5">
+  <ul>
+    <% question_id_array = [] %>
+    <% answer_content_array = [] %>
+    <!-- get the unique question ID from all the answers of the array -->
+    <% @answers.each do |answer| %>
+      <% question_id_array << answer.question.id %>
+    <% end %>
+    <% question_id_array.uniq! %>
+    <!-- use that ID to display the correct answer -->
+    <li>Question ID | Correct answer | Answers</li>
+    <% question_id_array.each do |number| %>
+      <li><%= number %> | <%= Question.find(number).correct_answer %> |
+        <!-- use that ID to put all the answers connected to the question into one array  -->
+        <% Question.find(number).answers.each do |answer| %>
+          <% answer_content_array << answer.content %>
+        <% end %>
+        <!-- turn the array into a hash grouped by frequency, sort it by highest first and display -->
+        <% Hash[answer_content_array.group_by(&:itself).map {|k,v| [k, v.size] }].sort_by{ |k,v| v }.reverse.each do |answer| %>
+          <%= answer[1] %>x <%= answer[0] %>,
+        <% end %>
+        <% answer_content_array = [] %>
+      </li>
+    <% end %>
+  </ul>
+</div>
+

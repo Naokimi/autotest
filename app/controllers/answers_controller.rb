@@ -1,7 +1,9 @@
-require 'net/http'
-require 'json'
-
 class AnswersController < ApplicationController
+  def index
+    @exam = Exam.find(params[:exam_id])
+    @answers = policy_scope(Answer) #.where("exam = ?", @exam)
+  end
+
   def new
     @submission = Submission.find(params[:submission_id])
     @img_path = "https://res.cloudinary.com/naokimi/#{@submission.image.model[:image]}"

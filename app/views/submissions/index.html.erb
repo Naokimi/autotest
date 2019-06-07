@@ -6,7 +6,7 @@
   <table class="table">
     <thead>
       <tr>
-        <th>Question #</th>
+        <th>Question id</th>
         <th>Correct Answer</th>
         <th># of total answers</th>
         <th># of correct answers</th>
@@ -15,7 +15,11 @@
     </thead>
     <% @exam.questions.each do |question| %>
       <tr>
-        <td><%= question.id %></td>
+        <td>
+          <%= link_to question_path(question) do %>
+            <%= question.id %>
+          <% end %>
+        </td>
         <td><%= question.correct_answer %></td>
         <td><%= question.answers.count %></td>
         <td><%= question.answers.where(is_correct: true).count %></td>

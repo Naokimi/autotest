@@ -1,8 +1,8 @@
 <div class="container mt-4">
   <div class="row">
-      <p>select area</p>
-
-      <p id='area' data-area="" data-canvas="<%= @exam.image.url %>"></p>
+    <div class="col-12 form-inline">
+      <h5 >Select area</h5>
+      <p id='area' data-area="" data-canvas="<%= @exam.image.url %>">
       <%= simple_form_for([ @exam ]) do |form| %>
 
       <%= form.input :origin_x, :as => :hidden %>
@@ -10,7 +10,10 @@
       <%= form.input :width, :as => :hidden %>
       <%= form.input :height, :as => :hidden %>
       <%= form.submit 'Save', class: 'special' %>
-      <% end %>
+      <% end %></p>
+    </div>
+  </div>
+  <div class="row">
       <canvas id="canvas" width="795" height="1123">
       </canvas>
   </div>

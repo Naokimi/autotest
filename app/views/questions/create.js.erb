@@ -3,5 +3,8 @@ btn.nextSibling.nextSibling.remove();
 btn.remove();
 if (document.querySelectorAll('.special').length === 0)
 {
-  console.log("dede");
+
+  var line ='<a href="<%= exam_path(@exam) %>" class="btn btn-success active" role="button" aria-pressed="true">Success</a>';
+  var list = document.getElementById("addBtn");
+  list.insertAdjacentHTML("beforeend", line);
 }

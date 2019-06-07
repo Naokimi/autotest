@@ -1,8 +1,16 @@
-<%= link_to exam_path(@exam), class: "btn btn-primary mt-4" do%>
-  <i class="fas fa-arrow-left px-3"></i>
-<% end %>
-<div class="container">
-  <h2>Exam id: <%= @exam.id %>, Total submissions: <%= @submissions.count %></h2>
+<div class="d-flex justify-content-between">
+  <%= link_to exam_path(@exam), class: "btn btn-primary mt-4" do%>
+    <i class="fas fa-arrow-left px-3"></i>
+  <% end %>
+  <%= link_to  exam_path(@exam), class: "btn btn-outline-success mt-4" do %>
+    <i class="fas fa-cloud-download-alt px-4"></i>
+  <% end %>
+</div>
+<div class="container shadow back-color">.
+  <div class="d-flex justify-content-around">
+    <h4>Exam id:- <%= @exam.id %></h4>
+    <h4>Total submissions:- <%= @submissions.count %></h4>
+  </div>
   <table class="table">
     <thead>
       <tr>
@@ -28,8 +36,8 @@
     <% end %>
   </table>
   <% @submissions.each do |submission| %>
-      <%= link_to submission_path(submission) do %>
-        <p> Submission id: <%= submission.id %>, Number of answers: <%= submission.answers.count %></p>
+      <%= link_to submission_path(submission),class: "table-links" do %>
+        <p > Submission id: <%= submission.id %>, Number of answers: <%= submission.answers.count %></p>
       <% end %>
   <% end %>
 </div>

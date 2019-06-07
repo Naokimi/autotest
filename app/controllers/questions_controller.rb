@@ -6,8 +6,9 @@ class QuestionsController < ApplicationController
   end
 
   def show
-    @question = Question.find(params[:id])
-    @answers = @questions.answers
+    @question = policy_scope(Question).find(params[:id])
+    authorize @question
+    @answers = @question.answers
   end
 
   def new

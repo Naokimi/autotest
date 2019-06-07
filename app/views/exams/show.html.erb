@@ -7,10 +7,10 @@
     <div style="background-color:rgba(0,0,0,0.01)" class="">
       <div class="d-flex justify-content-between px-4">
         <h4>Exam id:- <%= @exam.id %></h4>
-        <h4><em>Submissions id:-  </em><%= @exam.submissions.count %></h4>
+        <h4><em># of Submissions: </em><%= link_to @exam.submissions.count, exam_submissions_path(@exam)  %></h4>
       </div>
       <div class="col-8">
-        <%= cl_image_tag @exam.image, width: 540, crop: :fill %>
+        <%= cl_image_tag @exam.image, width: 600, crop: :fill %>
       </div>
     </div>
     <div class="col-4 card" style="background-color: white;margin: 36px 56px;">

@@ -1,3 +1,41 @@
-<h1><%= @question.correct_answer %></h1>
-<% @answers.each do |answer| %>
-<p><%= answer.content %> - <%= answer.is_correct %></p>
+<%= link_to exam_path(@question.exam), class: "btn btn-primary mt-4" do%>
+  <i class="fas fa-arrow-left px-3"></i>
+<% end %>
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <h2>Exam id: <%= @question.exam_id %>, Question id: <%= @question.id %></h2>
+      <p>Correct answer: <%= @question.correct_answer %></p>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Submission #</th>
+            <th>Correct?</th>
+            <th>Student Answer</th>
+            <th>Image</th>
+          </tr>
+        </thead>
+        <% @answers.each do |answer| %>
+          <% if answer.is_correct %>
+            <tr>
+          <% else %>
+            <tr class="table-warning">
+          <% end %>
+            <td>
+              <%= link_to answer.submission_id, submission_path(answer.submission) %>
+            </td>
+            <td><%= answer.is_correct ? 'Correct' : 'Incorrect' %></td>
+            <td><%= answer.content ? answer.content : 'No answer found' %></td>
+            <% url = "https://res.cloudinary.com/naokimi/image/upload/x_#{answer.question.origin_x.to_i},y_#{answer.question.origin_y.to_i},w_#{answer.question.width.to_i},h_#{answer.question.height.to_i},c_crop/#{answer.submission.image.filename}" %>
+            <% if url.nil? %>
+              <td><%= 'No image' %></td>
+            <% else %>
+              <td><%= image_tag(url) %></td>
+            <% end %>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>
+

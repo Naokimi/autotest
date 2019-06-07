@@ -26,10 +26,11 @@
                 <% qid = SecureRandom.hex(4) %>
                 <div class="form-group">
                   <%= form.submit 'ok', class: 'special', id: "qbtn-#{qid}" %>
+                  <div  class='btn cancel' id="<%= qid  %>"  aria-pressed='true'>X</div>
                 </div>
                 <%= form.input :correct_answer, input_html: { value: word.text, id:word.boundingBox , size: word.text.size}, label: false %>
                 <%= form.input :origin_x, :as => :hidden, :input_html => { :value => origin_x } %>
-                <%= form.input :origin_y, :as => :hidden, :input_html => { :value => word.boundingBox.split(',')[0][1]-35 } %>
+                <%= form.input :origin_y, :as => :hidden, :input_html => { :value => word.boundingBox.split(',')[0][1]-24 } %>
                 <%= form.input :width, :as => :hidden, :input_html => { :value => 165} %>
                 <%= form.input :height, :as => :hidden, :input_html => { :value => 52} %>
                 <%= form.input :qid, :as => :hidden, :input_html => { :value => qid } %>
@@ -45,4 +46,8 @@
     </div>
   </div>
 </div>
-
+<script>
+  const b = document.querySelectorAll(".cancel");
+  const cx = event => event.currentTarget.offsetParent.remove()
+  b.forEach(event => event.addEventListener('click', cx));
+</script>

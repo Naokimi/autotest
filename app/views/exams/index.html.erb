@@ -8,7 +8,7 @@
       <%= f.input :image, input_html: { class: 'text-white banner-btn btn btn-primary hide', id: 'upload' }, label: false  %>
       <!--,as: :file, , multiple:true add this inside inner html -->
       <%= f.input :image_cache, as: :hidden %>
-      <%= f.submit "Upload a new exam", class: "banner-btn btn btn-primary mb-3", id: "submit" %>
+      <%= f.submit "Upload a new exam", class: "banner-btn btn btn-primary mb-3 ml-4", id: "submit" %>
       <% end %>
     </div>
   </div>
@@ -16,8 +16,8 @@
 <div class="container text-center mt-4">
   <div class="student-exams  justify-content-around">
       <% @exams.each do |exam| %>
-      <div class="col-12 mb-3 shadow">
-        <%= link_to cl_image_tag(exam.image, height: 340, width: 300, crop: :fill), exam_path(exam), class: "" %>
+      <div class="col-12 mb-3">
+        <%= link_to cl_image_tag(exam.image, height: 340, width: 300, crop: :fill, class: "link-img"), exam_path(exam) %>
       </div>
       <% end %>
     </div>

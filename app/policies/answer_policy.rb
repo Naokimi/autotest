@@ -16,4 +16,8 @@ class AnswerPolicy < ApplicationPolicy
   def update?
     return true
   end
+
+  def show?
+    true
+  end
 end

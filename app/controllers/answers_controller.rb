@@ -1,7 +1,7 @@
 class AnswersController < ApplicationController
   def index
     @exam = Exam.find(params[:exam_id])
-    @answers = policy_scope(Answer) #.where("exam = ?", @exam)
+    @answers = policy_scope(Answer.where("question_id BETWEEN ? AND ?", @exam.questions.first.id, @exam.questions.last.id))
   end
 
   def new

@@ -20,7 +20,7 @@ class QuestionsController < ApplicationController
     # Create a header and body for new HTTP request
     request = Net::HTTP::Post.new(uri.request_uri)
     request['Content-Type'] = 'application/json'
-    request['Ocp-Apim-Subscription-Key'] = '933cd1f2524740a0bb33dd537ed98cd8'
+    request['Ocp-Apim-Subscription-Key'] = ENV['AZURE_API_KEY']
     # Request body
     request.body = "{\"url\": \"#{@exam.image.url}\"}"
 
@@ -42,7 +42,7 @@ class QuestionsController < ApplicationController
 
     request = Net::HTTP::Get.new(uri.request_uri)
     # Request headers
-    request['Ocp-Apim-Subscription-Key'] = '933cd1f2524740a0bb33dd537ed98cd8'
+    request['Ocp-Apim-Subscription-Key'] = ENV['AZURE_API_KEY']
     # Request body
     # request.body = "{body}"
 

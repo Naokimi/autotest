@@ -12,4 +12,8 @@ class AnswerPolicy < ApplicationPolicy
   def create?
     return true
   end
+
+  def update?
+    return true
+  end
 end

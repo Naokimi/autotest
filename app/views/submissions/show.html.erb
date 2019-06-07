@@ -14,8 +14,7 @@
               <th>Question #</th>
               <th>Correct Answer</th>
               <th>Student Answer</th>
-              <th>Correct?</th>
-              <th>Image</th>
+              <th></th>
             </tr>
           </thead>
           <% @answers.each do |answer| %>
@@ -26,8 +25,13 @@
             <% end %>
               <td><%= link_to answer.question_id, question_path(answer.question) %></td>
               <td><%= answer.question.correct_answer %></td>
-              <td><%= answer.content ? answer.content : 'No answer found' %></td>
-              <td><%= answer.is_correct ? 'Correct' : 'Incorrect' %></td>
+              <td>
+                <%= simple_form_for answer, html: { class: 'form-inline' } do |f| %>
+                  <%= f.input :is_correct, label: false %>
+                  <%= f.input :content, label:false %>
+                  <%= f.submit 'Update', class:'btn btn-info' %>
+                <% end %>
+              </td>
               <% url = "https://res.cloudinary.com/naokimi/image/upload/x_#{answer.question.origin_x.to_i},y_#{answer.question.origin_y.to_i},w_#{answer.question.width.to_i},h_#{answer.question.height.to_i},c_crop/#{@submission.image.filename}" %>
               <td><%= image_tag(url) %></td>
             </tr>

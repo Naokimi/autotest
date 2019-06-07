@@ -49,3 +49,17 @@ transition: background 0.3s ease;
   width:200px;
   margin-left: -59px;
 }
+
+.img-upload-button{
+  padding: 10px 67px;
+  margin-left:47px;
+}
+
+.img-upload-hide{
+  transform: translateY(62px);
+  opacity: 0;
+  z-index: 1;
+  width:100px;
+  margin-left: 63px;
+  padding:8px 126px;
+}

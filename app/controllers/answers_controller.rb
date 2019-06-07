@@ -45,7 +45,20 @@ class AnswersController < ApplicationController
   def create
   end
 
+  def update
+    @answer = Answer.find(params[:id])
+    authorize @answer
+    @answer.update(answer_params)
+
+    @answer.save
+    redirect_to submission_path(@answer.submission)
+  end
+
   private
+
+  def answer_params
+    params.require(:answer).permit(:content, :is_correct)
+  end
 
   def analyze_image(img_path)
     # Batch Read File API

@@ -1,6 +1,11 @@
-<%= link_to exam_path(@exam), class: "btn btn-primary mt-4" do%>
-  <i class="fas fa-arrow-left px-3"></i>
-<% end %>
+<div class="d-flex justify-content-between">
+  <%= link_to exam_path(@exam), class: "btn btn-primary mt-4" do%>
+    <i class="fas fa-arrow-left px-3"></i>
+  <% end %>
+  <%= link_to  exam_path(@exam), class: "btn btn-outline-success mt-4" do %>
+    <i class="fas fa-cloud-download-alt px-4"></i>
+  <% end %>
+</div>
 <div class="container shadow back-color">.
   <div class="d-flex justify-content-around">
     <h4>Exam id:- <%= @exam.id %></h4>

@@ -1,7 +1,9 @@
 class AnswersController < ApplicationController
+  before_action :set_answer, only: [:show, :update]
+
   def index
     @exam = Exam.find(params[:exam_id])
-    @answers = policy_scope(Answer) #.where("exam = ?", @exam)
+    @answers = policy_scope(Answer.where("question_id BETWEEN ? AND ?", @exam.questions.first.id, @exam.questions.last.id))
   end
 
   def new
@@ -25,15 +27,13 @@ class AnswersController < ApplicationController
         g = azure_result[0][6]
         h = azure_result[0][7]
         if a >= x && b >= y && c <= (x + wi) && d >= y && e <= (x + wi) && f <= (y + he) && g >= x && h <= (y + he)
+          answer.content = azure_result[1]
           if azure_result[1] == question.correct_answer
-            answer.content = azure_result[1]
             answer.is_correct = true
-            answer.save
           else
-            answer.content = azure_result[1]
             answer.is_correct = false
-            answer.save
           end
+          answer.save
         end
       end
     end
@@ -42,11 +42,14 @@ class AnswersController < ApplicationController
     redirect_to submission_path(@submission)
   end
 
+  def show
+    authorize @answer
+  end
+
   def create
   end
 
   def update
-    @answer = Answer.find(params[:id])
     authorize @answer
     @answer.update(answer_params)
 
@@ -55,6 +58,10 @@ class AnswersController < ApplicationController
   end
 
   private
+
+  def set_answer
+    @answer = Answer.find(params[:id])
+  end
 
   def answer_params
     params.require(:answer).permit(:content, :is_correct)

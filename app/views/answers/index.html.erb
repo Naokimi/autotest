@@ -17,7 +17,7 @@
         <% end %>
         <!-- turn the array into a hash grouped by frequency, sort it by highest first and display -->
         <% Hash[answer_content_array.group_by(&:itself).map {|k,v| [k, v.size] }].sort_by{ |k,v| v }.reverse.each do |answer| %>
-          <%= answer[1] %>x <%= answer[0] %>,
+          <%= link_to "#{answer[1]}x #{answer[0]}", exam_answer_path(@exam, Answer.find_by_content(answer[0])), class: "#{answer[0] == Question.find(number).correct_answer ? "btn btn-success" : "btn btn-danger"}" %>,
         <% end %>
         <% answer_content_array = [] %>
       </li>

@@ -1,4 +1,10 @@
 <div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-12">
+      <h5 align="center">Select the correct answers </h5>
+
+    </div>
+  </div>
   <div class="row ">
     <div class="col-lg-12" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%= cl_image_path @exam.image %>); width: <%= @ocr.recognitionResults[0].width %>px; height: <%= @ocr.recognitionResults[0].height %>px; background-repeat: repeat-y;">
       <% @ocr.recognitionResults.each do |region|  %>
@@ -12,6 +18,7 @@
               <% else  %>
                 <% left = word.boundingBox.split(',')[0][0] %>
                 <% origin_x = @exam.origin_x  %>
+                <% left = origin_x -(left - origin_x) %>
               <% end  %>
               <div class="form-inline" style="position: absolute;left: <%= left %>px;top: <%= word.boundingBox.split(',')[0][1] -10%>px;">
                 <!-- form -->
@@ -26,25 +33,7 @@
                 <%= form.input :width, :as => :hidden, :input_html => { :value => 165} %>
                 <%= form.input :height, :as => :hidden, :input_html => { :value => 52} %>
                 <%= form.input :qid, :as => :hidden, :input_html => { :value => qid } %>
-      <p id='area' data-canvas="<%= @exam.image.url %>"></p>
-      <canvas id="canvas"   width="<%= @ocr.recognitionResults[0].width %>" height="<%= @ocr.recognitionResults[0].height %>">
-      </canvas>
-      <div id="box" class="col-12"  width="1100" height="1424" style="background-image: url(https://res.cloudinary.com/naokimi/image/upload/v1559622431/autotest/201906041127-1.jpg);">
-        <%#= link_to "finish", exam_questions_path  %>
-        <% @ocr.recognitionResults.each do |region|  %>
-          <% region.lines.each do |line| %>
-            <% line.words.each do |word|%>
-            <div class="form-inline border border-success" style="position: absolute;left: <%= word.boundingBox.split(',')[0][0] %>px;top: <%= word.boundingBox.split(',')[0][1]%>px;">
-              <% if word.boundingBox.split(',')[0][1] > 276 && word.boundingBox.split(',')[0][0] > 323 && word.boundingBox.split(',')[0][1] < 805%>
-                <%= simple_form_for([ @exam, @question ], remote: true) do |form| %>
-                  <% qid = SecureRandom.hex(4) %>
-                  <%= form.input :correct_answer, input_html: { value: word.text, id:word.boundingBox }, label: false %>
-                  <%= form.input :origin_x, :as => :hidden, :input_html => { :value => word.boundingBox.split(',')[0][0]-100 } %>
-                  <%= form.input :origin_y, :as => :hidden, :input_html => { :value => word.boundingBox.split(',')[0][1]-50 } %>
-                  <%= form.input :width, :as => :hidden, :input_html => { :value => 200} %>
-                  <%= form.input :height, :as => :hidden, :input_html => { :value => 100} %>
-                  <%= form.input :qid, :as => :hidden, :input_html => { :value => qid } %>
-                  <%= form.submit 'Save', class: 'special', id: "qbtn-#{qid}" %>
+
                 <% end %>
                 <!-- endform -->
               </div>

@@ -1,1 +1,6 @@
-document.querySelector("#qbtn-<%= @qid %>").remove();
+var btn = document.querySelector("#qbtn-<%= @qid %>")
+btn.remove();
+if (document.querySelectorAll('.special').length === 0)
+{
+  console.log("dede");
+}

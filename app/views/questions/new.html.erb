@@ -19,7 +19,7 @@
               <% else  %>
                 <% left = word.boundingBox.split(',')[0][0] %>
                 <% origin_x = @exam.origin_x  %>
-                <% left = origin_x -(left - origin_x) %>
+                <% left = origin_x -(left - origin_x) -50 %>
               <% end  %>
               <div class="form-inline" style="position: absolute;left: <%= left %>px;top: <%= word.boundingBox.split(',')[0][1] -10%>px;">
                 <!-- form -->

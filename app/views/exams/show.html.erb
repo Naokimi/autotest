@@ -1,26 +1,29 @@
 <%= link_to exams_path, class: "btn btn-primary mt-4" do%>
   <i class="fas fa-arrow-left px-3"></i>
 <% end %>
-<div class="container">
+
+<div class="container mt-3">
   <div class="row">
-    <div class="col-8">
-      <p>Exam id: <%= @exam.id %></p>
-      <p># of Submissions <%= @exam.submissions.count %></p>
-      <%= cl_image_tag @exam.image, width: 600, crop: :fill %>
+    <div style="background-color:rgba(0,0,0,0.01);margin-right: 120px;" class="">
+      <div class="d-flex justify-content-between px-4">
+        <h4>Exam id: <%= @exam.id %></h4>
+        <h4><em># of Submissions: </em><%= link_to @exam.submissions.count, exam_submissions_path(@exam)  %></h4>
+      </div>
+      <div class="col-8">
+        <%= cl_image_tag @exam.image, width: 600, crop: :fill %>
+      </div>
     </div>
-    <div class="col-4 card" style="background-color: white;">
+    <div class="col-4 card" style="background-color: white;margin-top: 36px;">
       <div class="row ">
         <div class="col-12 my-1">
           <%= simple_form_for [@exam, @submission] do |f| %>
-            <%= f.input :image %>
+            <%= f.input :image , input_html: { class: 'text-white banner-btn btn btn-primary img-upload-hide', id: 'upload' }, label: false  %>
             <%= f.input :image_cache, as: :hidden %>
-            <%= f.submit "Upload answer sheet" %>
+             <%= f.submit "Upload an exam", class: "banner-btn btn btn-primary img-upload-button", id: "submit" %>
           <% end %>
         </div>
          <div class="col-12 my-5 d-flex justify-content-between">
           <%= link_to "Delete this exam", exam_path(@exam), method: "delete", class: "btn btn-danger" %>
-        <!-- </div>
-        <div class="col-12 my-1"> -->
           <% css_class = @exam.submissions.empty? ? "d-none" : "" %>
           <%= link_to "Submissions", exam_submissions_path(@exam), class: "btn btn-primary #{css_class}" %>
         </div>

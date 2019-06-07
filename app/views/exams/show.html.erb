@@ -4,16 +4,16 @@
 
 <div class="container mt-3">
   <div class="row">
-    <div style="background-color:rgba(0,0,0,0.01)" class="">
+    <div style="background-color:rgba(0,0,0,0.01);margin-right: 180px;" class="">
       <div class="d-flex justify-content-between px-4">
-        <h4>Exam id:- <%= @exam.id %></h4>
-        <h4><em>Submissions id:-  </em><%= @exam.submissions.count %></h4>
+        <h4>Exam id: <%= @exam.id %></h4>
+        <h4><em>Submissions id:  </em><%= @exam.submissions.count %></h4>
       </div>
       <div class="col-8">
         <%= cl_image_tag @exam.image, width: 540, crop: :fill %>
       </div>
     </div>
-    <div class="col-4 card" style="background-color: white;margin: 36px 56px;">
+    <div class="col-4 card" style="background-color: white;margin-top: 36px;">
       <div class="row ">
         <div class="col-12 my-1">
           <%= simple_form_for [@exam, @submission] do |f| %>

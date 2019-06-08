@@ -12,12 +12,8 @@ class QuestionsController < ApplicationController
   end
 
   def new
-    # Batch Read File API
     uri = URI('https://japaneast.api.cognitive.microsoft.com/vision/v2.0/read/core/asyncBatchAnalyze')
-    uri.query = URI.encode_www_form({
-    })
-
-    # Create a header and body for new HTTP request
+    uri.query = URI.encode_www_form({})
     request = Net::HTTP::Post.new(uri.request_uri)
     request['Content-Type'] = 'application/json'
     request['Ocp-Apim-Subscription-Key'] = ENV['AZURE_API_KEY']
@@ -33,22 +29,17 @@ class QuestionsController < ApplicationController
     response_url = response.header['operation-location']
 
     # Wait for 10 seconds
-    sleep(10)
+    sleep(3)
 
     # Get Read Operation Result API
     uri = URI(response_url)
-    uri.query = URI.encode_www_form({
-    })
-
+    uri.query = URI.encode_www_form({})
     request = Net::HTTP::Get.new(uri.request_uri)
-    # Request headers
     request['Ocp-Apim-Subscription-Key'] = ENV['AZURE_API_KEY']
-    # Request body
-    # request.body = "{body}"
-
     response = Net::HTTP.start(uri.host, uri.port, use_ssl: uri.scheme == 'https') do |http|
       http.request(request)
     end
+
     @ocr = JSON.parse(response.body, object_class: OpenStruct)
     @question = Question.new
     @exam = Exam.find(params[:exam_id])

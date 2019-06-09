@@ -4,7 +4,6 @@
       <h5 >Select area</h5>
       <p id='area' data-area="" data-canvas="<%= @exam.image.url %>">
       <%= simple_form_for([ @exam ]) do |form| %>
-
       <%= form.input :origin_x, :as => :hidden %>
       <%= form.input :origin_y, :as => :hidden %>
       <%= form.input :width, :as => :hidden %>

@@ -18,6 +18,7 @@ class QuestionsController < ApplicationController
     request['Content-Type'] = 'application/json'
     request['Ocp-Apim-Subscription-Key'] = ENV['AZURE_API_KEY']
     # Request body
+
     request.body = "{\"url\": \"#{@exam.image.url}\"}"
 
     # Send the http request to Azure and store the response

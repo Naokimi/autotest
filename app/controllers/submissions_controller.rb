@@ -1,7 +1,29 @@
 class SubmissionsController < ApplicationController
   def index
+    require 'mini_magick'
+
     @exam = Exam.find(params[:exam_id])
     @submissions = policy_scope(Submission).where("exam_id = ?", @exam.id)
+    color = "red"
+
+    @submissions.each do |submission|
+    img = MiniMagick::Image.open(submission.image.url)
+
+      img.combine_options do |i|
+        submission.answers.each do |answer|
+          question = answer.question
+            i.fill color
+            i.gravity 'NorthWest'
+            if answer.is_correct
+              i.draw "text #{question.origin_x},#{question.origin_y}  'O'"
+            else
+              i.draw "text #{question.origin_x},#{question.origin_y}  'X'"
+            end
+            i.pointsize '100'
+            i.write "#{submission.id}.pdf"
+        end
+      end
+    end
   end
 
   def show

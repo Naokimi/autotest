@@ -54,8 +54,8 @@
   }
 
 
-.shadow{
-  box-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+.banner-shadow{
+  box-shadow: 1px 2px 3px rgba(242,239,199,0.3);
 }
 
 .link-img{
@@ -68,4 +68,5 @@
 
 .link-img:hover{
    box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+   // box-shadow: 0 0 2px 1px rgba(242,239,199,0.1);
 }

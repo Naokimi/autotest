@@ -3,8 +3,18 @@ btn.nextSibling.nextSibling.remove();
 btn.remove();
 if (document.querySelectorAll('.special').length === 0)
 {
-
-  var line ='<a href="<%= exam_path(@exam) %>" class="btn btn-success active" role="button" aria-pressed="true">Success</a>';
+  // var line ='<a href="<%= exam_path(@exam) %>" class="btn btn-success active" role="button" aria-pressed="true">Upload students\' exams</a>';
+  var line = "<%= j render 'shared/upload', exam: @exam, submission: Submission.new %>"
   var list = document.getElementById("addBtn");
   list.insertAdjacentHTML("beforeend", line);
+
+
+  const upload = document.getElementById("upload");
+
+  if (upload) {
+    const submit = document.getElementById("submit");
+    upload.addEventListener("change", (event) => {
+      submit.click();
+    });
+  }
 }

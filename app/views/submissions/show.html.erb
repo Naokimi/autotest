@@ -25,7 +25,8 @@
             <% else %>
               <tr class="table-warning">
             <% end %>
-              <td><%= link_to answer.question_id - @first_question_id + 1, question_path(answer.question) %></td>
+              <% first_question_id = @submission.exam.questions.first.id %>
+              <td><%= link_to answer.question_id - first_question_id + 1, question_path(answer.question) %></td>
               <td><%= answer.question.correct_answer %></td>
               <%= simple_form_for answer, html: { class: 'form-inline' } do |f| %>
                 <td><%= f.input :is_correct, label: false %></td>

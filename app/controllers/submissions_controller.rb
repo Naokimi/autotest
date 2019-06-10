@@ -6,7 +6,6 @@ class SubmissionsController < ApplicationController
 
   def show
     @submission = policy_scope(Submission).find(params[:id])
-    @first_question_id = @submission.exam.questions.first.id
     @img_path = "https://res.cloudinary.com/naokimi/#{@submission.image.model[:image]}"
     @answers = Answer.where(submission_id: @submission.id).order(:question_id)
     @score = @answers.where('is_correct = true').count

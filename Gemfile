@@ -21,6 +21,7 @@ gem 'simple_form'
 gem 'uglifier'
 gem 'webpacker'
 gem "mini_magick"
+gem 'combine_pdf', '~> 1.0', '>= 1.0.16'
 
 group :development do
   gem 'web-console', '>= 3.3.0'

@@ -21,7 +21,7 @@
           </thead>
           <tbody>
             <% @answers.each do |answer| %>
-              <tr class="<%= 'table-warning' unless answer.is_correct %>">
+              <tr class="<%= 'table-incorrect' unless answer.is_correct %>">
                 <% first_question_id = @submission.exam.questions.first.id %>
                 <td><%= link_to answer.question_id - first_question_id + 1, question_path(answer.question) %></td>
                 <td><%= answer.question.correct_answer %></td>
@@ -29,7 +29,7 @@
                   <%= simple_form_for answer, remote: true, html: { class: 'form-inline' } do |f| %>
                     <%= f.input :is_correct, label: false %>
                     <%= f.input :content, label:false %>
-                    <%= f.submit 'Update' %>
+                    <%= f.submit 'Update', style: "display:none;" %>
                   <% end %>
                 </td>
                 <td>
@@ -44,7 +44,7 @@
         </table>
       <% end %>
     </div>
-    <button  class="btn-lg btn-warning" id="myProgress" style="position: fixed; bottom: 24px; width: 60%; left: 20%; opacity: 0.7;">Update
+    <button  class="btn-lg btn-delete" id="myProgress" style="position: fixed; bottom: 24px; width: 60%; left: 20%; opacity: 0.7;">Update
       <div id="myBar" style="margin-left: 5px;" ></div>
     </button>
   </div>

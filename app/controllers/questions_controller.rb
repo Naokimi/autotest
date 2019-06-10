@@ -29,7 +29,7 @@ class QuestionsController < ApplicationController
     # Store the operation-location
     response_url = response.header['operation-location']
 
-    # Wait for 10 seconds
+    # Wait for 10 seconds (coming from Azure's documentation)
     sleep(3)
 
     # Get Read Operation Result API

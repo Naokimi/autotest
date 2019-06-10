@@ -7,7 +7,7 @@
       <h3 class='mb-3'>Submission id: <%= params[:id] %> </h3>
       <p style="font-size: 24px;">Score: <%= @score %></p>
       <% if @answers == [] %>
-        <%= link_to 'Analyze the answers', new_submission_answer_path(@submission) %>
+        <%= link_to 'Analyze the answers', submission_answers_path(@submission), method: :post %>
       <% else %>
         <table class="table">
           <thead>

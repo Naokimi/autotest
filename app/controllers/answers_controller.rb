@@ -6,7 +6,7 @@ class AnswersController < ApplicationController
     @answers = policy_scope(Answer.where("question_id BETWEEN ? AND ?", @exam.questions.first.id, @exam.questions.last.id))
   end
 
-  def new
+  def create
     @submission = Submission.find(params[:submission_id])
     @img_path = "https://res.cloudinary.com/naokimi/#{@submission.image.model[:image]}"
     @azure_results = analyze_image(@img_path)
@@ -39,14 +39,18 @@ class AnswersController < ApplicationController
     end
     @answers = Answer.where(submission_id: @submission.id)
     authorize Answer.new
-    redirect_to submission_path(@submission)
+
+  rescue => e
+    p e
+  ensure
+    respond_to do |format|
+      format.html { redirect_to submission_path(@submission) }
+      format.js { head :no_content }
+    end
   end
 
   def show
     authorize @answer
-  end
-
-  def create
   end
 
   def update
@@ -78,6 +82,8 @@ class AnswersController < ApplicationController
     response = Net::HTTP.start(uri.host, uri.port, use_ssl: uri.scheme == 'https') do |http|
       http.request(request)
     end
+    require "pp"
+    pp response
     response_url = response.header['operation-location']
 
     #Wait for 3 seconds
@@ -92,6 +98,7 @@ class AnswersController < ApplicationController
       http.request(request)
     end
     json = JSON.parse(response.body)
+    pp json
     # puts "Status: #{json['status']}"
     # puts "Width: #{json['recognitionResults'][0]['width']}"
     # puts "Height: #{json['recognitionResults'][0]['height']}"

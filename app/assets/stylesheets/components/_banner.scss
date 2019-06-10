@@ -98,3 +98,15 @@ border-color: white;
 .btn-delete:hover{
   background-color: rgba(0,0,0,0.1);
 }
+
+.btn-download{
+  margin:0 351px 6px 0;
+  background-color:$primary;
+  opacity: 0.7;
+  border-color:$color-danger;
+}
+
+.btn-download:hover{
+  opacity:1;
+  font-size: 1.1em;
+}

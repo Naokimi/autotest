@@ -10,3 +10,11 @@
   text-decoration:none;
   font-size: 18px;
 }
+
+.table-incorrect {
+  background-color: $color-danger;
+}
+
+.table-incorrect td:nth-child(2) {
+  color: white;
+}

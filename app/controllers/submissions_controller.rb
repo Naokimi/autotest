@@ -1,6 +1,7 @@
 class SubmissionsController < ApplicationController
   def index
     require 'mini_magick'
+    pdf = CombinePDF.new
 
     @exam = Exam.find(params[:exam_id])
     @submissions = policy_scope(Submission).where("exam_id = ?", @exam.id)
@@ -20,10 +21,12 @@ class SubmissionsController < ApplicationController
               i.draw "text #{question.origin_x},#{question.origin_y}  'X'"
             end
             i.pointsize '100'
-            i.write "#{submission.id}.pdf"
         end
+          i.write "./public/uploads/tmp/#{submission.id}.pdf"
+          pdf << CombinePDF.load("./public/uploads/tmp/#{submission.id}.pdf")
       end
     end
+    pdf.save "./public/uploads/#{@exam.id}.pdf"
   end
 
   def show

@@ -19,33 +19,33 @@
               <th></th>
             </tr>
           </thead>
-          <% @answers.each do |answer| %>
-            <% if answer.is_correct %>
-              <tr>
-            <% else %>
-              <tr class="table-warning">
+          <tbody>
+            <% @answers.each do |answer| %>
+              <tr class="<%= 'table-warning' if answer.is_correct %>">
+                <% first_question_id = @submission.exam.questions.first.id %>
+                <td><%= link_to answer.question_id - first_question_id + 1, question_path(answer.question) %></td>
+                <td><%= answer.question.correct_answer %></td>
+                <td>
+                  <%= simple_form_for answer, remote: true, html: { class: 'form-inline' } do |f| %>
+                    <%= f.input :is_correct, label: false %>
+                    <%= f.input :content, label:false %>
+                    <%= f.submit 'Update' %>
+                  <% end %>
+                </td>
+                <td>
+                  <div class="bg-white rounded shadow">
+                    <% url = "https://res.cloudinary.com/naokimi/image/upload/x_#{answer.question.origin_x.to_i},y_#{answer.question.origin_y.to_i},w_#{answer.question.width.to_i},h_#{answer.question.height.to_i},c_crop/#{@submission.image.filename}" %>
+                    <%= image_tag url, style: "width:100%; height: auto;" %>
+                  </div>
+                </td>
+              </tr>
             <% end %>
-              <% first_question_id = @submission.exam.questions.first.id %>
-              <td><%= link_to answer.question_id - first_question_id + 1, question_path(answer.question) %></td>
-              <td><%= answer.question.correct_answer %></td>
-              <%= simple_form_for answer, remote: true, html: { class: 'form-inline' } do |f| %>
-                <td><%= f.input :is_correct, label: false %></td>
-                <td><%= f.input :content, label:false %>
-                <%= f.submit 'Update', class:'hide' %></td>
-              <% end %>
-              <% url = "https://res.cloudinary.com/naokimi/image/upload/x_#{answer.question.origin_x.to_i},y_#{answer.question.origin_y.to_i},w_#{answer.question.width.to_i},h_#{answer.question.height.to_i},c_crop/#{@submission.image.filename}" %>
-              <td>
-                <div class="bg-white rounded shadow">
-                  <%= image_tag url, style: "width:100%; height: auto;" %>
-                </div>
-              </td>
-            </tr>
-          <% end %>
+          </tbody>
         </table>
       <% end %>
     </div>
-    <button  class="btn-lg btn-warning"id="myProgress" style="position: fixed; bottom: 24px; width: 60%; left: 20%; opacity: 0.7;">Update
-      <div id="myBar" style="margin-left: 5px;" ><script>console.log("hello")</script></div>
+    <button  class="btn-lg btn-warning" id="myProgress" style="position: fixed; bottom: 24px; width: 60%; left: 20%; opacity: 0.7;">Update
+      <div id="myBar" style="margin-left: 5px;" ></div>
     </button>
   </div>
 </div>

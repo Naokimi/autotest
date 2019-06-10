@@ -1,13 +1,13 @@
 <div class="col-12 px-0">
-  <div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://images.unsplash.com/photo-1519032465794-2da0ceef0b63?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80);">
+  <div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://www.jdyoung.com/wp-content/uploads/2019/01/robot-reading-document-AI-content-management.jpg);">
     <div class="container">
       <h1><strong>AutoTest</strong></h1>
-      <h2>Grade hand-written exams instantly</h2>
+      <h2><b>Grade hand-written exams instantly</b></h2>
       <%= simple_form_for(@exam) do |f| %>
         <%= f.input :image, input_html: { class: 'text-white banner-btn btn btn-primary hide', id: 'upload' }, label: false  %>
         <!--,as: :file, , multiple:true add this inside inner html -->
         <%= f.input :image_cache, as: :hidden %>
-        <%= f.submit "Upload an exam", class: "banner-btn btn btn-primary", id: "submit" %>
+        <%= f.submit "Upload an exam", class: "banner-btn btn btn-success btn-banner", id: "submit" %>
       <% end %>
       <div class="cards d-flex justify-content-between mx-3">
         <div class="card shadow">

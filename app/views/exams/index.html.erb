@@ -7,7 +7,7 @@
       <%= simple_form_for(@exam) do |f| %>
       <%= f.input :image, input_html: { class: 'text-white banner-btn btn btn-primary hide', id: 'upload' }, label: false  %>
       <%= f.input :image_cache, as: :hidden %>
-      <%= f.submit "Upload a new exam", class: "banner-btn btn btn-primary mb-3 ml-4", id: "submit" %>
+      <%= f.submit "Upload a new exam", class: " btn btn-upload mb-3 ml-4", id: "submit" %>
       <% end %>
     </div>
   </div>

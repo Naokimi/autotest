@@ -26,6 +26,10 @@
   font-size: 16px;
 }
 
+.card-text{
+  color:black;
+  font-weight: bold;
+}
 
 .btn-flat{
 color: black;
@@ -97,4 +101,11 @@ border-color: white;
 
 .btn-delete:hover{
   background-color: rgba(0,0,0,0.1);
+}
+
+.btn-upload{
+  color: black;
+  border-color: $color-danger;
+  background-color: $primary;
+  font-weight: bold;
 }

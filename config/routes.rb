@@ -10,6 +10,6 @@ Rails.application.routes.draw do
   resources :questions, only: [:show]
   resources :answers, only: [:edit, :update]
   resources :submissions, only: [:show] do
-    resources :answers, only: [:new, :create]
+    resources :answers, only: [:create]
   end
 end

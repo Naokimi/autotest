@@ -31,25 +31,6 @@
   font-weight: bold;
 }
 
-.btn-flat{
-color: black;
-padding: 8px 24px;
-border-radius: 4px;
-background: rgba(0,0,0,0.4);
-// border-color: rgba(0,0,0,0.4);
-transition: background 0.3s ease;
-border-color: white;
-}
-
-.btn-flat:hover{
-  background: rgba(0,0,0,0.5);
-}
-
-.banner-btn{
-  font-weight:bold;
-}
-
-
 .circle{
   width: 64px;
   position: relative;
@@ -68,11 +49,6 @@ border-color: white;
   margin-left: -59px;
 }
 
-.img-upload-button{
-  padding: 10px 67px;
-  margin-left:47px;
-}
-
 .img-upload-hide{
   transform: translateY(62px);
   opacity: 0;
@@ -80,44 +56,4 @@ border-color: white;
   width:100px;
   margin-left: 63px;
   padding:8px 126px;
-}
-
-.btn-submission{
-  color: black;
-  border-color: rgba(0,0,0,0.4);
-  font-weight: bold;
-}
-
-.btn-submission:hover{
-  background-color: rgba(0,0,0,0.1);
-}
-
-.btn-delete{
-  color: black;
-  border-color: $color-danger;
-  background-color: rgba(0,0,0,0.3);
-  font-weight: bold;
-}
-
-.btn-delete:hover{
-  background-color: rgba(0,0,0,0.1);
-}
-
-.btn-upload{
-  // margin:0 351px 6px 0;
-  background-color:$primary;
-  opacity: 1;
-  border-color:$color-danger;
-}
-
-.btn-download{
-  margin:0 351px 6px 0;
-  background-color:$primary;
-  opacity: 0.7;
-  border-color:$color-danger;
-}
-
-.btn-download:hover{
-  opacity:1;
-  font-size: 1.1em;
 }

@@ -1,7 +1,7 @@
 .banner {
   background-size: cover;
   background-position: center;
-  padding: 80px 0;
+  padding: 161px 0;
   text-align: center;
 }
 
@@ -28,11 +28,17 @@
 
 
 .btn-flat{
-color: white;
+color: black;
 padding: 8px 24px;
 border-radius: 4px;
-background: $primary;
+background: rgba(0,0,0,0.4);
+// border-color: rgba(0,0,0,0.4);
 transition: background 0.3s ease;
+border-color: white;
+}
+
+.btn-flat:hover{
+  background: rgba(0,0,0,0.5);
 }
 
 .btn-banner{
@@ -70,4 +76,25 @@ transition: background 0.3s ease;
   width:100px;
   margin-left: 63px;
   padding:8px 126px;
+}
+
+.btn-submission{
+  color: black;
+  border-color: rgba(0,0,0,0.4);
+  font-weight: bold;
+}
+
+.btn-submission:hover{
+  background-color: rgba(0,0,0,0.1);
+}
+
+.btn-delete{
+  color: black;
+  border-color: $color-danger;
+  background-color: rgba(0,0,0,0.3);
+  font-weight: bold;
+}
+
+.btn-delete:hover{
+  background-color: rgba(0,0,0,0.1);
 }

@@ -21,7 +21,7 @@
           </thead>
           <tbody>
             <% @answers.each do |answer| %>
-              <tr class="<%= 'table-warning' if answer.is_correct %>">
+              <tr class="<%= 'table-warning' unless answer.is_correct %>">
                 <% first_question_id = @submission.exam.questions.first.id %>
                 <td><%= link_to answer.question_id - first_question_id + 1, question_path(answer.question) %></td>
                 <td><%= answer.question.correct_answer %></td>

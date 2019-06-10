@@ -9,7 +9,10 @@ import "./selectall";
 import "./progress";
 
 // window.move = move;
-document.getElementById("myProgress").addEventListener("click", () =>{
-  clickAll();
-  move();
-})
+let progress = document.getElementById("myProgress");
+
+  progress.addEventListener("click", () =>{
+    clickAll();
+    move();
+  })
+

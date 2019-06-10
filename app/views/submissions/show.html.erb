@@ -48,10 +48,24 @@
       function clickAll() {
         console.log('hello');
         forms = document.querySelectorAll('.simple_form');
+        const requests = [];
         forms.forEach(function(form) {
-        form.dispatchEvent(new Event('submit', {bubbles: true}));
+          const promise = new Promise(function(resolve, reject) {
+            form.addEventListener("ajax:success", () => {
+              console.log(form.id);
+              resolve();
+            });
+          });
+          requests.push(promise);
+
+          form.dispatchEvent(new Event('submit', {bubbles: true}));
         });
-        setTimeout(location.reload(), 1000)
+        // setTimeout(location.reload(), 1000)
+
+        Promise.all(requests).then(() => {
+          console.log("all done");
+          location.reload();
+        })
       }
     </script>
     <button onclick="clickAll();" class="btn-lg btn-warning" style="position: fixed; bottom: 24px; width: 60%; left: 20%; opacity: 0.7;">Update</button>

@@ -6,7 +6,6 @@ class SubmissionsController < ApplicationController
 
   def show
     @submission = policy_scope(Submission).find(params[:id])
-    @first_question_id = @submission.exam.questions.first.id
     @img_path = "https://res.cloudinary.com/naokimi/#{@submission.image.model[:image]}"
     @answers = Answer.where(submission_id: @submission.id).order(:question_id)
     @score = @answers.where('is_correct = true').count
@@ -37,7 +36,8 @@ class SubmissionsController < ApplicationController
         config.api_secret = ENV['CONVERT_API_SECRET']
       end
 
-      result = ConvertApi.convert('jpg', File: file, ImageHeight: '1424', ImageWidth: '1100')
+      # if needs to fix image size write , ScaleImage: 'true', ImageHeight: '1123', ImageWidth: '795'
+      result = ConvertApi.convert('jpg', File: file, ScaleProportions: 'true', TextAntialiasing: '4', GraphicsAntialiasing: '4', ImageInterpolation: 'true', ScaleImage: 'true', ImageHeight: '1695', ImageWidth: '1200')
       # @submission.remote_image_url = result.files.first.url
       result.files.each do |converted_file|
         @submission = @exam.submissions.new(submission_params)

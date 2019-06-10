@@ -2,34 +2,33 @@
   <div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://images.unsplash.com/photo-1519032465794-2da0ceef0b63?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80);">
     <div class="container">
       <h1><strong>AutoTest</strong></h1>
-      <h2>Grade Handwritten Exams Instantly</h2>
+      <h2>Save your time to grade hand-written exam papers</h2>
       <%= simple_form_for(@exam) do |f| %>
         <%= f.input :image, input_html: { class: 'text-white banner-btn btn btn-primary hide', id: 'upload' }, label: false  %>
         <!--,as: :file, , multiple:true add this inside inner html -->
         <%= f.input :image_cache, as: :hidden %>
         <%= f.submit "Upload an exam", class: "banner-btn btn btn-primary", id: "submit" %>
       <% end %>
+      <div class="cards d-flex justify-content-between mx-3">
+        <div class="card shadow">
+          <p class="text-primary">UPLOAD CORRECT ANSWER SHEET</p>
+          <i class="fas fa-file-upload"></i>
+          <p style="text-align: center">Auto Test will save correct answers into database</p>
+        </div>
+
+        <div class="card shadow">
+          <p class="text-primary">UPLOADE STUDENTS HAND-WRITTEN ANSWER SHEETS</p>
+          <i class="fas fa-file-signature"></i>
+          <p style="text-align: center">Auto Test will analyze the answers and save</p>
+        </div>
+
+        <div class="card shadow">
+          <p class="text-primary">DOWNLOAD / PRINT GRADED ANWER SHEETS</p>
+          <i class="fas fa-print"></i>
+          <p style="text-align: center">You can download / print graded answer sheets</p>
+        </div>
+      </div>
     </div>
   </div>
 </div>
-<div class="wrapper mx-3">
-  <div class="cards d-flex justify-content-around mx-5">
-  <div class="card shadow">
-    <h1>Step 1</h1>
-    <i class="fas fa-file-signature"></i>
-    <p style="text-align: center">Upload your answer sheet with correct answers</p>
-  </div>
 
-  <div class="card shadow">
-    <h1>Step 2</h1>
-    <i class="fas fa-file-upload"></i>
-    <p style="text-align: center">Upload your students' answer sheets</p>
-  </div>
-
-  <div class="card shadow">
-    <h1>Step 3</h1>
-    <i class="fas fa-file-download"></i>
-    <p style="text-align: center">Download corrected answer sheets and print</p>
-  </div>
-</div>
-</div>

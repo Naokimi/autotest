@@ -41,8 +41,8 @@ border-color: white;
   background: rgba(0,0,0,0.5);
 }
 
-.btn-banner{
-  color:white;
+.banner-btn{
+  font-weight:bold;
 }
 
 
@@ -97,6 +97,13 @@ border-color: white;
 
 .btn-delete:hover{
   background-color: rgba(0,0,0,0.1);
+}
+
+.btn-upload{
+  // margin:0 351px 6px 0;
+  background-color:$primary;
+  opacity: 1;
+  border-color:$color-danger;
 }
 
 .btn-download{

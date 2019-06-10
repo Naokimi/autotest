@@ -9,23 +9,29 @@
         <%= f.input :image_cache, as: :hidden %>
         <%= f.submit "Upload an exam", class: "banner-btn btn btn-success btn-banner", id: "submit" %>
       <% end %>
-      <div class="cards d-flex justify-content-between mx-3">
-        <div class="banner-card shadow">
-          <p class="text-primary">UPLOAD CORRECT ANSWER SHEET</p>
-          <i class="fas fa-file-upload"></i>
-          <p style="text-align: center">AutoTest will save correct answers into database</p>
+      <div class="row d-flex justify-content-between m-3">
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="banner-card shadow">
+            <p class="text-primary">UPLOAD CORRECT ANSWER SHEET</p>
+            <i class="fas fa-file-upload"></i>
+            <p style="text-align: center">AutoTest will save correct answers into database</p>
+          </div>
         </div>
 
-        <div class="banner-card shadow">
-          <p class="text-primary">UPLOAD STUDENTS' HAND-WRITTEN ANSWER SHEETS</p>
-          <i class="fas fa-file-signature"></i>
-          <p style="text-align: center">AutoTest will analyze the answers and save</p>
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="banner-card shadow">
+            <p class="text-primary">UPLOAD STUDENTS' HAND-WRITTEN ANSWER SHEETS</p>
+            <i class="fas fa-file-signature"></i>
+            <p style="text-align: center">AutoTest will analyze the answers and save</p>
+          </div>
         </div>
 
-        <div class="banner-card shadow">
-          <p class="text-primary">DOWNLOAD AND PRINT GRADED ANWER SHEETS</p>
-          <i class="fas fa-print"></i>
-          <p style="text-align: center">The sheets can be distributed back to students</p>
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="banner-card shadow">
+            <p class="text-primary">DOWNLOAD AND PRINT GRADED ANWER SHEETS</p>
+            <i class="fas fa-print"></i>
+            <p style="text-align: center">The sheets can be distributed back to students</p>
+          </div>
         </div>
       </div>
     </div>

@@ -1,4 +1,4 @@
-<%= link_to exams_path, class: "btn btn-primary mt-4" do%>
+<%= link_to exams_path, class: "btn btn-flat mt-4" do%>
   <i class="fas fa-arrow-left px-3"></i>
 <% end %>
 
@@ -23,9 +23,9 @@
           <% end %>
         </div>
          <div class="col-12 my-5 d-flex justify-content-between">
-          <%= link_to "Delete this exam", exam_path(@exam), method: "delete", class: "btn btn-danger" %>
+          <%= link_to "Delete this exam", exam_path(@exam), method: "delete", class: "btn btn-delete" %>
           <% css_class = @exam.submissions.empty? ? "d-none" : "" %>
-          <%= link_to "Submissions", exam_submissions_path(@exam), class: "btn btn-primary #{css_class}" %>
+          <%= link_to "Submissions", exam_submissions_path(@exam), class: "btn btn-submission #{css_class}" %>
         </div>
 
       </div>

@@ -81,6 +81,7 @@ border-color: white;
 .btn-submission{
   color: black;
   border-color: rgba(0,0,0,0.4);
+  font-weight: bold;
 }
 
 .btn-submission:hover{
@@ -90,6 +91,8 @@ border-color: white;
 .btn-delete{
   color: black;
   border-color: $color-danger;
+  background-color: rgba(0,0,0,0.3);
+  font-weight: bold;
 }
 
 .btn-delete:hover{

@@ -1,38 +1,21 @@
 <div class="col-12 px-0">
-  <div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://www.jdyoung.com/wp-content/uploads/2019/01/robot-reading-document-AI-content-management.jpg);">
-    <div class="container">
-      <h1><strong>AutoTest</strong></h1>
-      <h2><b>Grade hand-written exams instantly</b></h2>
-      <%= simple_form_for(@exam) do |f| %>
-        <%= f.input :image, input_html: { class: 'text-white banner-btn btn btn-primary hide', id: 'upload' }, label: false  %>
-        <%= f.input :image_cache, as: :hidden %>
-        <%= f.submit "Upload an exam", class: " btn btn-upload btn-banner px-3 py-2", id: "submit" %>
-      <% end %>
-      <div class="" style="padding-top:70px;">
-        <div class="row d-flex justify-content-between m-3">
-          <div class="col-12 col-md-6 col-lg-4">
-            <div class="banner-card banner-shadow">
-              <p class="card-text">UPLOAD CORRECT ANSWER SHEET</p>
-              <i class="fas fa-file-upload"></i>
-              <p style="text-align: center">AutoTest will save correct answers into database</p>
-            </div>
+  <div class="banner floatLeft">
+    <div class="banner-card1">
+      <div class="banner-card2">
+        <div class="banner-card3">
+          <div class="banner-head">Grade hand-written exams instantly</div>
+          <div class="banner-text space">
+            <ul content>
+              <li>Save  the correct answer to your test</li>
+              <li>Analyse  students answers automatically</li>
+              <li>Get Graded  students tests</li>
+          </ul>
           </div>
-
-          <div class="col-12 col-md-6 col-lg-4">
-            <div class="banner-card banner-shadow">
-              <p class="card-text">UPLOAD STUDENTS' HAND-WRITTEN ANSWER SHEETS</p>
-              <i class="fas fa-file-signature"></i>
-              <p style="text-align: center">AutoTest will analyze the answers and save</p>
-            </div>
-          </div>
-
-          <div class="col-12 col-md-6 col-lg-4">
-            <div class="banner-card banner-shadow">
-              <p class="card-text">DOWNLOAD AND PRINT GRADED ANWER SHEETS</p>
-              <i class="fas fa-print"></i>
-              <p style="text-align: center">The sheets can be distributed back to students</p>
-            </div>
-          </div>
+          <%= simple_form_for(@exam) do |f| %>
+            <%= f.input :image, input_html: { class: 'text-white btn-banner btn btn-primary hide', id: 'upload' }, label: false  %>
+            <%= f.input :image_cache, as: :hidden %>
+            <%= f.submit "Upload an exam", class: " btn btn-upload btn-banner px-3 py-2", id: "submit" %>
+          <% end %>
         </div>
       </div>
     </div>

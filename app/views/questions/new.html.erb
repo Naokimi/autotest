@@ -1,8 +1,10 @@
 <div class="container mt-4">
   <div class="row justify-content-center">
-    <div class="col-12">
-      <h5 align="center">Select the correct answers <span id="addBtn"></span></h5>
-      <button id="btnAll" type="button" class="btn btn-info">Select all</button>
+    <div class="col-12 mb-3">
+      <h5 align="center">Check the correct answers and confirm</h5>
+      <div class="text-right">
+        <button id="btnAll" type="button" class="btn btn-primary">Confirm all</button><span id="addBtn"></span>
+      </div>
     </div>
   </div>
   <div class="row ">
@@ -25,7 +27,7 @@
                 <%= simple_form_for([ @exam, @question ], remote: true,  html: { class: 'form-inline' }) do |form| %>
                 <% qid = SecureRandom.hex(4) %>
                 <div class="form-group">
-                  <%= form.submit 'ok', class: 'btn btn-success active special', id: "qbtn-#{qid}" %>
+                  <%= form.submit 'ok', class: 'btn btn-primary active special', id: "qbtn-#{qid}" %>
                   <div  class='btn btn-danger cancel' id="<%= qid  %>"  aria-pressed='true'>X</div>
                 </div>
                 <%= form.input :correct_answer, input_html: { value: word.text , size: word.text.size}, label: false %>

@@ -4,32 +4,33 @@ class SubmissionsController < ApplicationController
     @submissions = policy_scope(Submission).where("exam_id = ?", @exam.id)
   end
 
-  def pdf
+def pdf
     @submissions = policy_scope(Submission).where("exam_id = ?", params[:id])
     color = "red"
     authorize @submissions
-    pdf = CombinePDF.new
+    convert = MiniMagick::Tool::Convert.new
     @submissions.each do |submission|
-    img = MiniMagick::Image.open(submission.image.url)
-
+      img = MiniMagick::Image.open(submission.image.url)
       img.combine_options do |i|
         submission.answers.each do |answer|
           question = answer.question
-            i.fill color
-            i.gravity 'NorthWest'
-            if answer.is_correct
-              i.draw "text #{question.origin_x},#{question.origin_y}  'O'"
-            else
-              i.draw "text #{question.origin_x},#{question.origin_y}  'X'"
-            end
-            i.pointsize '100'
+          i.fill color
+          i.gravity 'NorthWest'
+          if answer.is_correct
+            i.draw "text #{question.origin_x},#{question.origin_y}  'O'"
+          else
+            i.draw "text #{question.origin_x},#{question.origin_y}  'X'"
+          end
+          i.pointsize '100'
         end
-          i.write "./public/uploads/tmp/#{submission.id}.pdf"
-          pdf << CombinePDF.load("./public/uploads/tmp/#{submission.id}.pdf")
       end
+      path = Rails.root.join("public", "uploads", "#{submission.id}.jpg")
+      img.write(path)
+      convert << path
     end
-    @route = "uploads/#{params[:id]}.pdf"
-    pdf.save "./public/#{@route}"
+
+    convert << "./public/uploads/#{params[:id]}.pdf"
+    convert.call
   end
 
   def show

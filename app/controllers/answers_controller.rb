@@ -88,7 +88,7 @@ class AnswersController < ApplicationController
     response_url = response.header['operation-location']
 
     #Wait for 3 seconds
-    sleep(3)
+    sleep(10)
 
     # Get Read Operation Result API
     uri = URI(response_url)

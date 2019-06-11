@@ -33,6 +33,8 @@ def pdf
 
     convert << "./public/uploads/#{params[:id]}.pdf"
     convert.call
+    pdf_filename = File.join("./public/uploads/#{params[:id]}.pdf")
+    send_file(pdf_filename, :filename => "pdf_exams.pdf", :type => "application/pdf")
   end
 
   def show

@@ -4,7 +4,7 @@ class SubmissionsController < ApplicationController
     @submissions = policy_scope(Submission).where("exam_id = ?", @exam.id)
   end
 
-def pdf
+  def pdf
     @submissions = policy_scope(Submission).where("exam_id = ?", params[:id])
     color = "red"
     authorize @submissions

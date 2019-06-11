@@ -14,14 +14,14 @@ class SubmissionsController < ApplicationController
       img.combine_options do |i|
         submission.answers.each do |answer|
           question = answer.question
-            i.fill color
-            i.gravity 'NorthWest'
-            if answer.is_correct
-              i.draw "text #{question.origin_x},#{question.origin_y}  'O'"
-            else
-              i.draw "text #{question.origin_x},#{question.origin_y}  'X'"
-            end
-            i.pointsize '100'
+          i.fill color
+          i.gravity 'NorthWest'
+          if answer.is_correct
+            i.draw "text #{question.origin_x},#{question.origin_y}  'O'"
+          else
+            i.draw "text #{question.origin_x},#{question.origin_y}  'X'"
+          end
+          i.pointsize '100'
         end
       end
       path = Rails.root.join("public", "uploads", "#{submission.id}.pdf")

@@ -5,8 +5,9 @@ class SubmissionsController < ApplicationController
   end
 
   def pdf
+    @submissions = policy_scope(Submission).where("exam_id = ?", params[:id])
     color = "red"
-    require 'mini_magick'
+    authorize @submissions
     pdf = CombinePDF.new
     @submissions.each do |submission|
     img = MiniMagick::Image.open(submission.image.url)
@@ -27,7 +28,8 @@ class SubmissionsController < ApplicationController
           pdf << CombinePDF.load("./public/uploads/tmp/#{submission.id}.pdf")
       end
     end
-    pdf.save "./public/uploads/#{@exam.id}.pdf"
+    @route = "uploads/#{params[:id]}.pdf"
+    pdf.save "./public/#{@route}"
   end
 
   def show

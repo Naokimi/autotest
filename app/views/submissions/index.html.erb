@@ -1,5 +1,5 @@
 <div class="d-flex justify-content-between">
-  <%= link_to exam_path(@exam), class: "btn btn-flat mt-4" do%>
+  <%= link_to exam_path(@exam), class: "btn btn-primary mt-5" do%>
     <i class="fas fa-arrow-left px-3"></i>
   <% end %>
   <%= link_to  submissions_pdf_path(@exam), class: "btn mt-4 btn-download" do %>
@@ -7,9 +7,10 @@
   <% end %>
 </div>
 <div class="container shadow back-color">.
-  <div class="d-flex justify-content-around">
-    <h4>Exam id:- <%= @exam.id %></h4>
-    <h4>Total submissions:- <%= @submissions.count %></h4>
+  <div class="d-flex justify-content-between">
+    <h4>Exam id: <%= @exam.id %></h4>
+    <h4>Total submissions: <%= @submissions.count %></h4>
+    <%= link_to 'View all incorrect answers', exam_answers_path, class:'btn btn-primary mb-3' %>
   </div>
   <table class="table">
     <thead>

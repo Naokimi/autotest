@@ -10,8 +10,7 @@ class SubmissionsController < ApplicationController
     authorize @submissions
     pdf = CombinePDF.new
     @submissions.each do |submission|
-    img = MiniMagick::Image.open(submission.image.url)
-
+      img = MiniMagick::Image.open(submission.image.url)
       img.combine_options do |i|
         submission.answers.each do |answer|
           question = answer.question
@@ -24,9 +23,10 @@ class SubmissionsController < ApplicationController
             end
             i.pointsize '100'
         end
-          i.write "./public/uploads/tmp/#{submission.id}.pdf"
-          pdf << CombinePDF.load("./public/uploads/tmp/#{submission.id}.pdf")
       end
+      path = Rails.root.join("public", "uploads", "#{submission.id}.pdf")
+      img.write(path)
+      pdf << CombinePDF.load(path)
     end
     @route = "uploads/#{params[:id]}.pdf"
     pdf.save "./public/#{@route}"

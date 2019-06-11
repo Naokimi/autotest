@@ -1,12 +1,13 @@
 class SubmissionsController < ApplicationController
   def index
-    require 'mini_magick'
-    pdf = CombinePDF.new
-
     @exam = Exam.find(params[:exam_id])
     @submissions = policy_scope(Submission).where("exam_id = ?", @exam.id)
-    color = "red"
+  end
 
+  def pdf
+    color = "red"
+    require 'mini_magick'
+    pdf = CombinePDF.new
     @submissions.each do |submission|
     img = MiniMagick::Image.open(submission.image.url)
 

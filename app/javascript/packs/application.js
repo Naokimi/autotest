@@ -10,9 +10,9 @@ import "./progress";
 
 // window.move = move;
 let progress = document.getElementById("myProgress");
-
+if (progress) {
   progress.addEventListener("click", () =>{
     clickAll();
     move();
   })
-
+}

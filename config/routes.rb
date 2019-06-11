@@ -12,4 +12,5 @@ Rails.application.routes.draw do
   resources :submissions, only: [:show] do
     resources :answers, only: [:create]
   end
+  get '/exams/:id/submissions/pdf', to: 'submissions#pdf', as: "submissions_pdf"
 end

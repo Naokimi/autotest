@@ -1,11 +1,12 @@
 <div class="container mt-5 pt-5 text-center">
   <h2 class="m-5">Analyzing students' answher sheets.....</h2>
-  <p><%= image_tag "Spinner-1.4s-200px.gif"%></p>
+  <p><%= image_tag "Spinner-1.4s-200px.gif" %></p>
+  <div style="height: 900px;"></div>
   <% @submissions.each do |submission| %>
-    <%= link_to submission_path(submission),class: "text-white" do %>
+    <%= link_to submission_path(submission),class: "table-links text-white" do %>
       <p > Submission id: <%= submission.id %>, Number of answers: <%= submission.answers.count %></p>
       <% if submission.answers.empty? %>
-        <%= link_to 'Analyze the answers', submission_answers_path(submission), class: "text-white", remote: true, method: :post %>
+        <%= link_to 'Analyze the answers', submission_answers_path(submission), class: "analyze-answer-link text-white", remote: true, method: :post %>
       <% end %>
     <% end %>
   <% end %>

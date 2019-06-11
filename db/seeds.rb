@@ -81,7 +81,7 @@ Submission.where(exam_id: auxiliary_exam.id).each do |submission|
     typo = ["Has", "Have", "haz", "HAS", "HAVE", "haf", "hass", "hav"].sample
     content = ["has", "have", typo].sample
     answer = Answer.new(question_id: question_id, submission_id: submission.id, content: content)
-    answer.is_correct = answer.content == answer.question.correct_answer
+    answer.is_correct = answer.content.downcase == answer.question.correct_answer.downcase
     answer.save!
     question_id += 1
   end

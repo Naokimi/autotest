@@ -16,7 +16,7 @@
     <div class="col-4 card bg-white mt-2" >
       <div class="row ">
         <div class="col-12 my-1">
-          <%= simple_form_for [@exam, @submission] do |f| %>
+          <%= simple_form_for [@exam, @submission], remote: true do |f| %>
             <%= f.input :image , input_html: { class: 'text-white banner-btn btn btn-primary img-upload-hide ml-3', id: 'upload' }, label: false  %>
             <%= f.input :image_cache, as: :hidden %>
              <%= f.submit "Upload answer sheets", class: "banner-btn btn btn-primary img-upload-button ml-3", id: "submit" %>

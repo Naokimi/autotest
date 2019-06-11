@@ -16,4 +16,8 @@ class SubmissionPolicy < ApplicationPolicy
   def pdf?
     true
   end
+
+  def new?
+    true
+  end
 end

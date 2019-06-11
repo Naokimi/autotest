@@ -1,0 +1,46 @@
+<div class="container mt-5 pt-5 text-center">
+  <h2 class="m-5">Analyzing students' answher sheets.....</h2>
+  <p><%= image_tag "Spinner-1.4s-200px.gif"%></p>
+  <% @submissions.each do |submission| %>
+    <%= link_to submission_path(submission),class: "text-white" do %>
+      <p > Submission id: <%= submission.id %>, Number of answers: <%= submission.answers.count %></p>
+      <% if submission.answers.empty? %>
+        <%= link_to 'Analyze the answers', submission_answers_path(submission), class: "text-white", remote: true, method: :post %>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    let requestCount = 0;
+    const maxRequests = 5;
+    const requests = [];
+
+    document.querySelectorAll(".analyze-answer-link").forEach((a) => {
+      const request = new Promise((resolve, reject) => {
+        a.addEventListener("ajax:success", () => {
+          console.log("something done...");
+          requestCount -= 1;
+          resolve();
+        });
+
+        const timer = setInterval(() => {
+          if (requestCount < maxRequests) {
+            console.log("starting req");
+            requestCount += 1;
+            a.click();
+            clearInterval(timer);
+          }
+        }, 1000);
+      });
+
+      requests.push(request);
+    });
+
+    Promise.all(requests).then(() => {
+      console.log("all done");
+      window.location = "<%= exam_submissions_path(@exam) %>";
+    })
+  });
+</script>

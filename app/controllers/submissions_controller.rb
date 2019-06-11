@@ -4,6 +4,12 @@ class SubmissionsController < ApplicationController
     @submissions = policy_scope(Submission).where("exam_id = ?", @exam.id)
   end
 
+  def new
+    @exam = Exam.find(params[:exam_id])
+    @submissions = policy_scope(Submission).where("exam_id = ?", @exam.id)
+    authorize @submissions
+  end
+
   def pdf
     @submissions = policy_scope(Submission).where("exam_id = ?", params[:id])
     color = "red"
@@ -46,8 +52,10 @@ class SubmissionsController < ApplicationController
     authorize @submission
 
     if convert_to_jpg_and_save
-      flash[:notice] = 'Successfully uploaded submissions'
-      redirect_to exam_submissions_path(@exam)
+      respond_to do |format|
+        format.html { redirect_to new_exam_submission_path(@exam) }
+        format.js { render js: "window.location = '#{new_exam_submission_path(@exam)}';" }
+      end
     else
       flash[:notice] = 'Failed to upload submissions'
       redirect_to exam_path(@exam)

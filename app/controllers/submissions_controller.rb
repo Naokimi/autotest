@@ -24,9 +24,11 @@ def pdf
           i.pointsize '100'
         end
       end
+
       path = Rails.root.join("public", "uploads", "#{submission.id}.jpg")
       img.write(path)
       convert << path
+
     end
 
     convert << "./public/uploads/#{params[:id]}.pdf"

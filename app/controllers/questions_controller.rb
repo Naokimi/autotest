@@ -8,7 +8,8 @@ class QuestionsController < ApplicationController
   def show
     @question = policy_scope(Question).find(params[:id])
     authorize @question
-    @answers = @question.answers
+    @answers = @question.answers.order('content')
+    @incorrect_answers = @question.answers.where("is_correct = false").order('content')
   end
 
   def new

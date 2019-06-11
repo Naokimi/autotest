@@ -17,7 +17,15 @@
         <% end %>
         <!-- turn the array into a hash grouped by frequency, sort it by highest first and display -->
         <% Hash[answer_content_array.group_by(&:itself).map {|k,v| [k, v.size] }].sort_by{ |k,v| v }.reverse.each do |answer| %>
-          <%= link_to "#{answer[1]}x #{answer[0]}", exam_answer_path(@exam, Answer.find_by_content(answer[0])), class: "#{answer[0] == Question.find(number).correct_answer ? "btn btn-success" : "btn btn-danger"}" %>,
+          <!-- logic for button class -->
+          <% if answer[0].nil? %>
+            <% button_class = "btn btn-danger" %>
+          <% elsif answer[0].downcase == Question.find(number).correct_answer.downcase %>
+            <% button_class = "btn btn-success" %>
+          <% else %>
+            <% button_class = "btn btn-danger" %>
+          <% end %>
+          <%= link_to "#{answer[1]}x #{answer[0]}", exam_answer_path(@exam, Answer.find_by_content(answer[0])), class: "#{button_class}" %>,
         <% end %>
         <% answer_content_array = [] %>
       </li>

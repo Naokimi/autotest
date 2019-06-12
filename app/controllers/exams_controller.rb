@@ -64,7 +64,7 @@ class ExamsController < ApplicationController
   end
 
   def exam_params
-    params.require(:exam).permit(:image, :origin_x, :origin_y, :width, :height)
+    params.require(:exam).permit(:image, :origin_x, :origin_y, :width, :height, :score_origin_x, :score_origin_y, :score_width, :score_height)
     # add inside the params :media => []
     # it will break your logic
   end

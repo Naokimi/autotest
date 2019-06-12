@@ -1369,6 +1369,11 @@ browserslist@^4.0.0, browserslist@^4.4.2, browserslist@^4.5.4, browserslist@^4.6
     electron-to-chromium "^1.3.137"
     node-releases "^1.1.21"
 
+bs-stepper@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/bs-stepper/-/bs-stepper-1.5.0.tgz#7ada58cee7b217524cc33672cd813b3c37295387"
+  integrity sha512-a6CVEDmA6pwayH1gzWATTYbkg3ws8MVnjZaoAjUXL5AzW2A0cxq4PVCk+YIP8wSSBNzeWtW1ruDBVNXiz1irLg==
+
 buffer-from@^1.0.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/buffer-from/-/buffer-from-1.1.1.tgz#32713bc028f75c02fdb710d7c7bcec1f2c6070ef"

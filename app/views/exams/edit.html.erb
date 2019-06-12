@@ -12,13 +12,13 @@
       <%= form.input :score_origin_y, :as => :hidden %>
       <%= form.input :score_width, :as => :hidden %>
       <%= form.input :score_height, :as => :hidden %>
-      <%= form.submit 'Save', class: 'btn btn-primary position-fixed mt-5' %>
+      <%= form.submit 'Save', id:"save", class: 'btn btn-primary position-fixed mt-5 hide' %>
       <% end %></p>
     </div>
   </div>
 </div>
-<div id="stepper1" class="bs-stepper">
-  <div class="bs-stepper-header" role="tablist">
+<div id="stepper1" class="bs-stepper row ml-3 mr-3">
+  <div class="bs-stepper-header col-12" role="tablist">
     <!-- your steps here -->
     <div class="step" data-target="#answer-part">
       <button type="button" class="step-trigger" role="tab" aria-controls="logins-part" id="stepper1">
@@ -43,12 +43,11 @@
         <canvas id="canvas" width="1200" height="1700">
         </canvas>
         <div class="form-group">
-          <button id="next" class="btn btn-primary position-fixed mt-5">Next</button>
+          <button id="next" class="btn btn-primary position-fixed mt-5 hide">Next</button>
         </div>
       </div>
     </div>
     <div id="score-part" class="content" role="tabpanel" aria-labelledby="information-part-trigger">
-      <p>Lorem ipsum dolor </p>
       <div class="row">
         <canvas id="canvas2" width="1200" height="1700">
         </canvas>

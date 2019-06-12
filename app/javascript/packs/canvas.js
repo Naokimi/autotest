@@ -25,8 +25,6 @@ const initCanvas = (canvasId) => {
      }
 
       function mouseUp(e) {
-        console.log(rect)
-
 
         if ('canvas2' === canvasId) {
           console.log(canvasId);
@@ -35,13 +33,18 @@ const initCanvas = (canvasId) => {
           document.getElementById('exam_score_origin_y').value =rect.startY;
           document.getElementById('exam_score_width').value =rect.w;
           document.getElementById('exam_score_height').value =rect.h;
+          document.getElementById('save').classList.remove("hide")
+          document.getElementById('save').style.left = rect.startX+rect.w+20+"px";
+
         }
         else {
           document.getElementById('area').innerHTML=`${rect.h}-${rect.w}-${rect.startX}-${rect.startY}`;
-          document.getElementById('exam_origin_x').value =rect.startX;
-          document.getElementById('exam_origin_y').value =rect.startY;
+          document.getElementById('exam_origin_x').value = rect.startX;
+          document.getElementById('exam_origin_y').value = rect.startY;
           document.getElementById('exam_width').value =rect.w;
           document.getElementById('exam_height').value =rect.h;
+          document.getElementById('next').classList.remove("hide")
+          document.getElementById('next').style.left = rect.startX+rect.w+20+"px";
         }
         drag = false;
       }
@@ -57,13 +60,10 @@ const initCanvas = (canvasId) => {
           ctx.strokeRect(rect.startX, rect.startY, rect.w, rect.h);
         }
       }
-    //
     init();
     document.getElementById('area').addEventListener('click', (el) => {
-      console.log(el);
     });
   }
-
 }
 
 export { initCanvas };

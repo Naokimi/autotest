@@ -59,7 +59,7 @@
   font-weight: bold;
   font-size: 32px;
   line-height: 81.68%;
-  color: #000000;
+  color: $my-black;
   transform: matrix(1, 0, 0.01, 1, 0, 0);
   margin:32px 2px;
 }
@@ -69,7 +69,7 @@
   height: 147px;
   font-size: 14px;
   line-height: 28px;
-  color: #000000;
+  color: $my-black;
   transform: matrix(1, 0, 0.01, 1, 0, 0);
   display: flex;
   align-items: center;

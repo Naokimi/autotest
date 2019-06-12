@@ -4,7 +4,7 @@ padding: 8px 24px;
 border-radius: 4px;
 background: $color-primary;
 transition: background 3s ease;
-border-color: white;
+border-color: $my-white;
 }
 
 .btn-flat:hover{
@@ -34,7 +34,7 @@ border-color: white;
 }
 
 .btn-delete{
-  color: white;
+  color: $my-white;
   border-color: $color-danger;
   background-color: $color-primary;
   font-weight: bold;
@@ -45,7 +45,7 @@ border-color: white;
 }
 
 .btn-upload{
-  color:white;
+  color:$my-white;
   background-color:$primary;
   border: 1px solid $color-primary;
   box-sizing: border-box;

@@ -13,26 +13,25 @@ class SubmissionsController < ApplicationController
   def pdf
     @submissions = policy_scope(Submission).where("exam_id = ?", params[:id])
     color = "red"
-    score = 0
     authorize @submissions
     convert = MiniMagick::Tool::Convert.new
     @submissions.each do |submission|
       img = MiniMagick::Image.open(submission.image.url)
       img.combine_options do |i|
+        score = 0
         submission.answers.each do |answer|
           question = answer.question
           i.fill color
           i.gravity 'NorthWest'
           if answer.is_correct
             i.draw "text #{question.origin_x},#{question.origin_y}  'O'"
-            score = score + 1
+            score += 1
           else
             i.draw "text #{question.origin_x},#{question.origin_y}  'X'"
           end
           i.pointsize '100'
         end
       i.draw "text #{submission.exam.score_origin_x + 20},#{submission.exam.score_origin_y} '#{score}'"
-      score = 0
       end
       path = Rails.root.join("public", "uploads", "#{submission.id}.jpg")
       img.write(path)

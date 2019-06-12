@@ -1,11 +1,11 @@
-<div class="container">
+<div class="container mt-5">
   <div class="d-flex justify-content-between align-items-end">
     <div class="">
-      <h1>My Exams</h1>
+      <h1 style="margin-bottom: 20px;">My Exams</h1>
     </div>
     <div class="">
       <%= simple_form_for(@exam) do |f| %>
-        <%= f.input :image, input_html: { id: 'upload' },  label_html: { class: 'custom-file-upload btn btn-upload btn-banner px-3 py-2' }, label: "Upload an exam", required: false  %>
+        <%= f.input :image, input_html: { id: 'upload' },  label_html: { class: 'custom-file-upload btn btn-upload  px-3 py-2' }, label: "Upload an exam", required: false  %>
         <%= f.input :image_cache, as: :hidden %>
         <%= f.submit "Upload", as: :hidden, id: "submit", style: "display:none;" %>
       <% end %>

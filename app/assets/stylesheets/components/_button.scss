@@ -51,7 +51,6 @@
 .btn-upload {
   color:$my-white;
   background-color:$primary;
-  border: 1px solid $primary;
   box-sizing: border-box;
   border-radius: 28px;
   transform: matrix(1, 0, 0.01, 1, 0, 0);
@@ -80,7 +79,6 @@ input[type="file"] {
 .custom-file-upload {
     border: 1px solid #ccc;
     display: inline-block;
-    padding: 6px 12px;
+    padding: 6px 2px 8px 2px;
     cursor: pointer;
-    color: black;
 }

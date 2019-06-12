@@ -1,22 +1,20 @@
 <div class="col-12 px-0">
   <div class="banner floatLeft">
     <div class="banner-card1">
-      <div class="banner-card2">
-        <div class="banner-card3">
-          <div class="banner-head">Grade hand-written exams instantly</div>
-          <div class="banner-text space">
-            <ul content>
-              <li>Save  the correct answer to your test</li>
-              <li>Analyse  students answers automatically</li>
-              <li>Get Graded  students tests</li>
-          </ul>
-          </div>
-          <%= simple_form_for(@exam) do |f| %>
-            <%= f.input :image, input_html: { class: 'text-white btn-banner btn btn-primary hide', id: 'upload' }, label: false  %>
-            <%= f.input :image_cache, as: :hidden %>
-            <%= f.submit "Upload an exam", class: " btn btn-upload btn-banner px-3 py-2", id: "submit" %>
-          <% end %>
+      <div class="banner-card3">
+        <div class="banner-head">Grade hand-written exams instantly</div>
+        <div class="banner-text space">
+          <ul content>
+            <li>Save  the correct answer to your test</li>
+            <li>Analyse  students answers automatically</li>
+            <li>Get Graded  students tests</li>
+        </ul>
         </div>
+        <%= simple_form_for(@exam) do |f| %>
+          <%= f.input :image, input_html: { class: 'text-white btn-banner btn btn-primary hide', id: 'upload' }, label: false  %>
+          <%= f.input :image_cache, as: :hidden %>
+          <%= f.submit "Upload an exam", class: " btn btn-upload btn-banner px-3 py-2", id: "submit" %>
+        <% end %>
       </div>
     </div>
   </div>

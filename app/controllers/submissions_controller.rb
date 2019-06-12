@@ -9,10 +9,11 @@ class SubmissionsController < ApplicationController
     @submissions = policy_scope(Submission).where("exam_id = ?", @exam.id)
     authorize @submissions
   end
-  
+
   def pdf
     @submissions = policy_scope(Submission).where("exam_id = ?", params[:id])
     color = "red"
+    score = 0
     authorize @submissions
     convert = MiniMagick::Tool::Convert.new
     @submissions.each do |submission|
@@ -24,17 +25,18 @@ class SubmissionsController < ApplicationController
           i.gravity 'NorthWest'
           if answer.is_correct
             i.draw "text #{question.origin_x},#{question.origin_y}  'O'"
+            score = score + 1
           else
             i.draw "text #{question.origin_x},#{question.origin_y}  'X'"
           end
           i.pointsize '100'
         end
+      i.draw "text #{submission.exam.score_origin_x + 20},#{submission.exam.score_origin_y} '#{score}'"
+      score = 0
       end
-
       path = Rails.root.join("public", "uploads", "#{submission.id}.jpg")
       img.write(path)
       convert << path
-
     end
 
     convert << "./public/uploads/#{params[:id]}.pdf"

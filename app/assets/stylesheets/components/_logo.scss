@@ -1,10 +1,9 @@
-
 .logo {
   display: flex;
   flex-direction: column;
 }
 
-.logo-head{
+.logo-head {
   font-style: normal;
   font-weight: bold;
   font-size: 24px;
@@ -13,12 +12,11 @@
   letter-spacing: -0.085em;
 }
 
-.logo p{
+.logo p {
   font-style: normal;
   font-weight: 300;
   font-size: 12px;
   line-height: 1px;
-  /* or 10px */
   display: flex;
   align-items: center;
   letter-spacing: 0.645em;

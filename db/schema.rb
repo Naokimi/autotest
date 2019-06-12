@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_06_045242) do
+ActiveRecord::Schema.define(version: 2019_06_11_062757) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,10 @@ ActiveRecord::Schema.define(version: 2019_06_06_045242) do
     t.float "origin_y"
     t.float "width"
     t.float "height"
+    t.float "score_origin_x"
+    t.float "score_origin_y"
+    t.float "score_width"
+    t.float "score_height"
     t.index ["teacher_id"], name: "index_exams_on_teacher_id"
   end
 

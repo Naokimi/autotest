@@ -1,7 +1,7 @@
 <%= link_to exam_submissions_path(@question.exam), class: "btn btn-primary mt-4" do%>
   <i class="fas fa-arrow-left px-3"></i>
 <% end %>
-<div class="container">
+<div class="container bg-white shadow p-3">
   <div class="row">
     <div class="col-12">
       <h2>Incorrect answers - Exam id: <%= @question.exam_id %>, Question id: <%= @question.id %> </h2>
@@ -20,10 +20,10 @@
           <% @incorrect_answers.each do |answer| %>
             <tr class="<%= 'table-warning' unless answer.is_correct %>">
               <td><%= link_to answer.question_id , question_path(answer.question) %></td>
-              <td><%= answer.question.correct_answer %></td>
+              <td class="correct-answer" ><%= answer.question.correct_answer %></td>
               <td>
                 <%= simple_form_for answer, remote: true, html: { class: 'form-inline' } do |f| %>
-                  <%= f.input :is_correct, label: false %>
+                  <%= f.input :is_correct, label: false, class:'is-correct' %>
                   <%= f.input :content, label:false %>
                   <%= f.submit 'Update', style: "display:none;" %>
                 <% end %>
@@ -44,4 +44,23 @@
     </button>
   </div>
 </div>
+
+<script>
+  // find all trs with answers
+  const answers = document.querySelectorAll('tbody tr');
+  // iterate each answer
+  answers.forEach((answer) => {
+    const checkbox = answer.querySelector('.form-check-input');
+    const inputbox = answer.querySelector('#answer_content');
+    const studentAnswer = answer.querySelector('#answer_content').value;
+    const correctAnswer = answer.querySelector('.correct-answer').innerText;
+    //find student answer and store
+    //add event listner for checkbox, update value when checked
+    answer.addEventListener('click', (event) => {
+      inputbox.value = correctAnswer;
+      checkbox.checked= true;
+      answer.classList = "";
+    });
+  });
+</script>
 

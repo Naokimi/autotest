@@ -1,3 +1,49 @@
+<div class="container shadow back-color my-4 pt-4 pb-5 px-5  rounded">
+  <div class="row">
+    <div class="col-12">
+      <h3 class='mb-3'>Exam id: <%= @exam.id %></h3>
+      <p># of Incorrect Anwers: <%= @incorrect_answers.count %></p>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Question #</th>
+            <th>Correct Answer</th>
+            <th>Correct?</th>
+            <th>Student Answer</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @incorrect_answers.each do |answer| %>
+            <tr class="<%= 'table-warning' unless answer.is_correct %>">
+              <% first_question_id = @exam.questions.first.id %>
+              <td><%= link_to answer.question_id - first_question_id + 1, question_path(answer.question) %></td>
+              <td><%= answer.question.correct_answer %></td>
+              <td>
+                <%= simple_form_for answer, remote: true, html: { class: 'form-inline' } do |f| %>
+                  <%= f.input :is_correct, label: false %>
+                  <%= f.input :content, label:false %>
+                  <%= f.submit 'Update', style: "display:none;" %>
+                <% end %>
+              </td>
+              <td>
+                <div class="bg-white rounded shadow">
+                  <% url = "https://res.cloudinary.com/naokimi/image/upload/x_#{answer.question.origin_x.to_i},y_#{answer.question.origin_y.to_i},w_#{answer.question.width.to_i},h_#{answer.question.height.to_i},c_crop/#{answer.submission.image.filename}" %>
+                  <%= image_tag url, style: "width:100%; height: auto;" %>
+                </div>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <button  class="btn-lg btn-delete" id="myProgress" style="position: fixed; bottom: 24px; width: 60%; left: 20%; opacity: 0.7;">Update
+      <div id="myBar" style="margin-left: 5px;" ></div>
+    </button>
+  </div>
+</div>
+
+
 <div class="container mt-5">
   <ul>
     <% question_id_array = [] %>
@@ -17,11 +63,18 @@
         <% end %>
         <!-- turn the array into a hash grouped by frequency, sort it by highest first and display -->
         <% Hash[answer_content_array.group_by(&:itself).map {|k,v| [k, v.size] }].sort_by{ |k,v| v }.reverse.each do |answer| %>
-          <%= link_to "#{answer[1]}x #{answer[0]}", exam_answer_path(@exam, Answer.find_by_content(answer[0])), class: "#{answer[0] == Question.find(number).correct_answer ? "btn btn-success" : "btn btn-danger"}" %>,
+          <!-- logic for button class -->
+          <% if answer[0].nil? %>
+            <% button_class = "btn btn-danger" %>
+          <% elsif answer[0].downcase == Question.find(number).correct_answer.downcase %>
+            <% button_class = "btn btn-success" %>
+          <% else %>
+            <% button_class = "btn btn-danger" %>
+          <% end %>
+          <%= link_to "#{answer[1]}x #{answer[0]}", exam_answer_path(@exam, Answer.find_by_content(answer[0])), class: "#{button_class}" %>,
         <% end %>
         <% answer_content_array = [] %>
       </li>
     <% end %>
   </ul>
 </div>
-

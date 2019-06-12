@@ -4,30 +4,43 @@ class SubmissionsController < ApplicationController
     @submissions = policy_scope(Submission).where("exam_id = ?", @exam.id)
   end
 
+  def new
+    @exam = Exam.find(params[:exam_id])
+    @submissions = policy_scope(Submission).where("exam_id = ?", @exam.id)
+    authorize @submissions
+  end
+  
   def pdf
+    @submissions = policy_scope(Submission).where("exam_id = ?", params[:id])
     color = "red"
-    require 'mini_magick'
-    pdf = CombinePDF.new
+    authorize @submissions
+    convert = MiniMagick::Tool::Convert.new
     @submissions.each do |submission|
-    img = MiniMagick::Image.open(submission.image.url)
-
+      img = MiniMagick::Image.open(submission.image.url)
       img.combine_options do |i|
         submission.answers.each do |answer|
           question = answer.question
-            i.fill color
-            i.gravity 'NorthWest'
-            if answer.is_correct
-              i.draw "text #{question.origin_x},#{question.origin_y}  'O'"
-            else
-              i.draw "text #{question.origin_x},#{question.origin_y}  'X'"
-            end
-            i.pointsize '100'
+          i.fill color
+          i.gravity 'NorthWest'
+          if answer.is_correct
+            i.draw "text #{question.origin_x},#{question.origin_y}  'O'"
+          else
+            i.draw "text #{question.origin_x},#{question.origin_y}  'X'"
+          end
+          i.pointsize '100'
         end
-          i.write "./public/uploads/tmp/#{submission.id}.pdf"
-          pdf << CombinePDF.load("./public/uploads/tmp/#{submission.id}.pdf")
       end
+
+      path = Rails.root.join("public", "uploads", "#{submission.id}.jpg")
+      img.write(path)
+      convert << path
+
     end
-    pdf.save "./public/uploads/#{@exam.id}.pdf"
+
+    convert << "./public/uploads/#{params[:id]}.pdf"
+    convert.call
+    pdf_filename = File.join("./public/uploads/#{params[:id]}.pdf")
+    send_file(pdf_filename, :filename => "pdf_exams.pdf", :type => "application/pdf")
   end
 
   def show
@@ -44,8 +57,10 @@ class SubmissionsController < ApplicationController
     authorize @submission
 
     if convert_to_jpg_and_save
-      flash[:notice] = 'Successfully uploaded submissions'
-      redirect_to exam_submissions_path(@exam)
+      respond_to do |format|
+        format.html { redirect_to new_exam_submission_path(@exam) }
+        format.js { render js: "window.location = '#{new_exam_submission_path(@exam)}';" }
+      end
     else
       flash[:notice] = 'Failed to upload submissions'
       redirect_to exam_path(@exam)

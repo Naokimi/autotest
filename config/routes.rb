@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :questions, only: [:show]
   resources :answers, only: [:edit, :update]
   resources :submissions, only: [:show] do
-    resources :answers, only: [:create]
+    resources :answers, only: [:new, :create]
   end
+  get '/exams/:id/submissions/pdf', to: 'submissions#pdf', as: "submissions_pdf"
 end

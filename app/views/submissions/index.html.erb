@@ -1,15 +1,16 @@
 <div class="d-flex justify-content-between">
-  <%= link_to exam_path(@exam), class: "btn btn-flat mt-4" do%>
+  <%= link_to exam_path(@exam), class: "btn btn-primary mt-5" do%>
     <i class="fas fa-arrow-left px-3"></i>
   <% end %>
-  <%= link_to  exam_path(@exam), class: "btn mt-4 btn-download" do %>
+  <%= link_to  submissions_pdf_path(@exam), class: "btn mt-4 btn-download" do %>
     <i class="fas fa-cloud-download-alt px-4"></i>
   <% end %>
 </div>
 <div class="container shadow back-color">.
-  <div class="d-flex justify-content-around">
-    <h4>Exam id:- <%= @exam.id %></h4>
-    <h4>Total submissions:- <%= @submissions.count %></h4>
+  <div class="d-flex justify-content-between">
+    <h4>Exam id: <%= @exam.id %></h4>
+    <h4>Total submissions: <%= @submissions.count %></h4>
+    <%= link_to 'View all incorrect answers', exam_answers_path, class:'btn btn-primary mb-3' %>
   </div>
   <table class="table">
     <thead>
@@ -35,45 +36,6 @@
       </tr>
     <% end %>
   </table>
-  <% @submissions.each do |submission| %>
-      <%= link_to submission_path(submission),class: "table-links" do %>
-        <p > Submission id: <%= submission.id %>, Number of answers: <%= submission.answers.count %></p>
-        <% if submission.answers.empty? %>
-          <%= link_to 'Analyze the answers', submission_answers_path(submission), class: "analyze-answer-link", remote: true, method: :post %>
-        <% end %>
-      <% end %>
-  <% end %>
 </div>
 
 
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    let requestCount = 0;
-    const maxRequests = 3;
-    const requests = [];
-
-    document.querySelectorAll(".analyze-answer-link").forEach((a) => {
-      const request = new Promise((resolve, reject) => {
-        a.addEventListener("ajax:success", () => {
-          console.log("something done...");
-          requestCount -= 1;
-        });
-
-        const timer = setInterval(() => {
-          if (requestCount < maxRequests) {
-            console.log("starting req");
-            requestCount += 1;
-            a.click();
-            clearInterval(timer);
-          }
-        }, 1000);
-      });
-
-      requests.push(request);
-    });
-
-    Promise.all(requests).then(() => {
-      console.log("all done");
-    })
-  });
-</script>

@@ -3,7 +3,8 @@ class AnswersController < ApplicationController
 
   def index
     @exam = Exam.find(params[:exam_id])
-    @answers = policy_scope(Answer.where("question_id BETWEEN ? AND ?", @exam.questions.first.id, @exam.questions.last.id))
+    @answers = policy_scope(Answer.where("question_id BETWEEN ? AND ?", @exam.questions.first.id, @exam.questions.last.id)).order('question_id , content')
+    @incorrect_answers = policy_scope(Answer.where("question_id BETWEEN ? AND ?", @exam.questions.first.id, @exam.questions.last.id)).where("is_correct = false").order('question_id , content')
   end
 
   def create
@@ -27,8 +28,8 @@ class AnswersController < ApplicationController
         g = azure_result[0][6]
         h = azure_result[0][7]
         if a >= x && b >= y && c <= (x + wi) && d >= y && e <= (x + wi) && f <= (y + he) && g >= x && h <= (y + he)
-          answer.content = azure_result[1]
-          if azure_result[1] == question.correct_answer
+          answer.content = azure_result[1].downcase
+          if azure_result[1].downcase == question.correct_answer.downcase # setting checking condition to downcase for simpler presentation, can be done dynamically on later versions
             answer.is_correct = true
           else
             answer.is_correct = false
@@ -87,7 +88,7 @@ class AnswersController < ApplicationController
     response_url = response.header['operation-location']
 
     #Wait for 3 seconds
-    sleep(3)
+    sleep(10)
 
     # Get Read Operation Result API
     uri = URI(response_url)

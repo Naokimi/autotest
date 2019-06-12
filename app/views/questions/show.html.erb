@@ -1,41 +1,47 @@
-<%= link_to exam_path(@question.exam), class: "btn btn-primary mt-4" do%>
+<%= link_to exam_submissions_path(@question.exam), class: "btn btn-primary mt-4" do%>
   <i class="fas fa-arrow-left px-3"></i>
 <% end %>
 <div class="container">
   <div class="row">
     <div class="col-12">
-      <h2>Exam id: <%= @question.exam_id %>, Question id: <%= @question.id %></h2>
+      <h2>Incorrect answers - Exam id: <%= @question.exam_id %>, Question id: <%= @question.id %> </h2>
       <p>Correct answer: <%= @question.correct_answer %></p>
       <table class="table">
         <thead>
           <tr>
-            <th>Submission #</th>
+            <th>Question #</th>
+            <th>Correct Answer</th>
             <th>Correct?</th>
             <th>Student Answer</th>
-            <th>Image</th>
+            <th></th>
           </tr>
         </thead>
-        <% @answers.each do |answer| %>
-          <% if answer.is_correct %>
-            <tr>
-          <% else %>
-            <tr class="table-warning">
+        <tbody>
+          <% @incorrect_answers.each do |answer| %>
+            <tr class="<%= 'table-warning' unless answer.is_correct %>">
+              <td><%= link_to answer.question_id , question_path(answer.question) %></td>
+              <td><%= answer.question.correct_answer %></td>
+              <td>
+                <%= simple_form_for answer, remote: true, html: { class: 'form-inline' } do |f| %>
+                  <%= f.input :is_correct, label: false %>
+                  <%= f.input :content, label:false %>
+                  <%= f.submit 'Update', style: "display:none;" %>
+                <% end %>
+              </td>
+              <td>
+                <div class="bg-white rounded shadow">
+                  <% url = "https://res.cloudinary.com/naokimi/image/upload/x_#{answer.question.origin_x.to_i},y_#{answer.question.origin_y.to_i},w_#{answer.question.width.to_i},h_#{answer.question.height.to_i},c_crop/#{answer.submission.image.filename}" %>
+                  <%= image_tag url, style: "width:100%; height: auto;" %>
+                </div>
+              </td>
+            </tr>
           <% end %>
-            <td>
-              <%= link_to answer.submission_id, submission_path(answer.submission) %>
-            </td>
-            <td><%= answer.is_correct ? 'Correct' : 'Incorrect' %></td>
-            <td><%= answer.content ? answer.content : 'No answer found' %></td>
-            <% url = "https://res.cloudinary.com/naokimi/image/upload/x_#{answer.question.origin_x.to_i},y_#{answer.question.origin_y.to_i},w_#{answer.question.width.to_i},h_#{answer.question.height.to_i},c_crop/#{answer.submission.image.filename}" %>
-            <% if url.nil? %>
-              <td><%= 'No image' %></td>
-            <% else %>
-              <td><%= image_tag(url) %></td>
-            <% end %>
-          </tr>
-        <% end %>
+        </tbody>
       </table>
     </div>
+    <button  class="btn-lg btn-delete" id="myProgress" style="position: fixed; bottom: 24px; width: 60%; left: 20%; opacity: 0.7;">Update
+      <div id="myBar" style="margin-left: 5px;" ></div>
+    </button>
   </div>
 </div>
 

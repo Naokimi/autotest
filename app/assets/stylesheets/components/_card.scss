@@ -21,40 +21,34 @@
 .banner-card h1 {
   text-align: center;
   color: rgba(105,39,255,0.9);
-  // font-weight: bold;
   text-shadow: 1px 1px 3px rgba(0,0,0,0.3)
-  // color: rgba(0,0,0,0.6);
 }
 
-.banner-card p{
+.banner-card p {
   font-size:16px;
 }
 
-.wrapper{
+.wrapper {
   margin: 8px;
   padding: 8px 16px;
 }
 
-.banner-card i{
+.banner-card i {
   font-size: 56px;
   text-align: center;
   padding: 24px;
   color: rgb(150,150,150)
 }
 
-// .card i:hover{
-//   color: rgb(100,100,100);
-//   font-size: 75px;
-// }
-.student-exams{
+.student-exams {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   column-gap: 24px;
   margin: 14px 0px;
-  }
+}
 
 
-.banner-shadow{
+.banner-shadow {
   box-shadow: 1px 2px 3px $shadow-blue;
 }
 

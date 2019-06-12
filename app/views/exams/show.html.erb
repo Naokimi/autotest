@@ -9,8 +9,8 @@
         <h4>Exam id: <%= @exam.id %></h4>
         <p># of Submissions: <%= link_to @exam.submissions.count, exam_submissions_path(@exam)  %></p>
       </div>
-      <div class="col-8">
-        <%= cl_image_tag @exam.image, width: 500, crop: :fill %>
+      <div class="col-6">
+        <%= cl_image_tag @exam.image, width: 400, crop: :fill %>
       </div>
     </div>
     <div class="col-4 card bg-white mt-2" >

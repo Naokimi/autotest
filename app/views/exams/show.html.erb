@@ -1,13 +1,13 @@
-<%= link_to exams_path, class: "btn btn-flat mt-4 position-fixed" do%>
+<%= link_to exams_path, class: "btn btn-primary mt-5 position-fixed" do%>
   <i class="fas fa-arrow-left px-3"></i>
 <% end %>
 
-<div class="container mt-3">
+<div class="container mt-5">
   <div class="row">
     <div class="shadow bg-white mr-5 mt-2 p-4 rounded">
-      <div class="d-flex justify-content-between px-4">
+      <div class="px-4">
         <h4>Exam id: <%= @exam.id %></h4>
-        <h4><em># of Submissions: </em><%= link_to @exam.submissions.count, exam_submissions_path(@exam)  %></h4>
+        <p># of Submissions: <%= link_to @exam.submissions.count, exam_submissions_path(@exam)  %></p>
       </div>
       <div class="col-8">
         <%= cl_image_tag @exam.image, width: 500, crop: :fill %>
@@ -26,33 +26,6 @@
       </div>
     </div>
   </div>
-</div>
-
-<div class="container mt-5 pt-5">
-  <p>------------------------------------------------------</p>
-  <p>Below is a table for debug....</p>
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Question #</th>
-        <th>Correct Answer</th>
-        <th>origin_x</th>
-        <th>origin_y</th>
-        <th>width</th>
-        <th>height</th>
-      </tr>
-    </thead>
-    <% @exam.questions.order(:id).each do |question| %>
-      <tr>
-        <td><%= question.id %></td>
-        <td><%= question.correct_answer %></td>
-        <td><%= question.origin_x %></td>
-        <td><%= question.origin_y %></td>
-        <td><%= question.width %></td>
-        <td><%= question.height %></td>
-      </tr>
-    <% end %>
-  </table>
 </div>
 
 <!-- <div class="card">

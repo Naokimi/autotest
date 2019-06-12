@@ -1,18 +1,17 @@
-<%= link_to exams_path, class: "btn btn-flat mt-4 position-fixed" do%>
+<%= link_to exams_path, class: "btn btn-primary mt-5 position-fixed" do%>
   <i class="fas fa-arrow-left px-3"></i>
 <% end %>
-<div class="container shadow back-color my-4 pt-4 pb-5 px-5  rounded">
+<div class="container shadow back-color my-5 pt-4 pb-5 px-5  rounded">
   <div class="row">
     <div class="col-12">
-      <h3 class='mb-3'>Exam id: <%= @exam.id %></h3>
-      <p># of Incorrect Anwers: <%= @incorrect_answers.count %></p>
+      <h2>Click each answer to mark as correct <i class="fas fa-check"></i></h2>
+      <p class="text-primary py-3">Exam id: <%= @exam.id %>, # of Incorrect Anwers: <%= @incorrect_answers.count %></p>
       <table class="table">
         <thead>
           <tr>
-            <th>Question #</th>
-            <th>Correct Answer</th>
-            <th>Correct?</th>
-            <th>Student Answer</th>
+            <th class="py-3">Question #</th>
+            <th class="py-3">Correct Answer</th>
+            <th class="text-center py-3">Student Answer</th>
             <th></th>
           </tr>
         </thead>
@@ -21,10 +20,10 @@
             <tr class="<%= 'table-warning' unless answer.is_correct %>">
               <% first_question_id = @exam.questions.first.id %>
               <td><%= link_to answer.question_id - first_question_id + 1, question_path(answer.question) %></td>
-              <td><%= answer.question.correct_answer %></td>
+              <td class="correct-answer p-3"><%= answer.question.correct_answer %></td>
               <td>
-                <%= simple_form_for answer, remote: true, html: { class: 'form-inline' } do |f| %>
-                  <%= f.input :is_correct, label: false %>
+                <%= simple_form_for answer, remote: true, html: { class: 'form-inline text-left' } do |f| %>
+                  <%= f.input :is_correct, label: false, class:'is-correct', wrapper_html: { class: 'hide' }  %>
                   <%= f.input :content, label:false %>
                   <%= f.submit 'Update', style: "display:none;" %>
                 <% end %>
@@ -40,44 +39,33 @@
         </tbody>
       </table>
     </div>
-    <button  class="btn-lg btn-delete" id="myProgress" style="position: fixed; bottom: 24px; width: 60%; left: 20%; opacity: 0.7;">Update
+    <button  class="btn-lg btn-primary" id="myProgress" style="position: fixed; bottom: 24px; width: 60%; left: 20%;">Update
       <div id="myBar" style="margin-left: 5px;" ></div>
     </button>
   </div>
 </div>
 
-
-<div class="container mt-5">
-  <ul>
-    <% question_id_array = [] %>
-    <% answer_content_array = [] %>
-    <!-- get the unique question ID from all the answers of the array -->
-    <% @answers.each do |answer| %>
-      <% question_id_array << answer.question.id %>
-    <% end %>
-    <% question_id_array.uniq! %>
-    <!-- use that ID to display the correct answer -->
-    <li>Question ID | Correct answer | Answers</li>
-    <% question_id_array.each do |number| %>
-      <li><%= number %> | <%= Question.find(number).correct_answer %> |
-        <!-- use that ID to put all the answers connected to the question into one array  -->
-        <% Question.find(number).answers.each do |answer| %>
-          <% answer_content_array << answer.content %>
-        <% end %>
-        <!-- turn the array into a hash grouped by frequency, sort it by highest first and display -->
-        <% Hash[answer_content_array.group_by(&:itself).map {|k,v| [k, v.size] }].sort_by{ |k,v| v }.reverse.each do |answer| %>
-          <!-- logic for button class -->
-          <% if answer[0].nil? %>
-            <% button_class = "btn btn-danger" %>
-          <% elsif answer[0].downcase == Question.find(number).correct_answer.downcase %>
-            <% button_class = "btn btn-success" %>
-          <% else %>
-            <% button_class = "btn btn-danger" %>
-          <% end %>
-          <%= link_to "#{answer[1]}x #{answer[0]}", exam_answer_path(@exam, Answer.find_by_content(answer[0])), class: "#{button_class}" %>,
-        <% end %>
-        <% answer_content_array = [] %>
-      </li>
-    <% end %>
-  </ul>
-</div>
+<script>
+  // find all trs with answers
+  const answers = document.querySelectorAll('tbody tr');
+  // iterate each answer
+  answers.forEach((answer) => {
+    const checkbox = answer.querySelector('.form-check-input');
+    const inputbox = answer.querySelector('#answer_content');
+    const studentAnswer = answer.querySelector('#answer_content').value;
+    const correctAnswer = answer.querySelector('.correct-answer').innerText;
+    //find student answer and store
+    //add event listner for checkbox, update value when checked
+    answer.addEventListener('click', (event) => {
+      if (checkbox.checked === false) {
+        inputbox.value = correctAnswer;
+        checkbox.checked= true;
+        answer.classList = "";
+      } else {
+        inputbox.value = studentAnswer;
+        checkbox.checked= false;
+        answer.classList = "table-warning";
+      };
+    });
+  });
+</script>

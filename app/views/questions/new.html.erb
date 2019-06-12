@@ -1,53 +1,83 @@
 <div class="container mt-5">
-  <div class="row justify-content-center">
-    <div class="col-12 mb-3">
-      <h4 align="center" class="my-3">Check the correct answers and confirm</h4>
-      <div class="text-right">
-        <button id="btnAll" type="button" class="btn btn-primary btn-block">Confirm all</button><span id="addBtn"></span>
+  <div id="stepper1" class="bs-stepper row d-flex justify-content-around">
+    <div class="bs-stepper-header" role="tablist">
+      <!-- your steps here -->
+      <div class="step" data-target="#answer-part">
+        <button type="button" class="step-trigger" role="tab" aria-controls="logins-part" id="stepper1">
+          <span class="bs-stepper-circle">1</span>
+          <span class="bs-stepper-label">Check the correct answers and confirm</span>
+        </button>
+      </div>
+      <div class="line"></div>
+      <div class="step" data-target="#score-part">
+        <button type="button" class="step-trigger" role="tab" aria-controls="information-part" id="information-part-trigger">
+          <span class="bs-stepper-circle">2</span>
+          <span class="bs-stepper-label">Please select the score area
+          </span>
+        </button>
+      </div>
+    </div>
+    <div class="bs-stepper-content">
+
+      <!-- your steps content here -->
+      <div id="answer-part" class="content" role="tabpanel" aria-labelledby="logins-part-trigger">
+        <div class="row justify-content-center">
+          <div class="col-12 mb-3">
+            <div class="text-right">
+              <button id="btnAll" type="button" class="btn btn-primary btn-block">Confirm all</button>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%= cl_image_path @exam.image %>); width: <%= @ocr.recognitionResults[0].width %>px; height: <%= @ocr.recognitionResults[0].height %>px; background-repeat: repeat-y;">
+            <% @ocr.recognitionResults.each do |region|  %>
+              <% region.lines.each do |line| %>
+                <% line.words.each do |word|%>
+                  <!-- start if -->
+                  <% if word.boundingBox.split(',')[0][1] > @exam.origin_y && word.boundingBox.split(',')[0][0] > @exam.origin_x && word.boundingBox.split(',')[0][1] < (@exam.origin_y + @exam.height) %>
+                    <%if (@exam.origin_x + @exam.width/2) < word.boundingBox.split(',')[0][0] %>
+                      <% left = word.boundingBox.split(',')[0][4]  %>
+                      <% origin_x = @exam.origin_x + (@exam.width/2) %>
+                    <% else  %>
+                      <% left = word.boundingBox.split(',')[0][0] %>
+                      <% origin_x = @exam.origin_x  %>
+                      <% left = origin_x -(left - origin_x) -50 %>
+                    <% end  %>
+                    <div id="questionCard" class="form-inline" style="position: absolute;left: <%= left %>px;top: <%= word.boundingBox.split(',')[0][1] -10%>px;">
+                      <!-- form -->
+                      <%= simple_form_for([ @exam, @question ], remote: true,  html: { class: 'form-inline' }) do |form| %>
+                      <% qid = SecureRandom.hex(4) %>
+                      <div class="form-group">
+                        <%= form.submit 'ok', class: 'btn btn-primary active special', id: "qbtn-#{qid}" %>
+                        <div  class='btn btn-danger cancel' id="<%= qid  %>"  aria-pressed='true'>X</div>
+                      </div>
+                      <%= form.input :correct_answer, input_html: { value: word.text , size: word.text.size}, label: false %>
+                      <%= form.input :origin_x, :as => :hidden, :input_html => { :value => origin_x } %>
+                      <%= form.input :origin_y, :as => :hidden, :input_html => { :value => word.boundingBox.split(',')[0][1]-35 } %>
+                      <%= form.input :width, :as => :hidden, :input_html => { :value => 250 } %>
+                      <%= form.input :height, :as => :hidden, :input_html => { :value => 125 } %>
+                      <%= form.input :qid, :as => :hidden, :input_html => { :value => qid } %>
+
+                      <% end %>
+                      <!-- endform -->
+                    </div>
+                  <% end %>
+                  <!-- end if -->
+                <% end  %>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <div id="score-part" class="content" role="tabpanel" aria-labelledby="information-part-trigger">
+        <div class="row">
+          <span id="addBtn"></span>
+        </div>
       </div>
     </div>
   </div>
-  <div class="row ">
-    <div class="col-lg-12" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%= cl_image_path @exam.image %>); width: <%= @ocr.recognitionResults[0].width %>px; height: <%= @ocr.recognitionResults[0].height %>px; background-repeat: repeat-y;">
-      <% @ocr.recognitionResults.each do |region|  %>
-        <% region.lines.each do |line| %>
-          <% line.words.each do |word|%>
-            <!-- start if -->
-            <% if word.boundingBox.split(',')[0][1] > @exam.origin_y && word.boundingBox.split(',')[0][0] > @exam.origin_x && word.boundingBox.split(',')[0][1] < (@exam.origin_y + @exam.height) %>
-              <%if (@exam.origin_x + @exam.width/2) < word.boundingBox.split(',')[0][0] %>
-                <% left = word.boundingBox.split(',')[0][4]  %>
-                <% origin_x = @exam.origin_x + (@exam.width/2) %>
-              <% else  %>
-                <% left = word.boundingBox.split(',')[0][0] %>
-                <% origin_x = @exam.origin_x  %>
-                <% left = origin_x -(left - origin_x) -50 %>
-              <% end  %>
-              <div id="questionCard" class="form-inline" style="position: absolute;left: <%= left %>px;top: <%= word.boundingBox.split(',')[0][1] -10%>px;">
-                <!-- form -->
-                <%= simple_form_for([ @exam, @question ], remote: true,  html: { class: 'form-inline' }) do |form| %>
-                <% qid = SecureRandom.hex(4) %>
-                <div class="form-group">
-                  <%= form.submit 'ok', class: 'btn btn-primary active special', id: "qbtn-#{qid}" %>
-                  <div  class='btn btn-danger cancel' id="<%= qid  %>"  aria-pressed='true'>X</div>
-                </div>
-                <%= form.input :correct_answer, input_html: { value: word.text , size: word.text.size}, label: false %>
-                <%= form.input :origin_x, :as => :hidden, :input_html => { :value => origin_x } %>
-                <%= form.input :origin_y, :as => :hidden, :input_html => { :value => word.boundingBox.split(',')[0][1]-35 } %>
-                <%= form.input :width, :as => :hidden, :input_html => { :value => 250 } %>
-                <%= form.input :height, :as => :hidden, :input_html => { :value => 125 } %>
-                <%= form.input :qid, :as => :hidden, :input_html => { :value => qid } %>
-
-                <% end %>
-                <!-- endform -->
-              </div>
-            <% end %>
-            <!-- end if -->
-          <% end  %>
-        <% end %>
-      <% end %>
-    </div>
-  </div>
 </div>
+
 <script>
   const b = document.querySelectorAll(".cancel");
   const cx = event => event.currentTarget.offsetParent.remove()

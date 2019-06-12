@@ -1,22 +1,28 @@
-<div class="col-12 px-0">
-  <div class="banner floatLeft">
+
+<div class="row banner floatLeft">
+  <div class="col-12 col-lg-6 d-flex justify-content-center align-items-center">
     <div class="banner-card1">
-      <div class="banner-card3">
+      <div class="banner-card3 d-flex justify-content-between flex-column">
         <div class="banner-head">Grade hand-written exams instantly</div>
         <div class="banner-text space">
-          <ul content>
-            <li>Save  the correct answer to your test</li>
-            <li>Analyse  students answers automatically</li>
-            <li>Get Graded  students tests</li>
-        </ul>
+          <ol content class="text-left">
+            <li>Save the correct answers of your test</li>
+            <li>Analyse students answers automatically</li>
+            <li>Download graded students tests</li>
+          </ol>
         </div>
-        <%= simple_form_for(@exam) do |f| %>
-          <%= f.input :image, input_html: { id: 'upload' },  label_html: { class: 'custom-file-upload btn btn-upload btn-banner px-3 py-2' }, label: "Upload an exam", required: false  %>
-          <%= f.input :image_cache, as: :hidden %>
-          <%= f.submit "Upload", as: :hidden, id: "submit", style: "display:none;" %>
-        <% end %>
+        <div class="mb-5">
+          <%= simple_form_for(@exam) do |f| %>
+            <%= f.input :image, input_html: { id: 'upload' },  label_html: { class: 'custom-file-upload btn btn-upload btn-banner px-3 py-2' }, label: "Upload an exam", required: false  %>
+            <%= f.input :image_cache, as: :hidden %>
+            <%= f.submit "Upload", as: :hidden, id: "submit", style: "display:none;" %>
+          <% end %>
+        </div>
       </div>
     </div>
+  </div>
+  <div class="col-12 col-lg-6 d-flex align-items-end">
+    <%= image_tag "printer.jpg", class: "hide-in-mobile" %>
   </div>
 </div>
 

@@ -2,19 +2,15 @@
 color: black;
 padding: 8px 24px;
 border-radius: 4px;
-background: rgba(0,0,0,0.4);
-// border-color: rgba(0,0,0,0.4);
-transition: background 0.3s ease;
-border-color: white;
+background: $color-primary;
+transition: background 3s ease;
+border-color: $my-white;
 }
 
 .btn-flat:hover{
-  background: rgba(0,0,0,0.5);
+  opacity: 0.7;
 }
 
-.img-upload-button{
-  padding: 10px 67px;
-}
 
 .btn-submission{
   color: black;
@@ -38,9 +34,9 @@ border-color: white;
 }
 
 .btn-delete{
-  color: black;
+  color: $my-white;
   border-color: $color-danger;
-  background-color: rgba(0,0,0,0.3);
+  background-color: $color-primary;
   font-weight: bold;
 }
 
@@ -49,10 +45,12 @@ border-color: white;
 }
 
 .btn-upload{
-  // margin:0 351px 6px 0;
+  color:$my-white;
   background-color:$primary;
-  opacity: 1;
-  border-color:$color-danger;
+  border: 1px solid $color-primary;
+  box-sizing: border-box;
+  border-radius: 28px;
+  transform: matrix(1, 0, 0.01, 1, 0, 0);
 }
 
 .btn-download{

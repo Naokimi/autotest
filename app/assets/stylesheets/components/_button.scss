@@ -1,3 +1,14 @@
+.btn-navbar {
+  color: black;
+  background-color: gray;
+  border-color: rgba(0,0,0,0.4);
+  font-weight: bold;
+
+  &:hover{
+    background-color: rgba(0,0,0,0.1);
+  }
+}
+
 .btn-flat {
   color: black;
   padding: 8px 24px;
@@ -12,34 +23,34 @@
 }
 
 .btn-submission {
-  color: black;
-  border-color: rgba(0,0,0,0.4);
-  font-weight: bold;
+  color:$my-white;
+  background-color:$primary;
+  box-sizing: border-box;
+  border-radius: 28px;
+  transform: matrix(1, 0, 0.01, 1, 0, 0);
+  font-weight: 600;
+  padding:6px 62px 6px 62px;
 
   &:hover{
-    background-color: rgba(0,0,0,0.1);
-  }
-}
-
-.btn-navbar {
-  color: black;
-  background-color: gray;
-  border-color: rgba(0,0,0,0.4);
-  font-weight: bold;
-
-  &:hover{
-    background-color: rgba(0,0,0,0.1);
+    opacity: 0.7;
+    font-size: 1.1em;
+    color: white;
   }
 }
 
 .btn-delete {
-  color: $my-white;
-  border-color: $color-danger;
-  background-color: $primary;
-  font-weight: bold;
+  color:$my-white;
+  background-color:$orange;
+  box-sizing: border-box;
+  border-radius: 28px;
+  transform: matrix(1, 0, 0.01, 1, 0, 0);
+  font-weight: 600;
+  padding:6px 45px 6px 45px;
 
   &:hover{
-    background-color: rgba(0,0,0,0.1);
+    opacity: 0.7;
+    font-size: 1.1em;
+    color: white;
   }
 }
 

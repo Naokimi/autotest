@@ -13,9 +13,9 @@
         </div>
         <div class="mb-5">
           <%= simple_form_for(@exam) do |f| %>
-            <%= f.input :image, input_html: { class: 'text-white btn-banner btn btn-primary hide', id: 'upload' }, label: false  %>
+            <%= f.input :image, input_html: { id: 'upload' },  label_html: { class: 'custom-file-upload btn btn-upload btn-banner px-3 py-2' }, label: "Upload an exam", required: false  %>
             <%= f.input :image_cache, as: :hidden %>
-            <%= f.submit "Upload an exam", class: " btn btn-upload btn-banner px-3 py-2", id: "submit" %>
+            <%= f.submit "Upload", as: :hidden, id: "submit", style: "display:none;" %>
           <% end %>
         </div>
       </div>

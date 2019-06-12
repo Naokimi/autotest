@@ -1,29 +1,26 @@
-<%= link_to exam_submissions_path(@question.exam), class: "btn btn-primary mt-4" do%>
+<%= link_to exam_submissions_path(@question.exam), class: "btn btn-primary mt-5 position-fixed" do%>
   <i class="fas fa-arrow-left px-3"></i>
 <% end %>
-<div class="container">
+<div class="container shadow back-color my-5 pt-4 pb-5 px-5 rounded">
   <div class="row">
     <div class="col-12">
-      <h2>Incorrect answers - Exam id: <%= @question.exam_id %>, Question id: <%= @question.id %> </h2>
-      <p>Correct answer: <%= @question.correct_answer %></p>
+      <h2>Click each answer to mark as correct <i class="fas fa-check"></i></span></h2>
+      <p class="text-primary py-3">Exam id: <%= @question.exam_id %>, Question id: <%= @question.id %> </p>
       <table class="table">
         <thead>
           <tr>
-            <th>Question #</th>
-            <th>Correct Answer</th>
-            <th>Correct?</th>
-            <th>Student Answer</th>
+            <th  class="py-3">Correct Answer</th>
+            <th class="text-center py-3">Student Answer</th>
             <th></th>
           </tr>
         </thead>
         <tbody>
           <% @incorrect_answers.each do |answer| %>
             <tr class="<%= 'table-warning' unless answer.is_correct %>">
-              <td><%= link_to answer.question_id , question_path(answer.question) %></td>
-              <td><%= answer.question.correct_answer %></td>
-              <td>
-                <%= simple_form_for answer, remote: true, html: { class: 'form-inline' } do |f| %>
-                  <%= f.input :is_correct, label: false %>
+              <td class="correct-answer p-3" ><%= answer.question.correct_answer %></td>
+              <td class="p-3">
+                <%= simple_form_for answer, remote: true, html: { class: 'form-inline text-left' } do |f| %>
+                  <%= f.input :is_correct, label: false, class:'is-correct', wrapper_html: { class: 'hide' } %>
                   <%= f.input :content, label:false %>
                   <%= f.submit 'Update', style: "display:none;" %>
                 <% end %>
@@ -39,9 +36,34 @@
         </tbody>
       </table>
     </div>
-    <button  class="btn-lg btn-delete" id="myProgress" style="position: fixed; bottom: 24px; width: 60%; left: 20%; opacity: 0.7;">Update
+    <button  class="btn-lg btn-primary" id="myProgress" style="position: fixed; bottom: 24px; width: 60%; left: 20%;">Update
       <div id="myBar" style="margin-left: 5px;" ></div>
     </button>
   </div>
 </div>
+
+<script>
+  // find all trs with answers
+  const answers = document.querySelectorAll('tbody tr');
+  // iterate each answer
+  answers.forEach((answer) => {
+    const checkbox = answer.querySelector('.form-check-input');
+    const inputbox = answer.querySelector('#answer_content');
+    const studentAnswer = answer.querySelector('#answer_content').value;
+    const correctAnswer = answer.querySelector('.correct-answer').innerText;
+    //find student answer and store
+    //add event listner for checkbox, update value when checked
+    answer.addEventListener('click', (event) => {
+      if (checkbox.checked === false) {
+        inputbox.value = correctAnswer;
+        checkbox.checked= true;
+        answer.classList = "";
+      } else {
+        inputbox.value = studentAnswer;
+        checkbox.checked= false;
+        answer.classList = "table-warning";
+      };
+    });
+  });
+</script>
 

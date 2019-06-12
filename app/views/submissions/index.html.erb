@@ -1,38 +1,56 @@
-<div class="d-flex justify-content-between">
-  <%= link_to exam_path(@exam), class: "btn btn-primary mt-5" do%>
-    <i class="fas fa-arrow-left px-3"></i>
-  <% end %>
-  <%= link_to  submissions_pdf_path(@exam), class: "btn mt-4 btn-download" do %>
-    <i class="fas fa-cloud-download-alt px-4"></i>
-  <% end %>
-</div>
-<div class="container shadow back-color">.
-  <div class="d-flex justify-content-between">
-    <h4>Exam id: <%= @exam.id %></h4>
-    <h4>Total submissions: <%= @submissions.count %></h4>
-    <%= link_to 'View all incorrect answers', exam_answers_path, class:'btn btn-primary mb-3' %>
+<%= link_to exam_path(@exam), class: "btn btn-primary mt-5 position-fixed" do%>
+  <i class="fas fa-arrow-left px-3"></i>
+<% end %>
+<div class="container shadow back-color my-5">.
+  <div class="d-flex justify-content-around m-4">
+    <div>Exam id: <span style="font-size: 28px; font-weight:bold;"><%= @exam.id %></span></div>
+    <div>Total submissions: <span style="font-size: 28px; font-weight:bold;"><%= @submissions.count %></span></div>
+  </div>
+  <div class="d-flex justify-content-around m-4">
+    <div>
+      Average Score: <span style="font-size: 28px; font-weight:bold;"><%= @exam.average_score %></span>
+      / <%= @exam.questions.count %>
+    </div>
+    <div>
+      Average %: <span style="font-size: 28px; font-weight:bold;"><%= @exam.average_percentage %></span>
+      / 100
+    </div>
+  </div>
+  <div class="d-flex justify-content-around m-4">
+    <div>
+      Highest Score: <span style="font-size: 28px; font-weight:bold;"><%= @exam.highest_score %></span>
+      / <%= @exam.questions.count %>
+    </div>
+    <div>
+      Lowest Score: <span style="font-size: 28px; font-weight:bold;"><%= @exam.lowest_score %></span>
+      / <%= @exam.questions.count %>
+    </div>
+  </div>
+  <div>
+    <div class="d-flex justify-content-around mb-4">
+      <%= link_to 'Show All Incorrect Answers', exam_answers_path, class:'btn btn-block btn-upload m-3' %>
+      <%= link_to  submissions_pdf_path(@exam), class: "btn btn-upload m-3" do %>
+        <i class="fas fa-cloud-download-alt px-4"></i>
+      <% end %>
+    </div>
   </div>
   <table class="table">
     <thead>
       <tr>
-        <th>Question id</th>
-        <th>Correct Answer</th>
-        <th># of total answers</th>
-        <th># of correct answers</th>
-        <th># of incorrect answers</th>
+        <th>Submission #</th>
+        <th>Total Score</th>
+        <th>%</th>
       </tr>
     </thead>
-    <% @exam.questions.each do |question| %>
+    <% @submissions.each do |submission| %>
       <tr>
         <td>
-          <%= link_to question_path(question) do %>
-            <%= question.id %>
+          <%= link_to submission_path(submission) do %>
+            <%= submission.id %>
           <% end %>
         </td>
-        <td><%= question.correct_answer %></td>
-        <td><%= question.answers.count %></td>
-        <td><%= question.answers.where(is_correct: true).count %></td>
-        <td><%= question.answers.where(is_correct: false).count %></td>
+        <td><span style="font-size: 28px; font-weight:bold;"><%= submission.score %></span> / <%= submission.answers.count %></td>
+        <td><span style="font-size: 28px; font-weight:bold;"><%= (submission.score.to_f / submission.answers.count * 100).floor %></span> %</td>
       </tr>
     <% end %>
   </table>

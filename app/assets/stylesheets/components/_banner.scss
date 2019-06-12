@@ -72,11 +72,6 @@
   margin:32px 0px;
 }
 
-.floatLeft {
-  float:left;
-  margin-right:20px
-}
-
 .banner h1 {
   margin: 0;
   color: white;
@@ -99,21 +94,11 @@
   font-size: 16px;
 }
 
-.card-text {
-  color:black;
-  font-weight: bold;
-}
-
-.hide {
-  transform: translateY(60px);
-  opacity: 0;
-  z-index: 1;
-  width:200px;
-  margin-left: 0px;
-  margin-top: -44px;
-}
-
 .banner li {
   font-size: 21px;
   padding-bottom: 10px;
+}
+
+.banner-shadow {
+  box-shadow: 1px 2px 3px $shadow-blue;
 }

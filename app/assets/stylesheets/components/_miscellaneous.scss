@@ -1,7 +1,19 @@
-
-
 @media screen and (max-width: 990px) {
   .hide-in-mobile {
     display: none;
   }
+}
+
+.floatLeft {
+  float:left;
+  margin-right:20px
+}
+
+.hide {
+  transform: translateY(60px);
+  opacity: 0;
+  z-index: 1;
+  width:200px;
+  margin-left: 0px;
+  margin-top: -44px;
 }

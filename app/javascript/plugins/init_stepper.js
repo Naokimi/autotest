@@ -6,17 +6,24 @@ const initStepper = () => {
     const stepperElement = document.querySelector('.bs-stepper');
     if (stepperElement) {
       var stepper = new Stepper(stepperElement);
-      console.log("pas");
 
       stepperElement.addEventListener('shown.bs-stepper', (event) => {
         initCanvas("canvas2");
       });
 
       const btn = document.getElementById('next');
-      btn.addEventListener('click', () => {
-        console.log("press");
-        stepper.next();
-      });
+      if (btn) {
+        btn.addEventListener('click', () => {
+          stepper.next();
+        });
+      }
+
+      const btnNewQ = document.getElementById('btnAll');
+      if (btnNewQ) {
+        btnNewQ.addEventListener('click', () => {
+          stepper.next();
+        });
+      }
     }
   });
 };

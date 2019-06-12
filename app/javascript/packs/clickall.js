@@ -1,24 +1,20 @@
 function clickAll() {
-        console.log('hello');
-        let forms = document.querySelectorAll('.simple_form');
-        const requests = [];
-        forms.forEach(function(form) {
-          const promise = new Promise(function(resolve, reject) {
-            form.addEventListener("ajax:success", () => {
-              console.log(form.id);
-              resolve();
-            });
-          });
-          requests.push(promise);
+  let forms = document.querySelectorAll('.simple_form');
+  const requests = [];
+  forms.forEach(function(form) {
+    const promise = new Promise(function(resolve, reject) {
+      form.addEventListener("ajax:success", () => {
+        resolve();
+      });
+    });
+    requests.push(promise);
 
-          form.dispatchEvent(new Event('submit', {bubbles: true}));
-        });
-        // setTimeout(location.reload(), 1000)
+    form.dispatchEvent(new Event('submit', {bubbles: true}));
+  });
 
-        Promise.all(requests).then(() => {
-          console.log("all done");
-          location.reload();
-        })
-      }
+  Promise.all(requests).then(() => {
+    location.reload();
+  })
+}
 
-      export { clickAll }
+export { clickAll }

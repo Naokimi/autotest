@@ -17,6 +17,8 @@ if (progress) {
   progress.addEventListener("click", () =>{
     clickAll();
     move();
+    const body = document.querySelector("body");
+    body.insertAdjacentHTML('afterbegin', "<div class='uploading'><h2 class='text-primary'>Saving answers...</h2></div>");
   })
 }
 

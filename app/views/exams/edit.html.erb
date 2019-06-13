@@ -1,24 +1,5 @@
-<div class="container mt-2 mb-3">
-  <div class="row">
-    <div class="col-12">
-      <p id='area' data-area="" data-canvas="<%= @exam.image.url %>" style="visibility:hidden;">
-        <p id='area2' data-area="" data-canvas="<%= @exam.image.url %>" style="visibility:hidden;">
-      <%= simple_form_for([ @exam ]) do |form| %>
-      <%= form.input :origin_x, :as => :hidden %>
-      <%= form.input :origin_y, :as => :hidden %>
-      <%= form.input :width, :as => :hidden %>
-      <%= form.input :height, :as => :hidden %>
-      <%= form.input :score_origin_x, :as => :hidden %>
-      <%= form.input :score_origin_y, :as => :hidden %>
-      <%= form.input :score_width, :as => :hidden %>
-      <%= form.input :score_height, :as => :hidden %>
-      <%= form.submit 'Save', id:"save", class: 'btn btn-primary position-fixed mt-5 hide' %>
-      <% end %></p>
-    </div>
-  </div>
-</div>
 <div id="stepper1" class="bs-stepper row d-flex justify-content-around">
-  <div class="bs-stepper-header" role="tablist">
+  <div class="bs-stepper-header position-fixed" role="tablist">
     <!-- your steps here -->
     <div class="step" data-target="#answer-part">
       <button type="button" class="step-trigger" role="tab" aria-controls="logins-part" id="stepper1">
@@ -36,6 +17,7 @@
       </button>
     </div>
   </div>
+
   <div class="bs-stepper-content">
     <!-- your steps content here -->
     <div id="answer-part" class="content" role="tabpanel" aria-labelledby="logins-part-trigger">
@@ -48,10 +30,28 @@
       </div>
     </div>
     <div id="score-part" class="content" role="tabpanel" aria-labelledby="information-part-trigger">
-      <div class="row">
+    <div class="row">
+      <div class="col-12">
+           <%= simple_form_for([ @exam ]) do |form| %>
+            <%= form.input :origin_x, :as => :hidden %>
+            <%= form.input :origin_y, :as => :hidden %>
+            <%= form.input :width, :as => :hidden %>
+            <%= form.input :height, :as => :hidden %>
+            <%= form.input :score_origin_x, :as => :hidden %>
+            <%= form.input :score_origin_y, :as => :hidden %>
+            <%= form.input :score_width, :as => :hidden %>
+            <%= form.input :score_height, :as => :hidden %>
+            <%= form.submit 'Save', id:"save", class: 'btn btn-primary  position-fixed mt-5 hide' %>
+            <% end %>
+      </div>
+    </div>
+            <p id='area' data-area="" data-canvas="<%= @exam.image.url %>" style="visibility:hidden;"></p>
+              <p id='area2' data-area="" data-canvas="<%= @exam.image.url %>" style="visibility:hidden;">
+           </p>
+
         <canvas id="canvas2" width="1200" height="1700">
         </canvas>
-      </div>
+    </div>
     </div>
   </div>
 </div>

@@ -27,15 +27,14 @@ const initCanvas = (canvasId) => {
       function mouseUp(e) {
 
         if ('canvas2' === canvasId) {
-          console.log(canvasId);
           document.getElementById('area2').innerHTML=`${rect.h}-${rect.w}-${rect.startX}-${rect.startY}`;
           document.getElementById('exam_score_origin_x').value =rect.startX;
           document.getElementById('exam_score_origin_y').value =rect.startY;
           document.getElementById('exam_score_width').value =rect.w;
           document.getElementById('exam_score_height').value =rect.h;
-          document.getElementById('save').classList.remove("hide")
-          document.getElementById('save').style.left = rect.startX+rect.w+20+"px";
-
+          document.getElementById('save').classList.remove("hide");
+          document.getElementById('save').style.left = rect.startX+rect.w+50+"px";
+          document.getElementById('save').style.top = 150+"px";
         }
         else {
           document.getElementById('area').innerHTML=`${rect.h}-${rect.w}-${rect.startX}-${rect.startY}`;
@@ -44,7 +43,9 @@ const initCanvas = (canvasId) => {
           document.getElementById('exam_width').value =rect.w;
           document.getElementById('exam_height').value =rect.h;
           document.getElementById('next').classList.remove("hide")
-          document.getElementById('next').style.left = rect.startX+rect.w+20+"px";
+          document.getElementById('next').style.left = rect.startX+rect.w+50+"px";
+          document.getElementById('next').style.top = rect.startY+"px";
+
         }
         drag = false;
       }
@@ -55,7 +56,7 @@ const initCanvas = (canvasId) => {
           ctx.drawImage(imageObj, 0, 0);
           rect.w = (e.pageX - this.offsetLeft) - rect.startX;
           rect.h = (e.pageY - this.offsetTop) - rect.startY;
-          ctx.strokeStyle = 'green';
+          ctx.strokeStyle = '#336666';
           ctx.lineWidth = 5;
           ctx.strokeRect(rect.startX, rect.startY, rect.w, rect.h);
         }

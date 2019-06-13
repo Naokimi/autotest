@@ -1,19 +1,21 @@
-var btn = document.querySelector("#qbtn-<%= @qid %>")
-btn.nextSibling.nextSibling.remove();
-btn.remove();
+var qbtn = document.querySelector("#qbtn-<%= @qid %>")
+qbtn.nextSibling.nextSibling.remove();
+qbtn.remove();
 if (document.querySelectorAll('.special').length === 0)
 {
   //save in line partial upload
-  var line = "<%= j render 'shared/upload_submissions', exam: @exam, submission: Submission.new %>"
-  var list = document.getElementById("addBtn");
+  const line = "<%= j render 'shared/upload_submissions', exam: @exam, submission: Submission.new %>"
+  const list = document.getElementById("addBtn");
   list.insertAdjacentHTML("beforeend", line);
 
   const upload = document.getElementById("upload");
+  const bodyElement = document.querySelector("body");
 
   if (upload) {
     const submit = document.getElementById("submit");
     upload.addEventListener("change", (event) => {
       submit.click();
+      bodyElement.insertAdjacentHTML("afterbegin", "<div class='uploading'><h2 class='text-primary'>Uploading images...please wait</h2></div>");
     });
   }
 }

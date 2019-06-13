@@ -1,7 +1,7 @@
 class SubmissionsController < ApplicationController
   def index
     @exam = Exam.find(params[:exam_id])
-    @submissions = policy_scope(Submission).where("exam_id = ?", @exam.id)
+    @submissions = policy_scope(Submission).where("exam_id = ?", @exam.id).order(:id)
   end
 
   def new

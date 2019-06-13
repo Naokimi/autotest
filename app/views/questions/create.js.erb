@@ -4,7 +4,7 @@ btn.remove();
 if (document.querySelectorAll('.special').length === 0)
 {
   //save in line partial upload
-  var line = "<%= j render 'shared/upload', exam: @exam, submission: Submission.new %>"
+  var line = "<%= j render 'shared/upload_submissions', exam: @exam, submission: Submission.new %>"
   var list = document.getElementById("addBtn");
   list.insertAdjacentHTML("beforeend", line);
 

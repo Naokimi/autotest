@@ -19,6 +19,20 @@
   color: white;
 }
 
-.table-center{
+.table-center {
   text-align:center;
+}
+
+.table-ok {
+  opacity: 0;
+  padding-right: 0px;
+  margin-right: -32px;
+}
+
+.table-move {
+  margin: -32px
+}
+
+.table-border {
+  border-radius: 0px;
 }

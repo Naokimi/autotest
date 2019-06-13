@@ -23,7 +23,7 @@
     border-right-color: #999;
     border-left-color: #999;
     border-bottom-color: #BBB;
-    border-top: #B00100 solid 4px;
+    border-top: rgb(104,178,160) solid 2px;
     border-top-left-radius: 9px;
     border-top-right-radius: 9px;
     background-color: white;
@@ -51,6 +51,25 @@
     color: #666;
     box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
   }
+
+  .huge{
+    font-size: 110px;
+    display: flex;
+    margin-left: 70px;
+  }
+  .emote{
+    width: 140px;
+    height: 140px;
+  }
+
+  .four1{
+    transform: translateX(25px);
+  }
+
+  .four2{
+    transform: translateX(-25px);
+  }
+
   </style>
 </head>
 
@@ -58,7 +77,10 @@
   <!-- This file lives in public/404.html -->
   <div class="dialog">
     <div>
-      <h1>The page you were looking for doesn't exist.</h1>
+      <div class="huge">
+        <div class="four1">4</div> <img src="https://media2.giphy.com/media/9xphXQG9ZBTjOi4THG/giphy.gif" alt="O" class="emote"> <div class="four2">4</div>
+      </div>
+      <h1>The pages you were looking for doesn't exist.</h1>
       <p>You may have mistyped the address or the page may have moved.</p>
     </div>
     <p>If you are the application owner check the logs for more information.</p>

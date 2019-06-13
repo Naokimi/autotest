@@ -3,10 +3,10 @@
 <% end %>
 
 <div class="container mt-5">
-  <div class="row">
-    <div class="shadow bg-white mr-5 mt-2 p-4 rounded">
+  <div class="row justify-content-around">
+    <div class="shadow bg-white mt-2 p-4 rounded">
       <div class="px-4">
-        <h4>Exam id: <%= @exam.id %></h4>
+        <p>Exam id: <%= @exam.id %></p>
         <p># of Submissions: <%= link_to @exam.submissions.count, exam_submissions_path(@exam)  %></p>
       </div>
       <div class="col-6">
@@ -18,12 +18,12 @@
         <div class="my-5">
           <%= render 'shared/upload_submissions', exam: @exam, submission: Submission.new %>
         </div>
-        <div class="mt-3 btn-upload ml-5">
-          <%= link_to "Delete this exam", exam_path(@exam), method: "delete", class: "btn btn-delete" %>
-        </div>
-        <div class="my-2 ml-5">
+        <div class="my-2 ml-5 mb-4">
           <% css_class = @exam.submissions.empty? ? "d-none" : "" %>
-          <%= link_to "Submissions", exam_submissions_path(@exam), class: "btn btn-submission #{css_class}" %>
+          <%= link_to "View Submissions", exam_submissions_path(@exam), class: "btn btn-submission #{css_class}" %>
+        </div>
+        <div class="mt-3 btn-upload ml-5 mb-5">
+          <%= link_to "Delete this exam", exam_path(@exam), method: "delete", class: "btn btn-delete" %>
         </div>
       </div>
     </div>

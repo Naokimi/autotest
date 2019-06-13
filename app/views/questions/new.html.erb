@@ -51,7 +51,7 @@
                         <%= form.submit 'ok', class: 'btn btn-primary active special', id: "qbtn-#{qid}" %>
                         <div  class='btn btn-danger cancel' id="<%= qid  %>"  aria-pressed='true'>X</div>
                       </div>
-                      <%= form.input :correct_answer, input_html: { value: word.text , size: word.text.size}, label: false %>
+                      <%= form.input :correct_answer, input_html: { value: word.text , size: word.text.size+2}, label: false %>
                       <%= form.input :origin_x, :as => :hidden, :input_html => { :value => origin_x } %>
                       <%= form.input :origin_y, :as => :hidden, :input_html => { :value => word.boundingBox.split(',')[0][1]-35 } %>
                       <%= form.input :width, :as => :hidden, :input_html => { :value => 250 } %>

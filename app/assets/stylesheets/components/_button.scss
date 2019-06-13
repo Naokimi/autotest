@@ -11,10 +11,11 @@
 
 .btn-flat {
   color:$my-white;
-  padding: 8px 24px;
+  padding: 8px 18px;
   border-radius: 4px;
   background: $color-primary;
   transition: background 3s ease;
+  margin-left:-2px;
 
   &:hover{
     opacity: 0.7;

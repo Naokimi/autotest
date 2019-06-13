@@ -28,7 +28,13 @@ const initCanvas = (canvasId) => {
      }
 
       function mouseUp(e) {
-  
+      let with_pos = 0;
+        if (w > 1350) {
+          with_pos = 200;
+        } else {
+          with_pos = 50;
+        }
+        console.log(with_pos);
         if ('canvas2' === canvasId) {
           document.getElementById('area2').innerHTML=`${rect.h}-${rect.w}-${rect.startX}-${rect.startY}`;
           document.getElementById('exam_score_origin_x').value =rect.startX;
@@ -36,14 +42,8 @@ const initCanvas = (canvasId) => {
           document.getElementById('exam_score_width').value =rect.w;
           document.getElementById('exam_score_height').value =rect.h;
           document.getElementById('save').classList.remove("hide");
-          if (w < 1350) {
-            with_pos = 100;
-          } else {
-            with_pos = 50;
-          }
-
           document.getElementById('save').style.left = rect.startX+rect.w+with_pos+"px";
-          document.getElementById('save').style.top = 150+"px";
+          document.getElementById('save').style.top = 200+"px";
 
         }
         else {
@@ -53,7 +53,7 @@ const initCanvas = (canvasId) => {
           document.getElementById('exam_width').value =rect.w;
           document.getElementById('exam_height').value =rect.h;
           document.getElementById('next').classList.remove("hide")
-          document.getElementById('next').style.left = rect.startX+rect.w+50+"px";
+          document.getElementById('next').style.left = rect.startX+rect.w+with_pos+"px";
           document.getElementById('next').style.top = rect.startY+"px";
 
         }

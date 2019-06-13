@@ -8,7 +8,7 @@ import { initCanvas } from "./canvas";
 import "./upload";
 import "./selectall";
 import "./progress";
-
+import "./loader"
 initCanvas("canvas");
 initStepper();
 // window.move = move;

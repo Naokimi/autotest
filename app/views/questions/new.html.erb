@@ -49,7 +49,7 @@
                       <% qid = SecureRandom.hex(4) %>
                       <div class="form-group">
                         <%= form.submit 'ok', class: 'btn btn-primary active special table-ok ml-4', id: "qbtn-#{qid}" %>
-                      <%= form.input :correct_answer, input_html: { value: word.text , size: word.text.size+1, class: "td-size"}, label: false %>
+                      <%= form.input :correct_answer, input_html: { value: word.text , size: word.text.size+1, class: "table-border"}, label: false %>
                       <%= form.input :origin_x, :as => :hidden, :input_html => { :value => origin_x } %>
                       <%= form.input :origin_y, :as => :hidden, :input_html => { :value => word.boundingBox.split(',')[0][1]-35 } %>
                       <%= form.input :width, :as => :hidden, :input_html => { :value => 250 } %>

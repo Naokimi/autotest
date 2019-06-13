@@ -1,7 +1,7 @@
 <%= link_to exam_path(@exam), class: "btn btn-primary mt-5 position-fixed" do%>
   <i class="fas fa-arrow-left px-3"></i>
 <% end %>
-<div class="container shadow back-color my-5">.
+<div class="container shadow back-color my-5">
   <div class="d-flex justify-content-around m-4">
     <div>Exam id: <span style="font-size: 28px; font-weight:bold;"><%= @exam.id %></span></div>
     <div>Total submissions: <span style="font-size: 28px; font-weight:bold;"><%= @submissions.count %></span></div>

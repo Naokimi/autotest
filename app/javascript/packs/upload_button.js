@@ -7,6 +7,6 @@ if (upload) {
   upload.addEventListener("change", (event) => {
     submit.click();
     console.log("display loading...");
-    body.insertAdjacentHTML('afterbegin', "<div class='uploading'><h2 class='text-primary'>Uploading images...please wait</h2></div>");
+    body.insertAdjacentHTML('afterbegin', "<div class='uploading'><h2 class='text-primary'>Uploading images...</h2></div>");
   });
 }

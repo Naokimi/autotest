@@ -1,6 +1,4 @@
 <div class="container mt-5 pt-5 text-center">
-  <h2 class="m-5 text-primary" style="font-size: 48px;">Analyzing students' answer sheets...</h2>
-  <p><%= image_tag "Spinner-1.4s-200px.gif" %></p>
   <div style="height: 900px;"></div>
   <% @submissions.each do |submission| %>
     <%= link_to submission_path(submission),class: "table-links text-white" do %>
@@ -13,6 +11,11 @@
 </div>
 
 <script>
+  const body = document.querySelector("body");
+  body.insertAdjacentHTML('afterbegin', "<div class='uploading-gear'><h2 class='text-primary'>Analyzing students' answers...</h2></div>");
+
+
+
   document.addEventListener("DOMContentLoaded", () => {
     let requestCount = 0;
     const maxRequests = 5;

@@ -4,24 +4,32 @@
 <div class="container shadow back-color my-5 py-4 px-5",style="margin-top:20px;">
   <div class="row">
     <div class="col-5 m-3 pl-5">
-      <div>Exam id: <span style="font-size: 28px; font-weight:bold;"><%= @exam.id %></span></div>
-      <div class="my-3">Average Score: <span style="font-size: 28px; font-weight:bold;"><%= @exam.average_score %></span>
-    / <%= @exam.questions.count %>
+      <div class="d-flex justify-content-between align-items-end">
+        <div>Exam date: </div>
+        <div><span style="font-size: 28px; font-weight:bold;"><%= @exam.created_at.strftime("%Y/%m/%d") %></span></div>
       </div>
-      <div class="mt-3">
-        Highest Score: <span style="font-size: 28px; font-weight:bold;"><%= @exam.highest_score %></span>
-        / <%= @exam.questions.count %>
+      <div class="my-3 d-flex justify-content-between align-items-end">
+        <div>Average Score: </div>
+        <div><span style="font-size: 28px; font-weight:bold;"><%= @exam.average_score %></span> / <%= @exam.questions.count %></div>
+      </div>
+      <div class="mt-3 d-flex justify-content-between align-items-end">
+        <div>Highest Score: </div>
+        <div><span style="font-size: 28px; font-weight:bold;"><%= @exam.highest_score %></span> / <%= @exam.questions.count %></div>
       </div>
     </div>
+    <div class="col-1"></div>
     <div class="col-5 m-3 pl-5">
-      <div>Total submissions: <span style="font-size: 28px; font-weight:bold;"><%= @submissions.count %></span></div>
-      <div class="my-3">
-        Average %: <span style="font-size: 28px; font-weight:bold;"><%= @exam.average_percentage %></span>
-        / 100
+      <div class="d-flex justify-content-between align-items-end">
+        <div>Total submissions: </div>
+        <div><span style="font-size: 28px; font-weight:bold;"><%= @submissions.count %></span></div>
       </div>
-      <div class="mt-3">
-        Lowest Score: <span style="font-size: 28px; font-weight:bold;"><%= @exam.lowest_score %></span>
-        / <%= @exam.questions.count %>
+      <div class="my-3 d-flex justify-content-between align-items-end">
+        <div>Average %: </div>
+        <div><span style="font-size: 28px; font-weight:bold;"><%= @exam.average_percentage %></span> %</div>
+      </div>
+      <div class="mt-3 d-flex justify-content-between align-items-end">
+        <div>Lowest Score: </div>
+        <div><span style="font-size: 28px; font-weight:bold;"><%= @exam.lowest_score %></span> / <%= @exam.questions.count %></div>
       </div>
     </div>
   </div>
@@ -35,23 +43,23 @@
       <% end %>
     </div>
   </div>
-  <table class="table">
+  <table class="table text-center">
     <thead>
-      <tr>
-        <th>Submission #</th>
-        <th>Total Score</th>
-        <th>%</th>
+      <tr class="row">
+        <th class="col-4">Student #</th>
+        <th class="col-4">Total Score</th>
+        <th class="col-4">Average</th>
       </tr>
     </thead>
     <% @submissions.each do |submission| %>
-      <tr>
-        <td>
+      <tr class="row">
+        <td class="col-4">
           <%= link_to submission_path(submission) do %>
             <%= submission.id - @exam.submissions.order(:id).first.id + 1 %>
           <% end %>
         </td>
-        <td><span style="font-size: 28px; font-weight:bold;"><%= submission.score %></span> / <%= submission.answers.count %></td>
-        <td><span style="font-size: 28px; font-weight:bold;"><%= (submission.score.to_f / submission.answers.count * 100).floor %></span> %</td>
+        <td class="col-4"><span style="font-size: 28px; font-weight:bold;"><%= submission.score %></span> / <%= submission.answers.count %></td>
+        <td class="col-4"><span style="font-size: 28px; font-weight:bold;"><%= (submission.score.to_f / submission.answers.count * 100).floor %></span> %</td>
       </tr>
     <% end %>
   </table>

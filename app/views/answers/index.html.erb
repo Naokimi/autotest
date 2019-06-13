@@ -22,9 +22,9 @@
               <td class="table-center"><%= link_to answer.question_id - first_question_id + 1, question_path(answer.question) %></td>
               <td class="correct-answer p-3 table-center"><%= answer.question.correct_answer %></td>
               <td class="table-center">
-                <%= simple_form_for answer, remote: true, html: { class: 'form-inline text-left' } do |f| %>
+                <%= simple_form_for answer, remote: true,novalidate: "novalidate", html: { class: 'form-inline text-left'  } do |f| %>
                   <%= f.input :is_correct, label: false, class:'is-correct', wrapper_html: { class: 'hide' }  %>
-                  <%= f.input :content, label:false %>
+                  <%= f.input :content, label: false%>
                   <%= f.submit 'Update', style: "display:none;" %>
                 <% end %>
               </td>

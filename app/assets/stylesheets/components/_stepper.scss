@@ -92,12 +92,12 @@
   margin: .25rem;
   line-height: 1em;
   color: #fff;
-  background-color: #66cc99;
+  background-color: $color-circle-stepper;
   border-radius: 1em;
 }
 
 .active .bs-stepper-circle {
-  background-color: #336666;
+  background-color: $color-circle-active;
 }
 
 .bs-stepper-content {

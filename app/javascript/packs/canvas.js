@@ -31,7 +31,10 @@ const initCanvas = (canvasId) => {
       let with_pos = 0;
         if (w > 1350) {
           with_pos = 200;
-        } else {
+        } else if (w > 1500) {
+          with_pos = 300;
+        }
+        else {
           with_pos = 50;
         }
         console.log(with_pos);

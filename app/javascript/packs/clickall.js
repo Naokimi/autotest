@@ -1,6 +1,6 @@
 function clickAll() {
         console.log('hello');
-        let forms = document.querySelectorAll('.simple_form');
+        let forms = document.querySelectorAll('.mark-as-correct .simple_form');
         const requests = [];
         forms.forEach(function(form) {
           const promise = new Promise(function(resolve, reject) {

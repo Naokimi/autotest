@@ -46,7 +46,7 @@
       <tr>
         <td>
           <%= link_to submission_path(submission) do %>
-            <%= submission.id %>
+            <%= submission.id - @exam.submissions.order(:id).first.id + 1 %>
           <% end %>
         </td>
         <td><span style="font-size: 28px; font-weight:bold;"><%= submission.score %></span> / <%= submission.answers.count %></td>

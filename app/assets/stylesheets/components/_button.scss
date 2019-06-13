@@ -31,11 +31,11 @@
   border-radius: 28px;
   transform: matrix(1, 0, 0.01, 1, 0, 0);
   font-weight: 600;
-  padding:6px 62px 6px 62px;
+  padding:6px 45px;
 
   &:hover{
     opacity: 0.7;
-    font-size: 1.1em;
+    font-size: 17px;
     color:$my-white;
   }
 }

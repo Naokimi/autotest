@@ -3,8 +3,8 @@
 <% end %>
 
 <div class="container mt-5">
-  <div class="row">
-    <div class="shadow bg-white mr-5 mt-2 p-4 rounded">
+  <div class="row justify-content-around">
+    <div class="shadow bg-white mt-2 p-4 rounded">
       <div class="px-4">
         <p>Exam id: <%= @exam.id %></p>
         <p># of Submissions: <%= link_to @exam.submissions.count, exam_submissions_path(@exam)  %></p>

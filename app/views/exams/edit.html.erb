@@ -1,5 +1,5 @@
-<div id="stepper1" class="bs-stepper row d-flex justify-content-around">
-  <div class="bs-stepper-header position-fixed" role="tablist">
+<div id="stepper1" class="bs-stepper row d-flex justify-content-around my-3">
+  <div class="bs-stepper-header position-fixed ml-5" role="tablist">
     <!-- your steps here -->
     <div class="step" data-target="#answer-part">
       <button type="button" class="step-trigger" role="tab" aria-controls="logins-part" id="stepper1">
@@ -9,7 +9,7 @@
       </button>
     </div>
     <div class="line"></div>
-    <div class="step" data-target="#score-part">
+    <div class="step mr-5 pr-5" data-target="#score-part">
       <button type="button" class="step-trigger" role="tab" aria-controls="information-part" id="information-part-trigger">
         <span class="bs-stepper-circle">2</span>
         <span class="bs-stepper-label">Please select the score area
@@ -25,7 +25,7 @@
         <canvas id="canvas" width="1200" height="1700">
         </canvas>
         <div class="form-group">
-          <button id="next" class="btn btn-primary position-fixed mt-5 hide">Next</button>
+          <button id="next" class="btn btn-lg btn-upload position-fixed mt-5 hide">Save the Answer area</button>
         </div>
       </div>
     </div>
@@ -41,7 +41,7 @@
             <%= form.input :score_origin_y, :as => :hidden %>
             <%= form.input :score_width, :as => :hidden %>
             <%= form.input :score_height, :as => :hidden %>
-            <%= form.submit 'Save', id:"save", class: 'btn btn-primary  position-fixed mt-5 hide' %>
+            <%= form.submit 'Save the Score area', id:"save", class: 'btn btn-lg btn-upload position-fixed mt-5 hide' %>
             <% end %>
       </div>
     </div>

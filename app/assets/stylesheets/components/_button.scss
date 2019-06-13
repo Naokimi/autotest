@@ -10,15 +10,17 @@
 }
 
 .btn-flat {
-  color: black;
-  padding: 8px 24px;
+  color:$my-white;
+  padding: 8px 18px;
   border-radius: 4px;
   background: $color-primary;
   transition: background 3s ease;
-  border-color: $my-white;
+  margin-left:-2px;
 
   &:hover{
     opacity: 0.7;
+    color:$my-white;
+    font-size: 1.1em;
   }
 }
 
@@ -34,7 +36,7 @@
   &:hover{
     opacity: 0.7;
     font-size: 1.1em;
-    color: white;
+    color:$my-white;
   }
 }
 
@@ -66,9 +68,15 @@
   border-radius: 28px;
   transform: matrix(1, 0, 0.01, 1, 0, 0);
   font-weight: 600;
+
+  &:hover{
+    opacity: 0.8;
+    color:$my-white;
+  }
 }
 
 .btn-download {
+  color:$my-white;
   margin:0 351px 6px 0;
   background-color:$primary;
   opacity: 0.7;
@@ -77,6 +85,7 @@
   &:hover{
     opacity:1;
     font-size: 1.1em;
+    color:$my-white;
   }
 }
 

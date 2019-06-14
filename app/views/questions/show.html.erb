@@ -16,7 +16,7 @@
         </thead>
         <tbody>
           <% @incorrect_answers.each do |answer| %>
-            <tr class="<%= 'table-warning' unless answer.is_correct %>">
+            <tr class="<%= 'table-incorrect' unless answer.is_correct %>">
               <td class="correct-answer p-3" ><%= answer.question.correct_answer %></td>
               <td class="p-3">
                 <%= simple_form_for answer, remote: true, html: { class: 'form-inline text-left' } do |f| %>
@@ -61,7 +61,7 @@
       } else {
         inputbox.value = studentAnswer;
         checkbox.checked= false;
-        answer.classList = "table-warning";
+        answer.classList = "table-incorrect";
       };
     });
   });

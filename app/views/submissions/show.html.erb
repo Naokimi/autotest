@@ -31,7 +31,7 @@
             <% if answer.is_correct %>
               <tr>
             <% else %>
-              <tr class="table-warning" data-toggle="tooltip" data-placement="left" title="Mark as correct">
+              <tr class="table-incorrect" data-toggle="tooltip" data-placement="left" title="Mark as correct">
             <% end %>
                 <% first_question_id = @submission.exam.questions.first.id %>
                 <td class="table-center align-middle"><%= link_to answer.question_id - first_question_id + 1, question_path(answer.question) %></td>
@@ -82,7 +82,7 @@
       } else {
         inputbox.value = studentAnswer;
         checkbox.checked= false;
-        answer.classList = "table-warning";
+        answer.classList = "table-incorrect";
         answer.setAttribute('data-toggle', 'tooltip')
         answer.setAttribute('title', 'Mark as correct')
       };

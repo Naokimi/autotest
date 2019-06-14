@@ -1,23 +1,35 @@
 <%= link_to exam_submissions_path(@exam), class: "btn btn-flat mt-5 position-fixed" do%>
   <i class="fas fa-arrow-left px-3"></i>
 <% end %>
-<div class="container shadow back-color my-5 pt-4 pb-5 px-5  rounded">
+<div class="container shadow back-color my-5 pt-4 pb-5 px-5 rounded">
+  <div class="d-flex justify-content-between align-items-center">
+    <div>
+      <h1>Incorrect answers</h1>
+      <p class="text-primary"><b>Exam id: <%= @exam.id %>, # of Incorrect Anwers: <%= @incorrect_answers.count %></b></p>
+    </div>
+    <ul style="list-style: none;">
+      <li class="mb-1"><i class="fas fa-hand-pointer"></i> Mark the answer as correct</li>
+      <li><i class="fas fa-save"></i> Click on update to save</li>
+    </ul>
+  </div>
   <div class="row">
     <div class="col-12">
-      <h2><i class="fas fa-check"></i> Click on the orange area to mark the answer as correct</h2>
-      <p class="text-primary py-3">Exam id: <%= @exam.id %>, # of Incorrect Anwers: <%= @incorrect_answers.count %></p>
-      <table class="table">
+      <table class="table text-center">
         <thead>
           <tr>
-            <th class="py-3 table-center">Question #</th>
-            <th class="py-3 table-center">Correct Answer</th>
-            <th class="text-center py-3 table-center">Student Answer</th>
-            <th></th>
+            <th class="py-3">Question #</th>
+            <th class="py-3">Correct Answer</th>
+            <th class="py-3">Student Answer</th>
+            <th class="py-3">Answer Image</th>
           </tr>
         </thead>
         <tbody style="cursor: pointer">
           <% @incorrect_answers.each do |answer| %>
-            <tr class="<%= 'table-warning' unless answer.is_correct %>">
+            <% if answer.is_correct %>
+              <tr>
+            <% else %>
+              <tr class="table-warning" data-toggle="tooltip" data-placement="left" title="Mark as correct">
+            <% end %>
               <% first_question_id = @exam.questions.first.id %>
               <td class="table-center align-middle"><%= link_to answer.question_id - first_question_id + 1, question_path(answer.question) %></td>
               <td class="correct-answer p-3 table-center align-middle"><%= answer.question.correct_answer %></td>
@@ -61,10 +73,14 @@
         inputbox.value = correctAnswer;
         checkbox.checked= true;
         answer.classList = "corrected";
+        answer.removeAttribute('data-toggle')
+        answer.removeAttribute('title')
       } else {
         inputbox.value = studentAnswer;
         checkbox.checked= false;
-        answer.classList = "table-warning corrected";
+        answer.classList = "table-warning";
+        answer.setAttribute('data-toggle', 'tooltip')
+        answer.setAttribute('title', 'Mark as correct')
       };
     });
   });

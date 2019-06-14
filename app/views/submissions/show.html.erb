@@ -2,37 +2,48 @@
   <i class="fas fa-arrow-left px-3"></i>
 <% end %>
 <div class="container shadow back-color my-5 pt-4 pb-5 px-5  rounded">
+  <div class="d-flex justify-content-between align-items-center">
+    <div>
+      <h1>Student no. <%= @submission.id - @submission.exam.submissions.order(:id).first.id + 1  %>'s answers</h1>
+      <p class="text-primary"><b>Score: <%= @score %> / <%= @submission.exam.questions.count %></b></p>
+    </div>
+    <ul style="list-style: none;">
+      <li class="mb-1"><i class="fas fa-hand-pointer"></i> Mark the answer as correct</li>
+      <li><i class="fas fa-save"></i> Click on update to save</li>
+    </ul>
+  </div>
   <div class="row">
     <div class="col-12">
-      <h2>Click each answer to mark as correct <i class="fas fa-check"></i></h2>
-      <p class='my-3'>Submission #: <%= params[:id] %> </p>
-      <p >Score: <span style="font-size: 28px; font-weight:bold;"> <%= @score %></span>/ <%= @submission.exam.questions.count %></p>
       <% if @answers == [] %>
         <%= link_to 'Analyze the answers', submission_answers_path(@submission), method: :post %>
       <% else %>
-        <table class="table">
+        <table class="table text-center">
           <thead>
             <tr>
-              <th>Question #</th>
-              <th>Correct Answer</th>
-              <th class="text-center py-3">Student Answer</th>
-              <th></th>
+              <th class="py-3">Question #</th>
+              <th class="py-3">Correct Answer</th>
+              <th class="py-3">Student Answer</th>
+              <th class="py-3">Answer Image</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody style="cursor: pointer">
             <% @answers.each do |answer| %>
-              <tr class="<%= 'table-warning' unless answer.is_correct %>">
+            <% if answer.is_correct %>
+              <tr>
+            <% else %>
+              <tr class="table-warning" data-toggle="tooltip" data-placement="left" title="Mark as correct">
+            <% end %>
                 <% first_question_id = @submission.exam.questions.first.id %>
-                <td><%= link_to answer.question_id - first_question_id + 1, question_path(answer.question) %></td>
-                <td class="correct-answer p-3"><%= answer.question.correct_answer %></td>
-                <td>
-                  <%= simple_form_for answer, remote: true, html: { class: 'form-inline' } do |f| %>
+                <td class="table-center align-middle"><%= link_to answer.question_id - first_question_id + 1, question_path(answer.question) %></td>
+                <td class="correct-answer p-3 table-center align-middle"><%= answer.question.correct_answer %></td>
+                <td class="table-center align-middle">
+                  <%= simple_form_for answer, remote: true, novalidate: true, html: { class: 'form-inline text-left' } do |f| %>
                     <%= f.input :is_correct, label: false, class:'is-correct', wrapper_html: { class: 'hide' }   %>
-                    <%= f.input :content, label:false %>
+                    <%= f.input :content, label:false, include_blank: false %>
                     <%= f.submit 'Update', style: "display:none;" %>
                   <% end %>
                 </td>
-                <td>
+                <td class="table-center align-middle">
                   <div class="bg-white rounded shadow">
                     <% url = "https://res.cloudinary.com/naokimi/image/upload/x_#{answer.question.origin_x.to_i},y_#{answer.question.origin_y.to_i},w_#{answer.question.width.to_i},h_#{answer.question.height.to_i},c_crop/#{@submission.image.filename}" %>
                     <%= image_tag url, style: "width:100%; height: auto;" %>
@@ -66,10 +77,14 @@
         inputbox.value = correctAnswer;
         checkbox.checked= true;
         answer.classList = "corrected";
+        answer.removeAttribute('data-toggle')
+        answer.removeAttribute('title')
       } else {
         inputbox.value = studentAnswer;
         checkbox.checked= false;
-        answer.classList = "table-warning corrected";
+        answer.classList = "table-warning";
+        answer.setAttribute('data-toggle', 'tooltip')
+        answer.setAttribute('title', 'Mark as correct')
       };
     });
   });
